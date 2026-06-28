@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<SimBase.Document Type="AceXML" version="1,0">
+    <Descr>AceXML Document</Descr>
+    <FlightPlan.FlightPlan>
+        <Title>Trip 1 - Orange River Run</Title>
+        <FPType>VFR</FPType>
+        <RouteType>LowAlt</RouteType>
+        <CruisingAlt>9500</CruisingAlt>
+        <DepartureID>FAWB</DepartureID>
+        <DepartureLLA>S25* 39' 14.00",E028* 13' 27.00",+004095.00</DepartureLLA>
+        <DestinationID>FAWB</DestinationID>
+        <DestinationLLA>S25* 39' 14.00",E028* 13' 27.00",+004095.00</DestinationLLA>
+        <Descr>FAWB Wonderboom - FAUP Upington - Augrabies - FYND Noordoewer - FYKT Keetmanshoop - return FAWB</Descr>
+        <DepartureName>Wonderboom</DepartureName>
+        <DestinationName>Wonderboom</DestinationName>
+        <AppVersion>
+            <AppVersionMajor>12</AppVersionMajor>
+            <AppVersionBuild>282174</AppVersionBuild>
+        </AppVersion>
+        <ATCWaypoint id="FAWB">
+            <ATCWaypointType>Airport</ATCWaypointType>
+            <WorldPosition>S25* 39' 14.00",E028* 13' 27.00",+004095.00</WorldPosition>
+            <ICAO>
+                <ICAOIdent>FAWB</ICAOIdent>
+            </ICAO>
+        </ATCWaypoint>
+        <ATCWaypoint id="FAUP">
+            <ATCWaypointType>User</ATCWaypointType>
+            <WorldPosition>S28* 23' 57.00",E021* 15' 37.00",+002791.00</WorldPosition>
+        </ATCWaypoint>
+        <ATCWaypoint id="AUGRABIES">
+            <ATCWaypointType>User</ATCWaypointType>
+            <WorldPosition>S28* 35' 37.00",E020* 20' 30.00",+009500.00</WorldPosition>
+        </ATCWaypoint>
+        <ATCWaypoint id="FYND">
+            <ATCWaypointType>User</ATCWaypointType>
+            <WorldPosition>S28* 42' 06.00",E017* 37' 28.00",+000560.00</WorldPosition>
+        </ATCWaypoint>
+        <ATCWaypoint id="FYKT">
+            <ATCWaypointType>User</ATCWaypointType>
+            <WorldPosition>S26* 32' 20.00",E018* 06' 42.00",+003506.00</WorldPosition>
+        </ATCWaypoint>
+        <ATCWaypoint id="FAWB">
+            <ATCWaypointType>Airport</ATCWaypointType>
+            <WorldPosition>S25* 39' 14.00",E028* 13' 27.00",+004095.00</WorldPosition>
+            <ICAO>
+                <ICAOIdent>FAWB</ICAOIdent>
+            </ICAO>
+        </ATCWaypoint>
+    </FlightPlan.FlightPlan>
+</SimBase.Document>

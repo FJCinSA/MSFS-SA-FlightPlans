@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SimBase.Document Type="AceXML" version="1,0">
+  <Descr>AceXML Document</Descr>
+  <FlightPlan.FlightPlan>
+    <Title>Leg 2 - FABW to FACB</Title>
+    <FPType>IFR</FPType>
+    <CruisingAlt>9500</CruisingAlt>
+    <DepartureID>FABW</DepartureID>
+    <DepartureLLA>S32* 18' 23.00",E22* 39' 52.00",+0002929.00</DepartureLLA>
+    <DestinationID>FACB</DestinationID>
+    <DestinationLLA>S30* 44' 02.00",E25* 03' 54.00",+0004757.00</DestinationLLA>
+    <Descr>FABW to FACB</Descr>
+    <DepartureName>Beaufort West</DepartureName>
+    <DestinationName>Colesberg</DestinationName>
+    <AppVersion>
+      <AppVersionMajor>11</AppVersionMajor>
+      <AppVersionBuild>282174</AppVersionBuild>
+    </AppVersion>
+    <ATCWaypoint id="FABW">
+      <ATCWaypointType>Airport</ATCWaypointType>
+      <WorldPosition>S32* 18' 23.00",E22* 39' 52.00",+0002929.00</WorldPosition>
+      <ICAO><ICAOIdent>FABW</ICAOIdent></ICAO>
+    </ATCWaypoint>
+    <ATCWaypoint id="SLV">
+      <ATCWaypointType>User</ATCWaypointType>
+      <WorldPosition>S32* 24' 00.00",E20* 40' 00.00",+0003500.00</WorldPosition>
+    </ATCWaypoint>
+    <ATCWaypoint id="BFW">
+      <ATCWaypointType>User</ATCWaypointType>
+      <WorldPosition>S31* 30' 00.00",E23* 00' 00.00",+0004000.00</WorldPosition>
+    </ATCWaypoint>
+    <ATCWaypoint id="FACB">
+      <ATCWaypointType>Airport</ATCWaypointType>
+      <WorldPosition>S30* 44' 02.00",E25* 03' 54.00",+0004757.00</WorldPosition>
+      <ICAO><ICAOIdent>FACB</ICAOIdent></ICAO>
+    </ATCWaypoint>
+  </FlightPlan.FlightPlan>
+</SimBase.Document>

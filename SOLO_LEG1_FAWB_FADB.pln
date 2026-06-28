@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SimBase.Document Type="AceXML" version="1,0">
+  <Descr>AceXML Document</Descr>
+  <FlightPlan.FlightPlan>
+    <Title>Solo Leg 1 - Wonderboom to Dwaalboom</Title>
+    <FPType>VFR</FPType>
+    <CruisingAlt>6500</CruisingAlt>
+    <DepartureID>FAWB</DepartureID>
+    <DepartureLLA>S25* 39' 14.00",E28* 13' 27.00",+0004095.00</DepartureLLA>
+    <DestinationID>FADB</DestinationID>
+    <DestinationLLA>S24* 48' 25.00",E26* 49' 46.00",+0003650.00</DestinationLLA>
+    <Descr>FAWB to FADB</Descr>
+    <DepartureName>Wonderboom</DepartureName>
+    <DestinationName>Dwaalboom</DestinationName>
+    <AppVersion>
+      <AppVersionMajor>11</AppVersionMajor>
+      <AppVersionBuild>282174</AppVersionBuild>
+    </AppVersion>
+    <ATCWaypoint id="FAWB">
+      <ATCWaypointType>Airport</ATCWaypointType>
+      <WorldPosition>S25* 39' 14.00",E28* 13' 27.00",+0004095.00</WorldPosition>
+      <ICAO><ICAOIdent>FAWB</ICAOIdent></ICAO>
+    </ATCWaypoint>
+    <ATCWaypoint id="BRITS">
+      <ATCWaypointType>User</ATCWaypointType>
+      <WorldPosition>S25* 37' 00.00",E27* 47' 00.00",+0004000.00</WorldPosition>
+    </ATCWaypoint>
+    <ATCWaypoint id="THABAZ">
+      <ATCWaypointType>User</ATCWaypointType>
+      <WorldPosition>S24* 35' 00.00",E27* 21' 00.00",+0004000.00</WorldPosition>
+    </ATCWaypoint>
+    <ATCWaypoint id="FADB">
+      <ATCWaypointType>Airport</ATCWaypointType>
+      <WorldPosition>S24* 48' 25.00",E26* 49' 46.00",+0003650.00</WorldPosition>
+      <ICAO><ICAOIdent>FADB</ICAOIdent></ICAO>
+    </ATCWaypoint>
+  </FlightPlan.FlightPlan>
+</SimBase.Document>

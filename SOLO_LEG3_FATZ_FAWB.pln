@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SimBase.Document Type="AceXML" version="1,0">
+  <Descr>AceXML Document</Descr>
+  <FlightPlan.FlightPlan>
+    <Title>Solo Leg 3 - Tzaneen back to Wonderboom</Title>
+    <FPType>VFR</FPType>
+    <CruisingAlt>8500</CruisingAlt>
+    <DepartureID>FATZ</DepartureID>
+    <DepartureLLA>S23* 49' 28.00",E30* 19' 46.00",+0001914.00</DepartureLLA>
+    <DestinationID>FAWB</DestinationID>
+    <DestinationLLA>S25* 39' 14.00",E28* 13' 27.00",+0004095.00</DestinationLLA>
+    <Descr>FATZ to FAWB</Descr>
+    <DepartureName>Tzaneen</DepartureName>
+    <DestinationName>Wonderboom</DestinationName>
+    <AppVersion>
+      <AppVersionMajor>11</AppVersionMajor>
+      <AppVersionBuild>282174</AppVersionBuild>
+    </AppVersion>
+    <ATCWaypoint id="FATZ">
+      <ATCWaypointType>Airport</ATCWaypointType>
+      <WorldPosition>S23* 49' 28.00",E30* 19' 46.00",+0001914.00</WorldPosition>
+      <ICAO><ICAOIdent>FATZ</ICAOIdent></ICAO>
+    </ATCWaypoint>
+    <ATCWaypoint id="ESCARP">
+      <ATCWaypointType>User</ATCWaypointType>
+      <WorldPosition>S23* 50' 00.00",E30* 00' 00.00",+0005000.00</WorldPosition>
+    </ATCWaypoint>
+    <ATCWaypoint id="POLKWNE">
+      <ATCWaypointType>User</ATCWaypointType>
+      <WorldPosition>S23* 51' 00.00",E29* 27' 00.00",+0004000.00</WorldPosition>
+    </ATCWaypoint>
+    <ATCWaypoint id="ELLISRS">
+      <ATCWaypointType>User</ATCWaypointType>
+      <WorldPosition>S23* 40' 00.00",E27* 44' 00.00",+0003000.00</WorldPosition>
+    </ATCWaypoint>
+    <ATCWaypoint id="THABAZ">
+      <ATCWaypointType>User</ATCWaypointType>
+      <WorldPosition>S24* 35' 00.00",E27* 21' 00.00",+0004000.00</WorldPosition>
+    </ATCWaypoint>
+    <ATCWaypoint id="BRITS">
+      <ATCWaypointType>User</ATCWaypointType>
+      <WorldPosition>S25* 37' 00.00",E27* 47' 00.00",+0004000.00</WorldPosition>
+    </ATCWaypoint>
+    <ATCWaypoint id="FAWB">
+      <ATCWaypointType>Airport</ATCWaypointType>
+      <WorldPosition>S25* 39' 14.00",E28* 13' 27.00",+0004095.00</WorldPosition>
+      <ICAO><ICAOIdent>FAWB</ICAOIdent></ICAO>
+    </ATCWaypoint>
+  </FlightPlan.FlightPlan>
+</SimBase.Document>

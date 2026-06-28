@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>South Africa Navaid Reference &mdash; CoetzeeMed</title>
+<style>
+  :root{
+    --navy:#0a1428; --navy2:#0d1c33; --panel:#14233d; --panel2:#1b2f4d;
+    --gold:#d4af37; --gold2:#f0d774; --ink:#e8eef7; --muted:#9fb2cc;
+    --line:#2a3f63; --teal:#5fd3c4; --rose:#e6a4b4;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:linear-gradient(180deg,#081020,#0a1428 40%,#0a1730);
+    color:var(--ink); font-family:"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.45; -webkit-font-smoothing:antialiased;
+  }
+  header{
+    padding:26px 20px 18px; text-align:center;
+    border-bottom:1px solid var(--line);
+    background:radial-gradient(120% 140% at 50% 0%,rgba(212,175,55,.10),transparent 60%);
+  }
+  .brand{font-size:13px; letter-spacing:.32em; color:var(--gold); text-transform:uppercase; font-weight:700}
+  .brand b{color:var(--gold2)}
+  h1{margin:.35em 0 .15em; font-size:clamp(22px,4.5vw,34px); color:#fff; font-weight:700}
+  h1 .accent{color:var(--gold)}
+  .sub{color:var(--muted); font-size:14px; margin:0}
+  .wrap{max-width:1180px; margin:0 auto; padding:18px 16px 60px}
+  .toolbar{
+    position:sticky; top:0; z-index:5; padding:14px 0 12px;
+    background:linear-gradient(180deg,#0a1428 70%,rgba(10,20,40,.0));
+  }
+  .search{
+    display:flex; gap:10px; align-items:center; max-width:560px; margin:0 auto;
+    background:var(--panel); border:1px solid var(--line); border-radius:12px;
+    padding:10px 14px; box-shadow:0 6px 18px rgba(0,0,0,.35);
+  }
+  .search input{
+    flex:1; background:transparent; border:0; outline:none; color:var(--ink);
+    font-size:16px;
+  }
+  .search input::placeholder{color:#6f86a6}
+  .search svg{flex:0 0 auto; opacity:.8}
+  .stats{display:flex; gap:18px; justify-content:center; flex-wrap:wrap; margin:14px 0 4px; color:var(--muted); font-size:13px}
+  .stats b{color:var(--gold2)}
+  .region{margin:26px 0 0}
+  .region h2{
+    display:flex; align-items:center; gap:12px; font-size:17px; letter-spacing:.12em;
+    text-transform:uppercase; color:var(--gold); margin:0 0 12px; padding-bottom:8px;
+    border-bottom:1px solid var(--line);
+  }
+  .region h2 .count{
+    margin-left:auto; font-size:12px; color:var(--muted); letter-spacing:normal;
+    text-transform:none; background:var(--panel); border:1px solid var(--line);
+    padding:2px 9px; border-radius:20px;
+  }
+  .grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(230px,1fr)); gap:12px}
+  .card{
+    background:linear-gradient(180deg,var(--panel),var(--navy2));
+    border:1px solid var(--line); border-radius:12px; padding:13px 14px;
+    transition:transform .12s ease,border-color .12s ease,box-shadow .12s ease;
+  }
+  .card:hover{transform:translateY(-2px); border-color:var(--gold); box-shadow:0 8px 22px rgba(0,0,0,.4)}
+  .card .top{display:flex; justify-content:space-between; align-items:flex-start; gap:8px}
+  .card .name{font-weight:700; color:#fff; font-size:15px}
+  .badge{
+    flex:0 0 auto; font-size:10px; font-weight:700; letter-spacing:.06em;
+    padding:3px 8px; border-radius:20px; text-transform:uppercase; white-space:nowrap;
+  }
+  .b-vortac{background:rgba(212,175,55,.16); color:var(--gold2); border:1px solid rgba(212,175,55,.4)}
+  .b-vordme{background:rgba(95,211,196,.13); color:var(--teal); border:1px solid rgba(95,211,196,.35)}
+  .b-vor{background:rgba(160,190,255,.12); color:#aecbff; border:1px solid rgba(160,190,255,.3)}
+  .b-ndb{background:rgba(230,164,180,.12); color:var(--rose); border:1px solid rgba(230,164,180,.32)}
+  .card .meta{display:flex; align-items:baseline; gap:10px; margin-top:10px}
+  .ident{
+    font-family:"Consolas",monospace; font-weight:700; color:var(--gold);
+    font-size:18px; letter-spacing:.04em;
+  }
+  .freq{margin-left:auto; font-family:"Consolas",monospace; color:var(--ink); font-size:15px}
+  .freq small{color:var(--muted); font-size:11px}
+  .noresult{text-align:center; color:var(--muted); padding:50px 0; display:none}
+  footer{text-align:center; color:#6f86a6; font-size:12px; padding:24px 16px 40px; border-top:1px solid var(--line)}
+  footer b{color:var(--gold)}
+  .disc{max-width:760px; margin:0 auto 0; color:#7e93b3; font-size:11.5px; line-height:1.6}
+  ::selection{background:var(--gold); color:#0a1428}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand">Coetzee<b>Med</b> &middot; Flight Operations</div>
+  <h1>South African <span class="accent">Navaid</span> Reference</h1>
+  <p class="sub">VOR &middot; VORTAC &middot; VOR-DME &middot; NDB &mdash; by region</p>
+</header>
+
+<div class="wrap">
+  <div class="toolbar">
+    <div class="search">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#d4af37" stroke-width="2">
+        <circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/>
+      </svg>
+      <input id="q" type="search" placeholder="Search name, ident, frequency or type&hellip;" autocomplete="off">
+    </div>
+    <div class="stats">
+      <span><b id="stCount">0</b> navaids</span>
+      <span><b id="stReg">0</b> regions</span>
+      <span><b id="stShown">0</b> shown</span>
+    </div>
+  </div>
+
+  <div id="regions"></div>
+  <div class="noresult" id="noresult">No navaids match your search.</div>
+</div>
+
+<footer>
+  <div class="disc">
+    Data compiled from the South African AIP for flight-simulation and reference use.
+    Always verify against current official AIP / NOTAM before operational use.
+  </div>
+  <p style="margin-top:14px"><b>CoetzeeMed</b> Flight Operations &middot; Southern Africa Navaid Package</p>
+</footer>
+
+<script>
+// [name, type, ident, freq, unit]  type: VORTAC | VOR-DME | VOR | NDB
+const DATA = {
+  "Western Cape":[
+    ["Cape Town","VORTAC","CTV","115.70","MHz"],
+    ["Cape Town","NDB","CB","463","kHz"],
+    ["Robben Island","VOR-DME","RIV","117.60","MHz"],
+    ["Swellendam","VOR","SWV","114.40","MHz"],
+    ["Overberg","VORTAC","OBV","115.40","MHz"],
+    ["Langebaanweg","VORTAC","LWV","117.00","MHz"],
+    ["Greyton","NDB","GE","270","kHz"],
+    ["Clanwilliam","NDB","CW","373","kHz"],
+    ["George","VOR-DME","GGV","112.50","MHz"],
+    ["George","NDB","GG","260","kHz"],
+    ["Oudtshoorn","NDB","OH","367","kHz"],
+    ["Plettenberg Bay","NDB","PY","278","kHz"]
+  ],
+  "Northern Cape":[
+    ["Sutherland","VOR","SLV","113.30","MHz"],
+    ["Upington","VOR-DME","UPV","116.50","MHz"],
+    ["Upington","NDB","UN","344","kHz"],
+    ["Aggeneys","VOR-DME","AGV","116.70","MHz"],
+    ["Alexander Bay","VOR-DME","ABV","112.10","MHz"],
+    ["Alexander Bay","NDB","AB","318","kHz"],
+    ["Kimberley","VOR-DME","KYV","113.20","MHz"],
+    ["Kimberley","NDB","KM","365","kHz"],
+    ["Sishen","NDB","SS","273","kHz"],
+    ["Hotazel","NDB","HZ","258","kHz"],
+    ["Kuruman","NDB","KUR","353","kHz"],
+    ["Nieuwoudtville","VOR","NVV","116.10","MHz"],
+    ["Ulco","VOR","UCV","114.70","MHz"],
+    ["Victoria West","VOR","VWV","113.70","MHz"],
+    ["Vryburg","NDB","VB","425","kHz"],
+    ["Kleinsee","NDB","KZ","213","kHz"]
+  ],
+  "Free State":[
+    ["Bloemfontein","VORTAC","BLV","114.10","MHz"],
+    ["Bloemfontein","NDB","BL","380","kHz"],
+    ["New Tempe","NDB","BTF","519","kHz"],
+    ["Welkom","VOR-DME","WMV","116.40","MHz"],
+    ["Warden","VOR","WDV","114.80","MHz"],
+    ["Harrismith","NDB","HS","483","kHz"],
+    ["Bethlehem","NDB","BM","343","kHz"],
+    ["Ficksburg","NDB","FB","390","kHz"],
+    ["Jagersfontein","NDB","JF","243","kHz"],
+    ["Kroonstad","NDB","KS","228","kHz"]
+  ],
+  "Gauteng":[
+    ["Johannesburg","VOR-DME","JSV","115.20","MHz"],
+    ["Johannesburg","NDB","JB","202","kHz"],
+    ["Rand","VOR-DME","RAV","117.70","MHz"],
+    ["Rand","NDB","RA","338","kHz"],
+    ["Rand","NDB","RD","308","kHz"],
+    ["Rand","NDB","RDW","288","kHz"],
+    ["Waterkloof","VORTAC","WKV","116.90","MHz"],
+    ["Waterkloof","NDB","WK","330","kHz"],
+    ["Waterkloof","NDB","WL","315","kHz"],
+    ["Lanseria","VOR-DME","LIV","117.40","MHz"],
+    ["Lanseria","NDB","LA","270","kHz"],
+    ["Wonderboom","NDB","WB","258","kHz"],
+    ["Wonderboom","NDB","WR","230","kHz"],
+    ["Grand Central","NDB","GC","373","kHz"],
+    ["Hartebeespoortdam","VOR","HBV","112.10","MHz"],
+    ["Bronkhorstspruit","VORTAC","MEV","114.30","MHz"],
+    ["Grasmere","VOR","GAV","115.50","MHz"],
+    ["Heidelberg","VOR","HGV","116.70","MHz"],
+    ["Meyerton","NDB","NMT","385","kHz"],
+    ["Roodeplaat","NDB","MC","357","kHz"],
+    ["Vereeniging","NDB","VV","460","kHz"],
+    ["Standerton","VOR","STV","116.00","MHz"]
+  ],
+  "North West":[
+    ["Potchefstroom","VOR-DME","PSV","115.80","MHz"],
+    ["Mafikeng","VOR-DME","MMV","112.90","MHz"],
+    ["Mafikeng","NDB","MH","305","kHz"],
+    ["Pilanesberg","VOR-DME","PNV","112.60","MHz"],
+    ["Pilanesberg","NDB","PLB","215","kHz"],
+    ["Pilanesberg","NDB","PLG","480","kHz"],
+    ["Rustenburg","NDB","RG","453","kHz"],
+    ["Klerksdorp","NDB","KD","280","kHz"]
+  ],
+  "Limpopo":[
+    ["Hoedspruit","VORTAC","HSV","114.00","MHz"],
+    ["Hoedspruit","NDB","HA","265","kHz"],
+    ["Polokwane","VOR-DME","PPV","114.50","MHz"],
+    ["Polokwane","NDB","PB","410","kHz"],
+    ["Makhado","VORTAC","LTV","115.00","MHz"],
+    ["Makhado","NDB","LS","485","kHz"],
+    ["Makhado","NDB","LU","473","kHz"],
+    ["Ellisras","VOR-DME","ERV","116.30","MHz"],
+    ["Ellisras","NDB","ER","345","kHz"],
+    ["Gravelotte","NDB","JP","403","kHz"],
+    ["Giyani","NDB","GI","430","kHz"],
+    ["Phalaborwa","VOR","PHV","115.30","MHz"],
+    ["Phalaborwa","NDB","PW","272","kHz"],
+    ["Pietersburg","NDB","PI","425","kHz"],
+    ["Louis Trichardt","NDB","LO","458","kHz"],
+    ["Nylstroom","NDB","NY","465","kHz"],
+    ["Thabazimbi","NDB","TB","398","kHz"],
+    ["Thohoyandou","NDB","THO","325","kHz"],
+    ["Venetia","NDB","VM","418","kHz"],
+    ["Mariepskop","NDB","MP","297","kHz"],
+    ["Greefswald","VOR","GWV","117.90","MHz"]
+  ],
+  "Mpumalanga":[
+    ["Nelspruit","VOR-DME","NSV","116.20","MHz"],
+    ["Nelspruit","NDB","NS","480","kHz"],
+    ["Witbank","VOR","WIV","113.30","MHz"],
+    ["Carolina","NDB","CL","275","kHz"],
+    ["Hendrina","NDB","HE","400","kHz"],
+    ["Secunda","NDB","SC","407","kHz"],
+    ["Skukuza","NDB","SZ","233","kHz"],
+    ["Kruger Mpumalanga","NDB","PK","405","kHz"],
+    ["Malelane","NDB","TSO","450","kHz"],
+    ["Wolfkop","NDB","WKP","360","kHz"],
+    ["Tutuka","NDB","TU","353","kHz"]
+  ],
+  "KwaZulu-Natal":[
+    ["Durban","VORTAC","DNV","112.50","MHz"],
+    ["Durban","NDB","DN","210","kHz"],
+    ["Durban","NDB","DU","393","kHz"],
+    ["Pietermaritzburg","VOR-DME","PMV","117.90","MHz"],
+    ["Pietermaritzburg","NDB","PM","363","kHz"],
+    ["Richards Bay","VOR-DME","RBV","113.00","MHz"],
+    ["Richards Bay","NDB","RB","337","kHz"],
+    ["Ladysmith","VOR","LYV","116.50","MHz"],
+    ["Ladysmith","NDB","LY","398","kHz"],
+    ["Greytown","VOR","GYV","115.50","MHz"],
+    ["Greytown","NDB","GT","282","kHz"],
+    ["Newcastle","NDB","NC","415","kHz"],
+    ["Majuba","NDB","MAJ","513","kHz"],
+    ["Durnacol","NDB","DH","358","kHz"],
+    ["Eshowe","NDB","ES","203","kHz"],
+    ["Hluhluwe","NDB","HL","375","kHz"],
+    ["Margate","NDB","UR","485","kHz"],
+    ["Pongola","NDB","PGL","383","kHz"],
+    ["Piet Retief","NDB","PRF","525","kHz"],
+    ["Ulundi","NDB","UD","268","kHz"],
+    ["Vryheid","NDB","VHD","230","kHz"]
+  ],
+  "Eastern Cape":[
+    ["East London","VORTAC","ELV","114.50","MHz"],
+    ["Port Elizabeth","VOR-DME","PEV","112.90","MHz"],
+    ["Burgersdorp","VOR","BDV","113.10","MHz"],
+    ["Cookhouse","NDB","CH","403","kHz"],
+    ["Mthatha","NDB","UA","228","kHz"],
+    ["Port Alfred","NDB","PA","233","kHz"],
+    ["Port St Johns","NDB","PJ","315","kHz"],
+    ["Badshoogte","NDB","BH","392","kHz"]
+  ]
+};
+
+const badgeClass = t => t==="VORTAC"?"b-vortac":t==="VOR-DME"?"b-vordme":t==="VOR"?"b-vor":"b-ndb";
+const regionsEl = document.getElementById('regions');
+let total=0;
+const regionNames = Object.keys(DATA);
+
+regionNames.forEach(region=>{
+  const items = DATA[region];
+  total += items.length;
+  const sec = document.createElement('section');
+  sec.className='region'; sec.dataset.region=region;
+  sec.innerHTML = `<h2>${region}<span class="count">${items.length}</span></h2>`;
+  const grid = document.createElement('div');
+  grid.className='grid';
+  items.forEach(([name,type,ident,freq,unit])=>{
+    const card = document.createElement('div');
+    card.className='card';
+    card.dataset.search = `${name} ${type} ${ident} ${freq} ${region}`.toLowerCase();
+    card.innerHTML = `
+      <div class="top">
+        <span class="name">${name}</span>
+        <span class="badge ${badgeClass(type)}">${type}</span>
+      </div>
+      <div class="meta">
+        <span class="ident">${ident}</span>
+        <span class="freq">${freq} <small>${unit}</small></span>
+      </div>`;
+    grid.appendChild(card);
+  });
+  sec.appendChild(grid);
+  regionsEl.appendChild(sec);
+});
+
+document.getElementById('stCount').textContent = total;
+document.getElementById('stReg').textContent = regionNames.length;
+
+const q = document.getElementById('q');
+const noresult = document.getElementById('noresult');
+const stShown = document.getElementById('stShown');
+
+function applyFilter(){
+  const term = q.value.trim().toLowerCase();
+  let shown=0;
+  document.querySelectorAll('.region').forEach(sec=>{
+    let visible=0;
+    sec.querySelectorAll('.card').forEach(card=>{
+      const match = !term || card.dataset.search.includes(term);
+      card.style.display = match ? '' : 'none';
+      if(match){visible++; shown++;}
+    });
+    sec.querySelector('.count').textContent = visible;
+    sec.style.display = visible ? '' : 'none';
+  });
+  stShown.textContent = shown;
+  noresult.style.display = shown ? 'none' : 'block';
+}
+q.addEventListener('input', applyFilter);
+applyFilter();
+</script>
+</body>
+</html>

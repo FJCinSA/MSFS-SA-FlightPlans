@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<SimBase.Document Type="AceXML" version="1,0">
+    <Descr>AceXML Document</Descr>
+    <FlightPlan.FlightPlan>
+        <Title>Trip 2 - Namib Desert</Title>
+        <FPType>VFR</FPType>
+        <RouteType>LowAlt</RouteType>
+        <CruisingAlt>9500</CruisingAlt>
+        <DepartureID>FYKT</DepartureID>
+        <DepartureLLA>S26* 32' 20.00",E018* 06' 42.00",+003506.00</DepartureLLA>
+        <DestinationID>FYSM</DestinationID>
+        <DestinationLLA>S22* 39' 43.00",E014* 34' 07.00",+000170.00</DestinationLLA>
+        <Descr>FYKT Keetmanshoop - FYLZ Luderitz - Sossusvlei overfly - FYSM Swakopmund</Descr>
+        <DepartureName>Keetmanshoop</DepartureName>
+        <DestinationName>Swakopmund</DestinationName>
+        <AppVersion>
+            <AppVersionMajor>12</AppVersionMajor>
+            <AppVersionBuild>282174</AppVersionBuild>
+        </AppVersion>
+        <ATCWaypoint id="FYKT">
+            <ATCWaypointType>Airport</ATCWaypointType>
+            <WorldPosition>S26* 32' 20.00",E018* 06' 42.00",+003506.00</WorldPosition>
+            <ICAO>
+                <ICAOIdent>FYKT</ICAOIdent>
+            </ICAO>
+        </ATCWaypoint>
+        <ATCWaypoint id="FYLZ">
+            <ATCWaypointType>User</ATCWaypointType>
+            <WorldPosition>S26* 41' 07.00",E015* 14' 44.00",+000457.00</WorldPosition>
+        </ATCWaypoint>
+        <ATCWaypoint id="SOSSUSVLEI">
+            <ATCWaypointType>User</ATCWaypointType>
+            <WorldPosition>S24* 43' 39.00",E015* 20' 33.00",+009500.00</WorldPosition>
+        </ATCWaypoint>
+        <ATCWaypoint id="FYSM">
+            <ATCWaypointType>Airport</ATCWaypointType>
+            <WorldPosition>S22* 39' 43.00",E014* 34' 07.00",+000170.00</WorldPosition>
+            <ICAO>
+                <ICAOIdent>FYSM</ICAOIdent>
+            </ICAO>
+        </ATCWaypoint>
+    </FlightPlan.FlightPlan>
+</SimBase.Document>

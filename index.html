@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Southern Africa Flight Pack &mdash; CoetzeeMed</title>
+<style>
+  :root{
+    --navy:#0a1428; --navy2:#0d1c33; --panel:#14233d; --gold:#d4af37; --gold2:#f0d774;
+    --ink:#e8eef7; --muted:#9fb2cc; --line:#2a3f63; --teal:#5fd3c4; --rose:#e6a4b4;
+  }
+  *{box-sizing:border-box}
+  body{margin:0; background:linear-gradient(180deg,#081020,#0a1428 40%,#0a1730);
+    color:var(--ink); font-family:"Segoe UI",Roboto,Helvetica,Arial,sans-serif; line-height:1.5;
+    -webkit-font-smoothing:antialiased}
+  a{color:inherit; text-decoration:none}
+  header{padding:38px 20px 26px; text-align:center; border-bottom:1px solid var(--line);
+    background:radial-gradient(120% 150% at 50% 0%,rgba(212,175,55,.12),transparent 60%)}
+  .brand{font-size:13px; letter-spacing:.34em; color:var(--gold); text-transform:uppercase; font-weight:700}
+  .brand b{color:var(--gold2)}
+  h1{margin:.3em 0 .2em; font-size:clamp(24px,5vw,40px); color:#fff; font-weight:700}
+  h1 .accent{color:var(--gold)}
+  .sub{color:var(--muted); font-size:15px; margin:0}
+  .env{display:inline-flex; gap:8px; margin-top:16px; flex-wrap:wrap; justify-content:center}
+  .env span{font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--teal);
+    background:rgba(95,211,196,.1); border:1px solid rgba(95,211,196,.3); padding:5px 11px; border-radius:20px}
+  .wrap{max-width:1060px; margin:0 auto; padding:30px 18px 60px}
+  .sect{margin:34px 0 0}
+  .sect h2{font-size:14px; letter-spacing:.16em; text-transform:uppercase; color:var(--gold);
+    border-bottom:1px solid var(--line); padding-bottom:10px; margin:0 0 16px}
+  .grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(290px,1fr)); gap:16px}
+  .card{display:block; background:linear-gradient(180deg,var(--panel),var(--navy2));
+    border:1px solid var(--line); border-radius:14px; padding:20px; position:relative; overflow:hidden;
+    transition:transform .14s,border-color .14s,box-shadow .14s}
+  .card:hover{transform:translateY(-3px); border-color:var(--gold); box-shadow:0 12px 28px rgba(0,0,0,.45)}
+  .card .ic{font-size:26px; margin-bottom:10px; display:block}
+  .card h3{margin:0 0 6px; color:#fff; font-size:18px}
+  .card p{margin:0; color:var(--muted); font-size:13.5px}
+  .card .tag{position:absolute; top:16px; right:16px; font-size:10px; font-weight:700; letter-spacing:.06em;
+    text-transform:uppercase; padding:3px 9px; border-radius:20px}
+  .t-web{background:rgba(212,175,55,.16); color:var(--gold2); border:1px solid rgba(212,175,55,.4)}
+  .t-pln{background:rgba(95,211,196,.13); color:var(--teal); border:1px solid rgba(95,211,196,.35)}
+  .card .go{display:inline-block; margin-top:14px; color:var(--gold); font-size:13px; font-weight:700; letter-spacing:.03em}
+  .route{margin-top:10px; font-family:"Consolas",monospace; font-size:12.5px; color:var(--ink); line-height:1.8}
+  .route b{color:var(--gold2)}
+  .note{background:rgba(230,182,95,.07); border:1px solid rgba(230,182,95,.25); border-radius:12px;
+    padding:16px 18px; color:#caa85f; font-size:13px; line-height:1.65; margin-top:18px}
+  .note b{color:var(--gold2)}
+  table.fix{width:100%; border-collapse:collapse; margin-top:10px; font-size:13px}
+  table.fix th,table.fix td{text-align:left; padding:7px 10px; border-bottom:1px solid var(--line)}
+  table.fix th{color:var(--muted); font-weight:600; font-size:11px; text-transform:uppercase; letter-spacing:.06em}
+  table.fix td{font-family:"Consolas",monospace; color:var(--ink)}
+  table.fix .was{color:var(--rose)}
+  table.fix .now{color:var(--teal)}
+  .how{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:14px}
+  .how div{background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:14px 16px}
+  .how h4{margin:0 0 6px; color:var(--gold2); font-size:13px; letter-spacing:.04em}
+  .how p{margin:0; color:var(--muted); font-size:12.5px; line-height:1.6}
+  .how code{color:var(--ink); background:#1f3559; padding:1px 6px; border-radius:5px; font-size:12px}
+  footer{text-align:center; color:#6f86a6; font-size:12px; padding:26px 16px 44px; border-top:1px solid var(--line); margin-top:36px}
+  footer b{color:var(--gold)}
+  ::selection{background:var(--gold); color:#0a1428}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand">Coetzee<b>Med</b> &middot; Flight Operations</div>
+  <h1>Southern Africa <span class="accent">Flight Pack</span></h1>
+  <p class="sub">Navaid references, ILS approaches &amp; bush-trip flight plans</p>
+  <div class="env">
+    <span>Microsoft Flight Simulator 2024</span>
+    <span>Little Navmap</span>
+    <span>MSFS PLN format</span>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <a class="card" href="Southern_Africa_Flight_Chart.html"
+     style="display:block; margin-bottom:8px; background:linear-gradient(120deg,#102740,#0a1a2e);
+     border-color:var(--gold); padding:24px 26px">
+    <span class="tag t-web" style="background:rgba(212,175,55,.16); color:var(--gold2); border-color:var(--gold)">Interactive</span>
+    <span class="ic" style="font-size:30px">&#128506;&#65039;</span>
+    <h3 style="font-size:22px">Southern Africa Flight Chart</h3>
+    <p>All eight routes plotted on one interactive aero chart &mdash; animated route lines, a flyable aircraft,
+       click-to-isolate journeys, live great-circle distances, compass rose &amp; scale bar. Self-contained, offline.</p>
+    <span class="go">Open the chart &rarr;</span>
+  </a>
+
+  <section class="sect">
+    <h2>Navaid &amp; Approach References</h2>
+    <div class="grid">
+      <a class="card" href="Navaids/SA_NAVAIDS_REFERENCE.html">
+        <span class="tag t-web">HTML</span>
+        <span class="ic">&#128225;</span>
+        <h3>SA Navaid Reference</h3>
+        <p>119 VOR / VORTAC / VOR-DME / NDB stations across all 9 provinces, searchable by name, ident or frequency.</p>
+        <span class="go">Open guide &rarr;</span>
+      </a>
+      <a class="card" href="Navaids/SA_ILS_APPROACHES.html">
+        <span class="tag t-web">HTML</span>
+        <span class="ic">&#128760;</span>
+        <h3>SA ILS Approaches</h3>
+        <p>Localiser frequencies, idents &amp; CAT I minima for 9 instrument airports including FACT, FAOR, FALA &amp; FAPE.</p>
+        <span class="go">Open cards &rarr;</span>
+      </a>
+      <a class="card" href="Navaids/NAMIBIA_NAVAIDS.html">
+        <span class="tag t-web">HTML</span>
+        <span class="ic">&#127759;</span>
+        <h3>Namibia Navaids</h3>
+        <p>Windhoek, Hosea Kutako, Eros, Katima Mulilo, Lüderitz, Swakopmund &amp; Keetmanshoop stations.</p>
+        <span class="go">Open guide &rarr;</span>
+      </a>
+    </div>
+  </section>
+
+  <section class="sect">
+    <h2>Bush-Trip Flight Plans</h2>
+    <div class="grid">
+      <a class="card" href="Trip1_OrangeRiverRun.pln">
+        <span class="tag t-pln">.PLN</span>
+        <span class="ic">&#9992;&#65039;</span>
+        <h3>Trip 1 &mdash; Orange River Run</h3>
+        <p>VFR loop along the Orange River, 9&#8239;500&#8239;ft cruise.</p>
+        <div class="route">
+          <b>FAWB</b> Wonderboom &rarr; <b>FAUP</b> Upington &rarr; Augrabies &rarr;
+          <b>FYND</b> Noordoewer &rarr; <b>FYKT</b> Keetmanshoop &rarr; <b>FAWB</b>
+        </div>
+        <span class="go">Load in sim &rarr;</span>
+      </a>
+      <a class="card" href="Trip2_NamibDesert.pln">
+        <span class="tag t-pln">.PLN</span>
+        <span class="ic">&#127956;</span>
+        <h3>Trip 2 &mdash; Namib Desert</h3>
+        <p>VFR coastal run over the dunes, 9&#8239;500&#8239;ft cruise.</p>
+        <div class="route">
+          <b>FYKT</b> Keetmanshoop &rarr; <b>FYLZ</b> Lüderitz &rarr; Sossusvlei &rarr;
+          <b>FYSM</b> Swakopmund
+        </div>
+        <span class="go">Load in sim &rarr;</span>
+      </a>
+    </div>
+  </section>
+
+  <section class="sect">
+    <h2>Cross-Country &mdash; Cape Town to Lanseria (IFR)</h2>
+    <div class="grid">
+      <a class="card" href="LEG1_FACT_FABW.pln">
+        <span class="tag t-pln">.PLN</span>
+        <span class="ic">&#9992;&#65039;</span>
+        <h3>Leg 1 &mdash; FACT &rarr; FABW</h3>
+        <p>Cape Town Intl to Beaufort West. IFR, 9&#8239;500&#8239;ft.</p>
+        <div class="route"><b>FACT</b> &rarr; CTV &rarr; Worcester &rarr; SWV &rarr; SLV &rarr; <b>FABW</b></div>
+        <span class="go">Load in sim &rarr;</span>
+      </a>
+      <a class="card" href="LEG2_FABW_FACB.pln">
+        <span class="tag t-pln">.PLN</span>
+        <span class="ic">&#9992;&#65039;</span>
+        <h3>Leg 2 &mdash; FABW &rarr; FACB</h3>
+        <p>Beaufort West to Colesberg. IFR, 9&#8239;500&#8239;ft.</p>
+        <div class="route"><b>FABW</b> &rarr; SLV &rarr; BFW &rarr; <b>FACB</b></div>
+        <span class="go">Load in sim &rarr;</span>
+      </a>
+      <a class="card" href="LEG3_FACB_FALA.pln">
+        <span class="tag t-pln">.PLN</span>
+        <span class="ic">&#9992;&#65039;</span>
+        <h3>Leg 3 &mdash; FACB &rarr; FALA</h3>
+        <p>Colesberg to Lanseria Intl. IFR, 9&#8239;500&#8239;ft.</p>
+        <div class="route"><b>FACB</b> &rarr; BLV &rarr; PSV &rarr; LIV &rarr; <b>FALA</b></div>
+        <span class="go">Load in sim &rarr;</span>
+      </a>
+    </div>
+  </section>
+
+  <section class="sect">
+    <h2>Solo Circuit &mdash; Wonderboom / Tzaneen (VFR)</h2>
+    <div class="grid">
+      <a class="card" href="SOLO_LEG1_FAWB_FADB.pln">
+        <span class="tag t-pln">.PLN</span>
+        <span class="ic">&#128694;</span>
+        <h3>Solo Leg 1 &mdash; FAWB &rarr; FADB</h3>
+        <p>Wonderboom to Dwaalboom. VFR, 6&#8239;500&#8239;ft.</p>
+        <div class="route"><b>FAWB</b> &rarr; Brits &rarr; Thabazimbi &rarr; <b>FADB</b></div>
+        <span class="go">Load in sim &rarr;</span>
+      </a>
+      <a class="card" href="SOLO_LEG2_FADB_FATZ.pln">
+        <span class="tag t-pln">.PLN</span>
+        <span class="ic">&#128694;</span>
+        <h3>Solo Leg 2 &mdash; FADB &rarr; FATZ</h3>
+        <p>Dwaalboom to Tzaneen. VFR, 7&#8239;500&#8239;ft.</p>
+        <div class="route"><b>FADB</b> &rarr; Ellisras &rarr; Polokwane &rarr; Escarpment &rarr; <b>FATZ</b></div>
+        <span class="go">Load in sim &rarr;</span>
+      </a>
+      <a class="card" href="SOLO_LEG3_FATZ_FAWB.pln">
+        <span class="tag t-pln">.PLN</span>
+        <span class="ic">&#128694;</span>
+        <h3>Solo Leg 3 &mdash; FATZ &rarr; FAWB</h3>
+        <p>Tzaneen back to Wonderboom. VFR, 8&#8239;500&#8239;ft.</p>
+        <div class="route"><b>FATZ</b> &rarr; Escarpment &rarr; Polokwane &rarr; Ellisras &rarr; Thabazimbi &rarr; Brits &rarr; <b>FAWB</b></div>
+        <span class="go">Load in sim &rarr;</span>
+      </a>
+    </div>
+  </section>
+
+  <section class="sect">
+    <h2>Using This Pack</h2>
+    <div class="how">
+      <div>
+        <h4>MSFS 2024</h4>
+        <p>World Map &rarr; <code>Load</code> &rarr; browse to <code>C:\FlightPlans\</code> and pick a <code>.pln</code>. Waypoints load as the planned route.</p>
+      </div>
+      <div>
+        <h4>Little Navmap</h4>
+        <p>File &rarr; <code>Open Flight Plan&hellip;</code> &rarr; select a <code>.pln</code>. Use the navaid pages alongside the map to tune VORs &amp; NDBs.</p>
+      </div>
+      <div>
+        <h4>Reference pages</h4>
+        <p>The three HTML files are self-contained &mdash; double-click to open in any browser, no internet needed. Search works offline.</p>
+      </div>
+    </div>
+    <div class="note">
+      <b>&#9888; Verified &amp; corrected:</b> two ICAO codes in the original routes were wrong and have been fixed in the PLN files.
+      <table class="fix">
+        <tr><th>Location</th><th>Originally</th><th>Corrected</th><th>Note</th></tr>
+        <tr><td>Noordoewer</td><td class="was">FYNW</td><td class="now">FYND</td><td>FYNW returns nothing in the AIP</td></tr>
+        <tr><td>Lüderitz</td><td class="was">FYAL</td><td class="now">FYLZ</td><td>FYAL is Auob Lodge, not Lüderitz</td></tr>
+      </table>
+      <div style="margin-top:10px">ILS decision heights / visibility minima on the approach page are <b>standard CAT I reference values</b>,
+      not chart-accurate &mdash; verify against the current AIP / Jeppesen plate before operational use.</div>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <p><b>CoetzeeMed</b> Flight Operations &middot; Southern Africa Flight Pack &middot; for MSFS 2024 &amp; Little Navmap</p>
+</footer>
+</body>
+</html>

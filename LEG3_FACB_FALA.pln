@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SimBase.Document Type="AceXML" version="1,0">
+  <Descr>AceXML Document</Descr>
+  <FlightPlan.FlightPlan>
+    <Title>Leg 3 - FACB to FALA</Title>
+    <FPType>IFR</FPType>
+    <CruisingAlt>9500</CruisingAlt>
+    <DepartureID>FACB</DepartureID>
+    <DepartureLLA>S30* 44' 02.00",E25* 03' 54.00",+0004757.00</DepartureLLA>
+    <DestinationID>FALA</DestinationID>
+    <DestinationLLA>S25* 56' 20.00",E27* 55' 34.00",+0005043.00</DestinationLLA>
+    <Descr>FACB to FALA</Descr>
+    <DepartureName>Colesberg</DepartureName>
+    <DestinationName>Lanseria Intl</DestinationName>
+    <AppVersion>
+      <AppVersionMajor>11</AppVersionMajor>
+      <AppVersionBuild>282174</AppVersionBuild>
+    </AppVersion>
+    <ATCWaypoint id="FACB">
+      <ATCWaypointType>Airport</ATCWaypointType>
+      <WorldPosition>S30* 44' 02.00",E25* 03' 54.00",+0004757.00</WorldPosition>
+      <ICAO><ICAOIdent>FACB</ICAOIdent></ICAO>
+    </ATCWaypoint>
+    <ATCWaypoint id="BLV">
+      <ATCWaypointType>User</ATCWaypointType>
+      <WorldPosition>S29* 05' 42.00",E26* 18' 18.00",+0004590.00</WorldPosition>
+    </ATCWaypoint>
+    <ATCWaypoint id="PSV">
+      <ATCWaypointType>User</ATCWaypointType>
+      <WorldPosition>S26* 40' 30.00",E27* 05' 12.00",+0004593.00</WorldPosition>
+    </ATCWaypoint>
+    <ATCWaypoint id="LIV">
+      <ATCWaypointType>User</ATCWaypointType>
+      <WorldPosition>S25* 56' 23.00",E27* 55' 36.00",+0005043.00</WorldPosition>
+    </ATCWaypoint>
+    <ATCWaypoint id="FALA">
+      <ATCWaypointType>Airport</ATCWaypointType>
+      <WorldPosition>S25* 56' 20.00",E27* 55' 34.00",+0005043.00</WorldPosition>
+      <ICAO><ICAOIdent>FALA</ICAOIdent></ICAO>
+    </ATCWaypoint>
+  </FlightPlan.FlightPlan>
+</SimBase.Document>

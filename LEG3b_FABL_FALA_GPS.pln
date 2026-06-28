@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SimBase.Document Type="AceXML" version="1,0">
+    <Descr>AceXML Document</Descr>
+    <FlightPlan.FlightPlan>
+        <Title>LEG3b FABL to FALA - GPS Edition</Title>
+        <FPType>IFR</FPType>
+        <RouteType>LowAlt</RouteType>
+        <CruisingAlt>7500</CruisingAlt>
+        <DepartureID>FABL</DepartureID>
+        <DepartureLLA>S29* 5' 47.00",E26* 18' 7.00",+4458.00</DepartureLLA>
+        <DestinationID>FALA</DestinationID>
+        <DestinationLLA>S25* 56' 19.00",E27* 55' 34.00",+4517.00</DestinationLLA>
+        <Descr>Bloemfontein to Lanseria - GPS Direct</Descr>
+        <DeparturePosition>1</DeparturePosition>
+        <DepartureName>Bloemfontein</DepartureName>
+        <DestinationName>Lanseria</DestinationName>
+        <ATCWaypoint id="FABL">
+            <ATCWaypointType>Airport</ATCWaypointType>
+            <WorldPosition>S29* 5' 47.00",E26* 18' 7.00",+4458.00</WorldPosition>
+            <ICAO><ICAOIdent>FABL</ICAOIdent></ICAO>
+        </ATCWaypoint>
+        <ATCWaypoint id="FALA">
+            <ATCWaypointType>Airport</ATCWaypointType>
+            <WorldPosition>S25* 56' 19.00",E27* 55' 34.00",+4517.00</WorldPosition>
+            <ICAO><ICAOIdent>FALA</ICAOIdent></ICAO>
+        </ATCWaypoint>
+    </FlightPlan.FlightPlan>
+</SimBase.Document>

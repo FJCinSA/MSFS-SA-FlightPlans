@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SimBase.Document Type="AceXML" version="1,0">
+  <Descr>AceXML Document</Descr>
+  <FlightPlan.FlightPlan>
+    <Title>Solo Leg 2 - Dwaalboom to Tzaneen</Title>
+    <FPType>VFR</FPType>
+    <CruisingAlt>7500</CruisingAlt>
+    <DepartureID>FADB</DepartureID>
+    <DepartureLLA>S24* 48' 25.00",E26* 49' 46.00",+0003650.00</DepartureLLA>
+    <DestinationID>FATZ</DestinationID>
+    <DestinationLLA>S23* 49' 28.00",E30* 19' 46.00",+0001914.00</DestinationLLA>
+    <Descr>FADB to FATZ</Descr>
+    <DepartureName>Dwaalboom</DepartureName>
+    <DestinationName>Tzaneen</DestinationName>
+    <AppVersion>
+      <AppVersionMajor>11</AppVersionMajor>
+      <AppVersionBuild>282174</AppVersionBuild>
+    </AppVersion>
+    <ATCWaypoint id="FADB">
+      <ATCWaypointType>Airport</ATCWaypointType>
+      <WorldPosition>S24* 48' 25.00",E26* 49' 46.00",+0003650.00</WorldPosition>
+      <ICAO><ICAOIdent>FADB</ICAOIdent></ICAO>
+    </ATCWaypoint>
+    <ATCWaypoint id="ELLISRS">
+      <ATCWaypointType>User</ATCWaypointType>
+      <WorldPosition>S23* 40' 00.00",E27* 44' 00.00",+0003000.00</WorldPosition>
+    </ATCWaypoint>
+    <ATCWaypoint id="POLKWNE">
+      <ATCWaypointType>User</ATCWaypointType>
+      <WorldPosition>S23* 51' 00.00",E29* 27' 00.00",+0004000.00</WorldPosition>
+    </ATCWaypoint>
+    <ATCWaypoint id="ESCARP">
+      <ATCWaypointType>User</ATCWaypointType>
+      <WorldPosition>S23* 50' 00.00",E30* 00' 00.00",+0005000.00</WorldPosition>
+    </ATCWaypoint>
+    <ATCWaypoint id="FATZ">
+      <ATCWaypointType>Airport</ATCWaypointType>
+      <WorldPosition>S23* 49' 28.00",E30* 19' 46.00",+0001914.00</WorldPosition>
+      <ICAO><ICAOIdent>FATZ</ICAOIdent></ICAO>
+    </ATCWaypoint>
+  </FlightPlan.FlightPlan>
+</SimBase.Document>

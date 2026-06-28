@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SimBase.Document Type="AceXML" version="1,0">
+  <Descr>AceXML Document</Descr>
+  <FlightPlan.FlightPlan>
+    <Title>Leg 1 - FACT to FABW</Title>
+    <FPType>IFR</FPType>
+    <CruisingAlt>9500</CruisingAlt>
+    <DepartureID>FACT</DepartureID>
+    <DepartureLLA>S33* 58' 19.00",E18* 36' 14.00",+0000148.00</DepartureLLA>
+    <DestinationID>FABW</DestinationID>
+    <DestinationLLA>S32* 18' 23.00",E22* 39' 52.00",+0002929.00</DestinationLLA>
+    <Descr>FACT to FABW</Descr>
+    <DepartureName>Cape Town Intl</DepartureName>
+    <DestinationName>Beaufort West</DestinationName>
+    <AppVersion>
+      <AppVersionMajor>11</AppVersionMajor>
+      <AppVersionBuild>282174</AppVersionBuild>
+    </AppVersion>
+    <ATCWaypoint id="FACT">
+      <ATCWaypointType>Airport</ATCWaypointType>
+      <WorldPosition>S33* 58' 19.00",E18* 36' 14.00",+0000148.00</WorldPosition>
+      <ICAO><ICAOIdent>FACT</ICAOIdent></ICAO>
+    </ATCWaypoint>
+    <ATCWaypoint id="CTV">
+      <ATCWaypointType>User</ATCWaypointType>
+      <WorldPosition>S33* 59' 00.00",E18* 36' 00.00",+0000500.00</WorldPosition>
+    </ATCWaypoint>
+    <ATCWaypoint id="WOR">
+      <ATCWaypointType>User</ATCWaypointType>
+      <WorldPosition>S33* 37' 48.00",E19* 25' 48.00",+0001000.00</WorldPosition>
+    </ATCWaypoint>
+    <ATCWaypoint id="SWV">
+      <ATCWaypointType>User</ATCWaypointType>
+      <WorldPosition>S34* 03' 00.00",E20* 26' 00.00",+0003000.00</WorldPosition>
+    </ATCWaypoint>
+    <ATCWaypoint id="SLV">
+      <ATCWaypointType>User</ATCWaypointType>
+      <WorldPosition>S32* 24' 00.00",E20* 40' 00.00",+0003500.00</WorldPosition>
+    </ATCWaypoint>
+    <ATCWaypoint id="FABW">
+      <ATCWaypointType>Airport</ATCWaypointType>
+      <WorldPosition>S32* 18' 23.00",E22* 39' 52.00",+0002929.00</WorldPosition>
+      <ICAO><ICAOIdent>FABW</ICAOIdent></ICAO>
+    </ATCWaypoint>
+  </FlightPlan.FlightPlan>
+</SimBase.Document>

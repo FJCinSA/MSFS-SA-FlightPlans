@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Southern Africa Flight Chart &mdash; CoetzeeMed</title>
+<style>
+  :root{
+    --navy:#081424; --navy2:#0a1a2e; --panel:#102740; --panel2:#0c2036;
+    --gold:#d4af37; --gold2:#f0d774; --ink:#e8eef7; --muted:#90a6c4; --line:#243f63;
+    --sea:#06101e; --land:#0f2238; --coast:#7fa6cf;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0; background:var(--navy);
+    color:var(--ink); font-family:"Segoe UI",Roboto,Helvetica,Arial,sans-serif; -webkit-font-smoothing:antialiased}
+  .top{display:flex; align-items:center; gap:14px; padding:16px 22px; border-bottom:1px solid var(--line);
+    background:radial-gradient(120% 200% at 0% 0%,rgba(212,175,55,.12),transparent 55%)}
+  .badge-co{font-size:12px; letter-spacing:.32em; color:var(--gold); text-transform:uppercase; font-weight:700; white-space:nowrap}
+  .badge-co b{color:var(--gold2)}
+  .top h1{margin:0; font-size:clamp(16px,2.4vw,22px); color:#fff; font-weight:700; letter-spacing:.01em}
+  .top h1 span{color:var(--gold)}
+  .top .spacer{flex:1}
+  .top .tag{font-size:10.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--coast);
+    border:1px solid var(--line); border-radius:20px; padding:5px 11px; white-space:nowrap}
+  .layout{display:flex; gap:0; align-items:stretch; min-height:calc(100vh - 60px)}
+  .map-col{flex:1 1 auto; min-width:0; position:relative; background:
+    radial-gradient(140% 120% at 50% 0%,#0a1a30,#070f1d 70%)}
+  svg{display:block; width:100%; height:auto; max-height:calc(100vh - 60px)}
+  .side{flex:0 0 320px; border-left:1px solid var(--line); background:linear-gradient(180deg,var(--panel2),var(--navy2));
+    padding:18px 16px 26px; overflow-y:auto; max-height:calc(100vh - 60px)}
+  .stats{display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:16px}
+  .stat{background:var(--panel); border:1px solid var(--line); border-radius:10px; padding:10px 12px}
+  .stat .v{font-size:20px; font-weight:700; color:var(--gold2); font-family:"Consolas",monospace}
+  .stat .k{font-size:10.5px; text-transform:uppercase; letter-spacing:.07em; color:var(--muted); margin-top:2px}
+  .side h2{font-size:11.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--gold); margin:6px 0 10px}
+  .jcard{background:var(--panel); border:1px solid var(--line); border-left-width:4px; border-radius:10px;
+    padding:11px 13px; margin-bottom:9px; cursor:pointer; transition:transform .12s,box-shadow .12s,background .12s}
+  .jcard:hover{transform:translateX(2px); box-shadow:0 6px 16px rgba(0,0,0,.4)}
+  .jcard.active{background:var(--panel2); box-shadow:0 0 0 1px var(--gold) inset}
+  .jcard .jt{font-weight:700; color:#fff; font-size:14px; line-height:1.25}
+  .jcard .jm{display:flex; gap:10px; flex-wrap:wrap; margin-top:6px; color:var(--muted); font-size:11.5px}
+  .jcard .jm b{color:var(--ink); font-family:"Consolas",monospace}
+  .jdetail{display:none; margin-top:9px; padding-top:9px; border-top:1px dashed var(--line); font-size:12px; color:var(--muted)}
+  .jcard.active .jdetail{display:block}
+  .jdetail .wp{font-family:"Consolas",monospace; color:var(--ink); line-height:1.7; word-spacing:.04em}
+  .ctrls{display:flex; gap:8px; margin:4px 0 16px}
+  .btn{flex:1; background:var(--panel); border:1px solid var(--line); color:var(--ink); border-radius:9px;
+    padding:9px 10px; font-size:12.5px; cursor:pointer; transition:border-color .12s,color .12s}
+  .btn:hover{border-color:var(--gold); color:var(--gold2)}
+  .btn.primary{background:linear-gradient(180deg,rgba(212,175,55,.22),rgba(212,175,55,.08)); border-color:var(--gold); color:var(--gold2); font-weight:700}
+  .disc{margin-top:18px; font-size:10.5px; color:#6f86a6; line-height:1.6; border-top:1px solid var(--line); padding-top:12px}
+  .disc b{color:var(--gold)}
+  /* SVG element styles */
+  .grat{stroke:#1b3252; stroke-width:.6; fill:none}
+  .grat-lbl{fill:#54708f; font:10px "Consolas",monospace}
+  .coast{fill:none; stroke:var(--coast); stroke-width:1.1; opacity:.55; stroke-linejoin:round; stroke-linecap:round}
+  .route-line{fill:none; stroke-width:2.4; stroke-linejoin:round; stroke-linecap:round;
+    filter:url(#glow); transition:opacity .25s,stroke-width .25s}
+  .route-flow{fill:none; stroke-width:2.4; stroke-linecap:round; stroke-dasharray:2 12;
+    animation:flow 1.6s linear infinite; opacity:.9; transition:opacity .25s}
+  @keyframes flow{to{stroke-dashoffset:-14}}
+  .ap{fill:var(--navy); stroke:var(--gold); stroke-width:1.6}
+  .ap-core{fill:var(--gold2)}
+  .ap-lbl{fill:#dfe8f5; font:700 11px "Consolas",monospace; paint-order:stroke; stroke:#06101e; stroke-width:3px}
+  .wpt{fill:#6f8db0; stroke:#0a1a2e; stroke-width:.8}
+  .scenic{fill:var(--gold2); stroke:#06101e; stroke-width:.8}
+  .w-lbl{fill:#9fc0e6; font:10px "Consolas",monospace; opacity:0; transition:opacity .2s; paint-order:stroke; stroke:#06101e; stroke-width:2.6px}
+  .w-lbl.show{opacity:.95}
+  .s-lbl{fill:var(--gold2); font:italic 600 11px "Segoe UI"; paint-order:stroke; stroke:#06101e; stroke-width:3px}
+  .rose, .scalebar text, .titleblock text{font-family:"Consolas",monospace}
+  .dim{opacity:.10 !important}
+  ::selection{background:var(--gold); color:#06101e}
+  @media(max-width:860px){
+    .layout{flex-direction:column}
+    .side{flex:none; border-left:0; border-top:1px solid var(--line); max-height:none}
+    svg{max-height:62vh}
+  }
+</style>
+</head>
+<body>
+<div class="top">
+  <span class="badge-co">Coetzee<b>Med</b></span>
+  <h1>Southern Africa <span>Flight Chart</span></h1>
+  <span class="spacer"></span>
+  <span class="tag">RSA &middot; NAM</span>
+  <span class="tag">MSFS 2024 &middot; Little Navmap</span>
+</div>
+
+<div class="layout">
+  <div class="map-col">
+    <svg id="chart" viewBox="0 0 1031 820" preserveAspectRatio="xMidYMid meet" aria-label="Southern Africa flight chart"></svg>
+  </div>
+
+  <aside class="side">
+    <div class="stats">
+      <div class="stat"><div class="v" id="sDist">0</div><div class="k">Total nm</div></div>
+      <div class="stat"><div class="v" id="sJourneys">0</div><div class="k">Journeys</div></div>
+      <div class="stat"><div class="v" id="sAirports">0</div><div class="k">Airports</div></div>
+      <div class="stat"><div class="v" id="sWpts">0</div><div class="k">Waypoints</div></div>
+    </div>
+
+    <div class="ctrls">
+      <button class="btn" id="flyBtn">&#9654; Fly route</button>
+      <button class="btn primary" id="allBtn">Show all</button>
+    </div>
+
+    <h2>Journeys</h2>
+    <div id="jlist"></div>
+
+    <div class="disc">
+      <b>Routes plotted from the actual PLN coordinates</b> in this pack. Coastline is a stylised
+      cartographic approximation. Distances are great-circle (haversine) sums in nautical miles.
+      Decorative chart &mdash; <b>not for real-world navigation</b>.
+      <div style="margin-top:8px">&copy; CoetzeeMed Flight Operations &middot; Southern Africa Flight Pack</div>
+    </div>
+  </aside>
+</div>
+
+<script>
+"use strict";
+const SVGNS="http://www.w3.org/2000/svg";
+const W=1031,H=820,PAD=12;
+const B={lonMin:13.5,lonMax:33.0,latMin:-35.0,latMax:-21.3};
+function el(tag,attrs,parent){
+  const n=document.createElementNS(SVGNS,tag);
+  if(attrs)for(const k in attrs)n.setAttribute(k,attrs[k]);
+  if(parent)parent.appendChild(n);
+  return n;
+}
+function project(lon,lat){
+  const fx=(lon-B.lonMin)/(B.lonMax-B.lonMin);
+  const fy=(B.latMax-lat)/(B.latMax-B.latMin);
+  return [PAD+fx*(W-2*PAD), PAD+fy*(H-2*PAD)];
+}
+function hav(a,b){
+  const R=3440.065,r=Math.PI/180;
+  const dLa=(b.lat-a.lat)*r,dLo=(b.lon-a.lon)*r;
+  const h=Math.sin(dLa/2)**2+Math.cos(a.lat*r)*Math.cos(b.lat*r)*Math.sin(dLo/2)**2;
+  return 2*R*Math.asin(Math.sqrt(h));
+}
+
+// ---- waypoint table (decimal deg, from the pack PLN files) ----
+const P={
+  FAWB:{lon:28.224167,lat:-25.653889,k:'a',l:'FAWB'},
+  FAUP:{lon:21.260278,lat:-28.399167,k:'a',l:'FAUP'},
+  AUGR:{lon:20.341667,lat:-28.593611,k:'s',l:'Augrabies'},
+  FYND:{lon:17.624444,lat:-28.701667,k:'a',l:'FYND'},
+  FYKT:{lon:18.111667,lat:-26.538889,k:'a',l:'FYKT'},
+  FYLZ:{lon:15.245556,lat:-26.685278,k:'a',l:'FYLZ'},
+  SOSS:{lon:15.342500,lat:-24.727500,k:'s',l:'Sossusvlei'},
+  FYSM:{lon:14.568611,lat:-22.661944,k:'a',l:'FYSM'},
+  FACT:{lon:18.603889,lat:-33.971944,k:'a',l:'FACT'},
+  CTV :{lon:18.600000,lat:-33.983333,k:'w',l:'CTV'},
+  WOR :{lon:19.430000,lat:-33.630000,k:'w',l:'WOR'},
+  SWV :{lon:20.433333,lat:-34.050000,k:'w',l:'SWV'},
+  SLV :{lon:20.666667,lat:-32.400000,k:'w',l:'SLV'},
+  FABW:{lon:22.664444,lat:-32.306389,k:'a',l:'FABW'},
+  BFW :{lon:23.000000,lat:-31.500000,k:'w',l:'BFW'},
+  FACB:{lon:25.065000,lat:-30.733889,k:'a',l:'FACB'},
+  BLV :{lon:26.305000,lat:-29.095000,k:'w',l:'BLV'},
+  PSV :{lon:27.086667,lat:-26.675000,k:'w',l:'PSV'},
+  LIV :{lon:27.926667,lat:-25.939722,k:'w',l:'LIV'},
+  FALA:{lon:27.926111,lat:-25.938889,k:'a',l:'FALA'},
+  BRITS:{lon:27.783333,lat:-25.616667,k:'w',l:'Brits'},
+  THAB:{lon:27.350000,lat:-24.583333,k:'w',l:'Thabazimbi'},
+  FADB:{lon:26.829444,lat:-24.806944,k:'a',l:'FADB'},
+  ELLI:{lon:27.733333,lat:-23.666667,k:'w',l:'Ellisras'},
+  POLO:{lon:29.450000,lat:-23.850000,k:'w',l:'Polokwane'},
+  ESCA:{lon:30.000000,lat:-23.833333,k:'w',l:'Escarp'},
+  FATZ:{lon:30.329444,lat:-23.824444,k:'a',l:'FATZ'}
+};
+
+const JOURNEYS=[
+  {id:'orange',name:'Trip 1 — Orange River Run',sub:'VFR bush loop',color:'#f0d774',cruise:'9,500 ft',
+   route:['FAWB','FAUP','AUGR','FYND','FYKT','FAWB']},
+  {id:'namib',name:'Trip 2 — Namib Desert',sub:'VFR coastal',color:'#5fd3c4',cruise:'9,500 ft',
+   route:['FYKT','FYLZ','SOSS','FYSM']},
+  {id:'xc',name:'Cross-Country — Cape Town ⇢ Lanseria',sub:'IFR · 3 legs',color:'#e6a4b4',cruise:'9,500 ft',
+   route:['FACT','CTV','WOR','SWV','SLV','FABW','BFW','FACB','BLV','PSV','LIV','FALA']},
+  {id:'solo',name:'Solo Circuit — Wonderboom ⇢ Tzaneen',sub:'VFR · round trip',color:'#9ad36b',cruise:'6.5–8.5k ft',
+   route:['FAWB','BRITS','THAB','FADB','ELLI','POLO','ESCA','FATZ','ESCA','POLO','ELLI','THAB','BRITS','FAWB']}
+];
+
+// stylised coastline (lon,lat) NW Namibia -> Cape -> NE to Mozambique border
+const COAST=[
+  [13.9,-21.5],[14.4,-22.0],[14.5,-22.68],[14.55,-23.1],[15.0,-25.8],[15.16,-26.65],
+  [16.45,-28.6],[17.1,-30.3],[17.9,-32.6],[18.30,-33.4],[18.35,-34.08],[18.49,-34.36],
+  [19.3,-34.62],[20.01,-34.83],[21.0,-34.45],[22.15,-34.18],[23.4,-34.06],[24.85,-34.02],
+  [25.70,-34.00],[26.9,-33.76],[27.91,-33.02],[28.9,-32.30],[30.05,-31.05],[31.05,-29.87],
+  [32.10,-28.80],[32.55,-27.5],[32.90,-26.85]
+];
+
+const svg=document.getElementById('chart');
+// defs
+const defs=el('defs',null,svg);
+defs.innerHTML=`
+  <radialGradient id="seaGrad" cx="50%" cy="20%" r="90%">
+    <stop offset="0%" stop-color="#0b1d34"/><stop offset="100%" stop-color="#060f1d"/>
+  </radialGradient>
+  <linearGradient id="landGrad" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#13294310"/><stop offset="0%" stop-color="#142a44"/>
+    <stop offset="100%" stop-color="#0d1f34"/>
+  </linearGradient>
+  <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+    <feGaussianBlur stdDeviation="2.4" result="b"/><feMerge>
+    <feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+  </filter>
+  <filter id="softglow" x="-50%" y="-50%" width="200%" height="200%">
+    <feGaussianBlur stdDeviation="4"/>
+  </filter>`;
+
+// layers
+const gSea=el('g',null,svg), gLand=el('g',null,svg), gGrat=el('g',null,svg),
+      gRoutes=el('g',null,svg), gMarks=el('g',null,svg), gPlane=el('g',null,svg), gOver=el('g',null,svg);
+
+// sea
+el('rect',{x:0,y:0,width:W,height:H,fill:'url(#seaGrad)'},gSea);
+
+// land (coast + frame corners to fill continent)
+let dLand='M';
+COAST.forEach((c,i)=>{const p=project(c[0],c[1]); dLand+=(i?'L':'')+p[0].toFixed(1)+','+p[1].toFixed(1)+' ';});
+const tr=project(B.lonMax,B.latMax), tl=project(B.lonMin,B.latMax);
+dLand+='L'+tr[0].toFixed(1)+','+tr[1].toFixed(1)+' L'+tl[0].toFixed(1)+','+tl[1].toFixed(1)+' Z';
+el('path',{d:dLand,fill:'url(#landGrad)'},gLand);
+// coastline stroke
+let dCoast='M';
+COAST.forEach((c,i)=>{const p=project(c[0],c[1]); dCoast+=(i?'L':'')+p[0].toFixed(1)+','+p[1].toFixed(1)+' ';});
+el('path',{d:dCoast,class:'coast'},gLand);
+
+// graticule
+for(let lon=14;lon<=32;lon+=2){
+  const a=project(lon,B.latMax),b=project(lon,B.latMin);
+  el('line',{x1:a[0],y1:a[1],x2:b[0],y2:b[1],class:'grat'},gGrat);
+  el('text',{x:a[0]+2,y:14,class:'grat-lbl'},gGrat).textContent=lon+'°E';
+}
+for(let lat=-22;lat>=-34;lat-=2){
+  const a=project(B.lonMin,lat),b=project(B.lonMax,lat);
+  el('line',{x1:a[0],y1:a[1],x2:b[0],y2:b[1],class:'grat'},gGrat);
+  el('text',{x:4,y:a[1]-3,class:'grat-lbl'},gGrat).textContent=Math.abs(lat)+'°S';
+}
+
+// routes
+const routeEls={};
+JOURNEYS.forEach(j=>{
+  const pts=j.route.map(k=>project(P[k].lon,P[k].lat));
+  const d='M'+pts.map(p=>p[0].toFixed(1)+','+p[1].toFixed(1)).join(' L');
+  const g=el('g',{'data-id':j.id},gRoutes);
+  el('path',{d,class:'route-line',stroke:j.color},g);
+  el('path',{d,class:'route-flow',stroke:'#ffffff'},g);
+  routeEls[j.id]=g;
+  g.style.cursor='pointer';
+  g.addEventListener('click',()=>select(j.id));
+});
+
+// markers (unique points actually used)
+const used=new Set(); JOURNEYS.forEach(j=>j.route.forEach(k=>used.add(k)));
+const wLabelEls={}; // id -> {pt key: textEl}
+[...used].forEach(k=>{
+  const pt=P[k],[x,y]=project(pt.lon,pt.lat);
+  if(pt.k==='a'){
+    el('circle',{cx:x,cy:y,r:5.4,class:'ap'},gMarks);
+    el('circle',{cx:x,cy:y,r:2.1,class:'ap-core'},gMarks);
+    el('text',{x:x+8,y:y+3.5,class:'ap-lbl'},gMarks).textContent=pt.l;
+  }else if(pt.k==='s'){
+    star(x,y,5.2,gMarks);
+    el('text',{x:x+8,y:y+3.5,class:'s-lbl'},gMarks).textContent=pt.l;
+  }else{
+    el('rect',{x:x-2.6,y:y-2.6,width:5.2,height:5.2,class:'wpt',transform:`rotate(45 ${x} ${y})`},gMarks);
+    const t=el('text',{x:x+6,y:y+3,class:'w-lbl'},gMarks); t.textContent=pt.l;
+    wLabelEls[k]=t;
+  }
+});
+function star(cx,cy,r,parent){
+  let d='';for(let i=0;i<10;i++){const ang=-Math.PI/2+i*Math.PI/5;const rad=i%2?r*0.42:r;
+    d+=(i?'L':'M')+(cx+rad*Math.cos(ang)).toFixed(1)+','+(cy+rad*Math.sin(ang)).toFixed(1)+' ';}
+  return el('path',{d:d+'Z',class:'scenic'},parent);
+}
+
+// compass rose
+(function(){
+  const cx=W-78,cy=92,R=34;
+  el('circle',{cx,cy,r:R,fill:'rgba(8,20,36,.55)',stroke:'#33507a','stroke-width':1},gOver);
+  el('circle',{cx,cy,r:R-6,fill:'none',stroke:'#23405f','stroke-width':.7},gOver);
+  for(let a=0;a<360;a+=30){const rad=(a-90)*Math.PI/180;
+    const o=a%90===0?R:R-5;
+    el('line',{x1:cx+(R-2)*Math.cos(rad),y1:cy+(R-2)*Math.sin(rad),
+      x2:cx+(o-8)*Math.cos(rad),y2:cy+(o-8)*Math.sin(rad),stroke:'#3a5a82','stroke-width':a%90===0?1.4:.7},gOver);}
+  const np=`${cx},${cy-R+3} ${cx-5},${cy-6} ${cx+5},${cy-6}`;
+  el('polygon',{points:np,fill:'#f0d774'},gOver);
+  el('polygon',{points:`${cx},${cy+R-3} ${cx-5},${cy+6} ${cx+5},${cy+6}`,fill:'#3a5a82'},gOver);
+  el('text',{x:cx,y:cy-R-5,'text-anchor':'middle',fill:'#f0d774',font:'700 12px Consolas'},gOver).textContent='N';
+})();
+
+// scale bar (100 nm)
+(function(){
+  const nmPerDegLon=60*Math.cos(-28*Math.PI/180);
+  const pxPerDegLon=(W-2*PAD)/(B.lonMax-B.lonMin);
+  const px100=100/(nmPerDegLon/pxPerDegLon);
+  const x0=40,y0=H-40;
+  el('line',{x1:x0,y1:y0,x2:x0+px100,y2:y0,stroke:'#cdd9ea','stroke-width':2},gOver);
+  [0,px100/2,px100].forEach(dx=>el('line',{x1:x0+dx,y1:y0-4,x2:x0+dx,y2:y0+4,stroke:'#cdd9ea','stroke-width':2},gOver));
+  el('text',{x:x0,y:y0-8,fill:'#aebfd6',font:'11px Consolas'},gOver).textContent='0';
+  el('text',{x:x0+px100,y:y0-8,'text-anchor':'end',fill:'#aebfd6',font:'11px Consolas'},gOver).textContent='100 nm';
+})();
+
+// title block (bottom-right)
+(function(){
+  const bw=232,bh=56,x=W-bw-16,y=H-bh-16;
+  el('rect',{x,y,width:bw,height:bh,rx:8,fill:'rgba(8,18,32,.82)',stroke:'#33507a'},gOver);
+  el('text',{x:x+14,y:y+22,fill:'#f0d774',font:'700 13px Segoe UI','letter-spacing':'.18em'},gOver).textContent='COETZEEMED';
+  el('text',{x:x+14,y:y+39,fill:'#cdd9ea',font:'11px Consolas'},gOver).textContent='S. AFRICA FLIGHT PACK';
+  el('text',{x:x+bw-12,y:y+39,'text-anchor':'end',fill:'#6f86a6',font:'10px Consolas'},gOver).textContent='VFR / IFR';
+})();
+
+// plane
+const plane=el('path',{d:'M13,0 L-8,-7 L-3,0 L-8,7 Z',fill:'#fff',opacity:0,filter:'url(#softglow)'},gPlane);
+const planeCore=el('path',{d:'M13,0 L-8,-7 L-3,0 L-8,7 Z',fill:'#fff',opacity:0},gPlane);
+
+// ---- distances + stats ----
+function routeDist(route){let s=0;for(let i=1;i<route.length;i++)s+=hav(P[route[i-1]],P[route[i]]);return s;}
+let totalDist=0; JOURNEYS.forEach(j=>{j.dist=routeDist(j.route); totalDist+=j.dist;});
+const airports=[...used].filter(k=>P[k].k==='a').length;
+const wpts=[...used].filter(k=>P[k].k==='w'||P[k].k==='s').length;
+document.getElementById('sDist').textContent=Math.round(totalDist).toLocaleString();
+document.getElementById('sJourneys').textContent=JOURNEYS.length;
+document.getElementById('sAirports').textContent=airports;
+document.getElementById('sWpts').textContent=wpts;
+
+// ---- sidebar journey cards ----
+const jlist=document.getElementById('jlist');
+JOURNEYS.forEach(j=>{
+  const c=document.createElement('div');
+  c.className='jcard'; c.style.borderLeftColor=j.color; c.dataset.id=j.id;
+  const stops=j.route.filter((k,i)=>j.route.indexOf(k)===i);
+  c.innerHTML=`
+    <div class="jt">${j.name}</div>
+    <div class="jm"><span>${j.sub}</span><span>&#9679; <b>${Math.round(j.dist)} nm</b></span><span>&#9650; ${j.cruise}</span></div>
+    <div class="jdetail"><div class="wp">${j.route.map(k=>P[k].l).join(' → ')}</div></div>`;
+  c.addEventListener('click',()=>select(j.id));
+  jlist.appendChild(c);
+});
+
+// ---- selection / isolate ----
+let selected=null, anim=null;
+function select(id){
+  selected=(selected===id)?null:id;
+  JOURNEYS.forEach(j=>{
+    const on=!selected||selected===j.id;
+    routeEls[j.id].classList.toggle('dim',!on);
+    const card=jlist.querySelector(`[data-id="${j.id}"]`);
+    card.classList.toggle('active',selected===j.id);
+    j.route.forEach(k=>{if(wLabelEls[k])wLabelEls[k].classList.toggle('show',selected===j.id);});
+  });
+  stopPlane();
+  if(selected){const j=JOURNEYS.find(x=>x.id===selected); flyRoute(j);}
+  else hidePlane();
+}
+function showAll(){selected=null;
+  JOURNEYS.forEach(j=>{routeEls[j.id].classList.remove('dim');
+    jlist.querySelector(`[data-id="${j.id}"]`).classList.remove('active');
+    j.route.forEach(k=>{if(wLabelEls[k])wLabelEls[k].classList.remove('show');});});
+  stopPlane(); hidePlane();
+}
+document.getElementById('allBtn').addEventListener('click',showAll);
+document.getElementById('flyBtn').addEventListener('click',()=>{
+  const j=JOURNEYS.find(x=>x.id===selected)||JOURNEYS[0];
+  if(!selected)select(j.id); else flyRoute(j);
+});
+
+// ---- plane animation ----
+function hidePlane(){plane.setAttribute('opacity',0);planeCore.setAttribute('opacity',0);}
+function stopPlane(){if(anim){cancelAnimationFrame(anim);anim=null;}}
+function flyRoute(j){
+  stopPlane();
+  const pts=j.route.map(k=>project(P[k].lon,P[k].lat));
+  const seg=[]; let total=0;
+  for(let i=1;i<pts.length;i++){const dx=pts[i][0]-pts[i-1][0],dy=pts[i][1]-pts[i-1][1];
+    const len=Math.hypot(dx,dy); seg.push({a:pts[i-1],b:pts[i],len,acc:total}); total+=len;}
+  if(total<1){hidePlane();return;}
+  plane.setAttribute('stroke',j.color); plane.setAttribute('fill',j.color);
+  const speed=170; // px/sec
+  let t0=null;
+  function frame(ts){
+    if(t0===null)t0=ts;
+    let dist=((ts-t0)/1000)*speed % total;
+    let s=seg.find(g=>dist>=g.acc&&dist<=g.acc+g.len)||seg[seg.length-1];
+    const f=s.len?(dist-s.acc)/s.len:0;
+    const x=s.a[0]+(s.b[0]-s.a[0])*f, y=s.a[1]+(s.b[1]-s.a[1])*f;
+    const ang=Math.atan2(s.b[1]-s.a[1],s.b[0]-s.a[0])*180/Math.PI;
+    plane.setAttribute('transform',`translate(${x.toFixed(1)} ${y.toFixed(1)}) rotate(${ang.toFixed(1)})`);
+    planeCore.setAttribute('transform',`translate(${x.toFixed(1)} ${y.toFixed(1)}) rotate(${ang.toFixed(1)})`);
+    plane.setAttribute('opacity',.55); planeCore.setAttribute('opacity',1);
+    anim=requestAnimationFrame(frame);
+  }
+  anim=requestAnimationFrame(frame);
+}
+</script>
+</body>
+</html>

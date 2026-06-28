@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SimBase.Document Type="AceXML" version="1,0">
+    <Descr>AceXML Document</Descr>
+    <FlightPlan.FlightPlan>
+        <Title>LEG3a FACB to FABL - GPS Edition</Title>
+        <FPType>IFR</FPType>
+        <RouteType>LowAlt</RouteType>
+        <CruisingAlt>7500</CruisingAlt>
+        <DepartureID>FACB</DepartureID>
+        <DepartureLLA>S30* 20' 25.20",E25* 35' 30.00",+4757.00</DepartureLLA>
+        <DestinationID>FABL</DestinationID>
+        <DestinationLLA>S29* 5' 47.00",E26* 18' 7.00",+4458.00</DestinationLLA>
+        <Descr>Colesberg to Bloemfontein - GPS Direct</Descr>
+        <DeparturePosition>1</DeparturePosition>
+        <DepartureName>Colesberg</DepartureName>
+        <DestinationName>Bloemfontein</DestinationName>
+        <ATCWaypoint id="FACB">
+            <ATCWaypointType>Airport</ATCWaypointType>
+            <WorldPosition>S30* 20' 25.20",E25* 35' 30.00",+4757.00</WorldPosition>
+            <ICAO><ICAOIdent>FACB</ICAOIdent></ICAO>
+        </ATCWaypoint>
+        <ATCWaypoint id="FABL">
+            <ATCWaypointType>Airport</ATCWaypointType>
+            <WorldPosition>S29* 5' 47.00",E26* 18' 7.00",+4458.00</WorldPosition>
+            <ICAO><ICAOIdent>FABL</ICAOIdent></ICAO>
+        </ATCWaypoint>
+    </FlightPlan.FlightPlan>
+</SimBase.Document>
