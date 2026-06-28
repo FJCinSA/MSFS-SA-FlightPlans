@@ -2,21 +2,21 @@
 <SimBase.Document Type="AceXML" version="1,0">
     <Descr>AceXML Document</Descr>
     <FlightPlan.FlightPlan>
-        <Title>LEG3a FACB to FABL - RAW NAV Edition</Title>
+        <Title>LEG3a FACB to FABL - RAW NAV v2</Title>
         <FPType>IFR</FPType>
         <RouteType>LowAlt</RouteType>
-        <CruisingAlt>7500</CruilingAlt>
+        <CruisingAlt>7500</CruisingAlt>
         <DepartureID>FACB</DepartureID>
-        <DepartureLLA>S30* 20' 25.20",E25* 35' 30.00",+4757.00</DepartureLLA>
+        <DepartureLLA>S30* 44' 2.00",E25* 3' 54.00",+4639.00</DepartureLLA>
         <DestinationID>FABL</DestinationID>
         <DestinationLLA>S29* 5' 47.00",E26* 18' 7.00",+4458.00</DestinationLLA>
-        <Descr>Colesberg to Bloemfontein via BDV VOR / DR / BL NDB / BLV VORTAC</Descr>
+        <Descr>Colesberg to Bloemfontein: BDV VOR / TROMPSBURG DR / JF NDB / BL NDB / BLV VORTAC</Descr>
         <DeparturePosition>1</DeparturePosition>
         <DepartureName>Colesberg</DepartureName>
         <DestinationName>Bloemfontein</DestinationName>
         <ATCWaypoint id="FACB">
             <ATCWaypointType>Airport</ATCWaypointType>
-            <WorldPosition>S30* 20' 25.20",E25* 35' 30.00",+4757.00</WorldPosition>
+            <WorldPosition>S30* 44' 2.00",E25* 3' 54.00",+4639.00</WorldPosition>
             <ICAO><ICAOIdent>FACB</ICAOIdent></ICAO>
         </ATCWaypoint>
         <ATCWaypoint id="BDV">
@@ -28,9 +28,10 @@
             <ATCWaypointType>User</ATCWaypointType>
             <WorldPosition>S30* 0' 0.00",E25* 46' 0.00",+4800.00</WorldPosition>
         </ATCWaypoint>
-        <ATCWaypoint id="SPRINGFONTEIN">
-            <ATCWaypointType>User</ATCWaypointType>
-            <WorldPosition>S29* 40' 0.00",E25* 44' 0.00",+4700.00</WorldPosition>
+        <ATCWaypoint id="JF">
+            <ATCWaypointType>NDB</ATCWaypointType>
+            <WorldPosition>S29* 44' 0.00",E25* 27' 0.00",+4600.00</WorldPosition>
+            <ICAO><ICAOIdent>JF</ICAOIdent></ICAO>
         </ATCWaypoint>
         <ATCWaypoint id="BL">
             <ATCWaypointType>NDB</ATCWaypointType>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SimBase.Document Type="AceXML" version="1,0">
+    <Descr>AceXML Document</Descr>
+    <FlightPlan.FlightPlan>
+        <Title>SOLO LEG2 FAPN to FAMM - RAW NAV (ZS-NTP Recreation)</Title>
+        <FPType>VFR</FPType>
+        <RouteType>LowAlt</RouteType>
+        <CruisingAlt>6500</CruisingAlt>
+        <DepartureID>FAPN</DepartureID>
+        <DepartureLLA>S25* 20' 7.74",E27* 10' 17.88",+3412.00</DepartureLLA>
+        <DestinationID>FAMM</DestinationID>
+        <DestinationLLA>S25* 47' 53.00",E25* 32' 56.00",+4088.00</DestinationLLA>
+        <Descr>Pilanesberg to Mafikeng via PNV VOR-DME / MMV VOR-DME / MH NDB</Descr>
+        <DeparturePosition>1</DeparturePosition>
+        <DepartureName>Pilanesberg</DepartureName>
+        <DestinationName>Mafikeng</DestinationName>
+        <ATCWaypoint id="FAPN">
+            <ATCWaypointType>Airport</ATCWaypointType>
+            <WorldPosition>S25* 20' 7.74",E27* 10' 17.88",+3412.00</WorldPosition>
+            <ICAO><ICAOIdent>FAPN</ICAOIdent></ICAO>
+        </ATCWaypoint>
+        <ATCWaypoint id="PNV">
+            <ATCWaypointType>VOR</ATCWaypointType>
+            <WorldPosition>S25* 20' 7.74",E27* 10' 17.88",+3412.00</WorldPosition>
+            <ICAO><ICAOIdent>PNV</ICAOIdent></ICAO>
+        </ATCWaypoint>
+        <ATCWaypoint id="ZEERUST">
+            <ATCWaypointType>User</ATCWaypointType>
+            <WorldPosition>S25* 32' 0.00",E26* 4' 0.00",+4200.00</WorldPosition>
+        </ATCWaypoint>
+        <ATCWaypoint id="MMV">
+            <ATCWaypointType>VOR</ATCWaypointType>
+            <WorldPosition>S25* 47' 53.00",E25* 32' 56.00",+4088.00</WorldPosition>
+            <ICAO><ICAOIdent>MMV</ICAOIdent></ICAO>
+        </ATCWaypoint>
+        <ATCWaypoint id="MH">
+            <ATCWaypointType>NDB</ATCWaypointType>
+            <WorldPosition>S25* 47' 53.00",E25* 32' 56.00",+4088.00</WorldPosition>
+            <ICAO><ICAOIdent>MH</ICAOIdent></ICAO>
+        </ATCWaypoint>
+        <ATCWaypoint id="FAMM">
+            <ATCWaypointType>Airport</ATCWaypointType>
+            <WorldPosition>S25* 47' 53.00",E25* 32' 56.00",+4088.00</WorldPosition>
+            <ICAO><ICAOIdent>FAMM</ICAOIdent></ICAO>
+        </ATCWaypoint>
+    </FlightPlan.FlightPlan>
+</SimBase.Document>

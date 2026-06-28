@@ -2,7 +2,7 @@
 <SimBase.Document Type="AceXML" version="1,0">
     <Descr>AceXML Document</Descr>
     <FlightPlan.FlightPlan>
-        <Title>LEG3b FABL to FALA - RAW NAV Edition</Title>
+        <Title>LEG3b FABL to FALA - RAW NAV v2</Title>
         <FPType>IFR</FPType>
         <RouteType>LowAlt</RouteType>
         <CruisingAlt>7500</CruisingAlt>
@@ -10,7 +10,7 @@
         <DepartureLLA>S29* 5' 47.00",E26* 18' 7.00",+4458.00</DepartureLLA>
         <DestinationID>FALA</DestinationID>
         <DestinationLLA>S25* 56' 19.00",E27* 55' 34.00",+4517.00</DestinationLLA>
-        <Descr>Bloemfontein to Lanseria via BLV VORTAC / KS NDB / Potchefstroom / LIV VOR-DME</Descr>
+        <Descr>Bloemfontein to Lanseria: BLV VORTAC / KS NDB / PSV VOR-DME / LIV VOR-DME</Descr>
         <DeparturePosition>1</DeparturePosition>
         <DepartureName>Bloemfontein</DepartureName>
         <DestinationName>Lanseria</DestinationName>
@@ -33,13 +33,10 @@
             <WorldPosition>S27* 40' 44.04",E27* 17' 13.96",+4500.00</WorldPosition>
             <ICAO><ICAOIdent>KS</ICAOIdent></ICAO>
         </ATCWaypoint>
-        <ATCWaypoint id="POTCHEFSTROOM">
-            <ATCWaypointType>User</ATCWaypointType>
-            <WorldPosition>S26* 40' 0.00",E27* 5' 0.00",+4700.00</WorldPosition>
-        </ATCWaypoint>
-        <ATCWaypoint id="KRUGERSDORP">
-            <ATCWaypointType>User</ATCWaypointType>
-            <WorldPosition>S26* 6' 0.00",E27* 46' 0.00",+5200.00</WorldPosition>
+        <ATCWaypoint id="PSV">
+            <ATCWaypointType>VOR</ATCWaypointType>
+            <WorldPosition>S26* 43' 0.00",E27* 6' 0.00",+4593.00</WorldPosition>
+            <ICAO><ICAOIdent>PSV</ICAOIdent></ICAO>
         </ATCWaypoint>
         <ATCWaypoint id="LIV">
             <ATCWaypointType>VOR</ATCWaypointType>
