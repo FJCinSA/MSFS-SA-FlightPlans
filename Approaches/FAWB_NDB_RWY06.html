@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FAWB NDB RWY 06 Approach — Wonderboom</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Barlow+Condensed:wght@400;600;700&display=swap');
+  :root {
+    --black:#0a0c0f;--panel:#111418;--border:#2a3040;
+    --amber:#e8a020;--amber-dim:#7a5010;--green:#4ecb71;
+    --red:#e84040;--blue:#4a9eff;--white:#e8eaf0;--grey:#6a7080;
+    --mono:'Share Tech Mono',monospace;--cond:'Barlow Condensed',sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--black);color:var(--white);font-family:var(--mono);padding:24px;min-height:100vh;}
+  .plate{max-width:780px;margin:0 auto;border:2px solid var(--amber);background:var(--panel);}
+  .plate-header{background:var(--amber);color:var(--black);padding:10px 16px;display:flex;justify-content:space-between;align-items:center;}
+  .plate-header .airport{font-family:var(--cond);font-size:1.4rem;font-weight:700;letter-spacing:0.05em;}
+  .plate-header .approach-type{font-family:var(--cond);font-size:1.1rem;font-weight:600;text-align:right;}
+  .plate-header .icao{font-family:var(--mono);font-size:0.85rem;opacity:0.7;}
+  .sim-warning{background:#1a1000;border-bottom:1px solid var(--amber-dim);padding:5px 16px;font-size:0.7rem;color:var(--amber-dim);text-align:center;letter-spacing:0.08em;}
+  .ndb-band{background:#0a1020;border-bottom:1px solid var(--border);padding:8px 16px;display:flex;gap:24px;align-items:center;flex-wrap:wrap;}
+  .ndb-item{display:flex;flex-direction:column;gap:2px;}
+  .ndb-item .ndb-label{font-size:0.65rem;color:var(--grey);letter-spacing:0.1em;text-transform:uppercase;}
+  .ndb-item .ndb-value{font-size:0.9rem;color:var(--amber);font-weight:bold;}
+  .ndb-item .ndb-value.blue{color:var(--blue);}
+  .ndb-item .ndb-value.green{color:var(--green);}
+  .plate-body{display:grid;grid-template-columns:1fr 1fr;gap:0;}
+  .plan-view{border-right:1px solid var(--border);padding:16px;}
+  .section-label{font-family:var(--cond);font-size:0.7rem;letter-spacing:0.15em;color:var(--grey);margin-bottom:10px;text-transform:uppercase;}
+  .data-panel{padding:16px;display:flex;flex-direction:column;gap:14px;}
+  .data-block{border:1px solid var(--border);}
+  .data-block-header{background:var(--border);padding:4px 10px;font-family:var(--cond);font-size:0.75rem;letter-spacing:0.12em;color:var(--amber);text-transform:uppercase;}
+  .data-row{display:flex;justify-content:space-between;padding:5px 10px;border-bottom:1px solid #1a1e28;font-size:0.78rem;}
+  .data-row:last-child{border-bottom:none;}
+  .data-row .label{color:var(--grey);}
+  .data-row .value{color:var(--white);font-weight:bold;}
+  .data-row .value.amber{color:var(--amber);}
+  .data-row .value.green{color:var(--green);}
+  .data-row .value.blue{color:var(--blue);}
+  .data-row .value.red{color:var(--red);}
+  .minima-table{width:100%;border-collapse:collapse;font-size:0.75rem;}
+  .minima-table th{background:var(--border);color:var(--amber);padding:5px 8px;text-align:center;font-family:var(--cond);letter-spacing:0.1em;font-size:0.72rem;}
+  .minima-table td{padding:6px 8px;text-align:center;border-bottom:1px solid #1a1e28;color:var(--white);}
+  .minima-table tr:last-child td{border-bottom:none;}
+  .minima-table .cat{color:var(--amber);font-weight:bold;}
+  .profile-view{border-top:1px solid var(--border);padding:16px;grid-column:1/-1;}
+  .missed{border-top:1px solid var(--border);padding:12px 16px;grid-column:1/-1;background:#0f0a00;display:flex;gap:8px;align-items:flex-start;font-size:0.78rem;}
+  .missed-label{color:var(--red);font-family:var(--cond);font-weight:700;font-size:0.8rem;letter-spacing:0.08em;white-space:nowrap;padding-top:1px;}
+  .missed-text{color:var(--white);line-height:1.5;}
+  .caution-bar{border-top:1px solid var(--border);padding:10px 16px;grid-column:1/-1;background:#100800;font-size:0.75rem;line-height:1.7;}
+  .caution-bar .caution-title{color:var(--red);font-family:var(--cond);font-weight:700;letter-spacing:0.1em;font-size:0.8rem;margin-bottom:6px;}
+  .caution-bar .caution-item{color:var(--white);margin-bottom:3px;}
+  .caution-bar .caution-item span{color:var(--amber);margin-right:6px;}
+  .history-bar{border-top:1px solid var(--border);padding:10px 16px;grid-column:1/-1;background:#080d08;font-size:0.72rem;color:var(--grey);line-height:1.6;font-style:italic;}
+  .history-bar strong{color:var(--green);font-style:normal;}
+  .comms-bar{border-top:1px solid var(--border);padding:10px 16px;grid-column:1/-1;display:flex;flex-wrap:wrap;gap:16px;font-size:0.72rem;}
+  .comm-item{display:flex;gap:8px;}
+  .comm-label{color:var(--grey);}
+  .comm-freq{color:var(--blue);font-weight:bold;}
+  .plate-footer{border-top:2px solid var(--amber);background:#0d0f14;padding:8px 16px;display:flex;justify-content:space-between;font-size:0.65rem;color:var(--grey);}
+</style>
+</head>
+<body>
+<div class="plate">
+
+  <div class="plate-header">
+    <div>
+      <div class="airport">WONDERBOOM (PRETORIA)</div>
+      <div class="icao">FAWB · Pretoria · South Africa</div>
+    </div>
+    <div class="approach-type">NDB RWY 06<br><span style="font-size:0.8rem;font-weight:400;">WB 258 kHz</span></div>
+  </div>
+
+  <div class="sim-warning">⚠ SIMULATION REFERENCE ONLY — NOT FOR OPERATIONAL USE — VERIFY AGAINST CURRENT AIP / NOTAM / JEPPESEN</div>
+
+  <div class="ndb-band">
+    <div class="ndb-item"><span class="ndb-label">Primary NDB</span><span class="ndb-value">WB · 258 kHz</span></div>
+    <div class="ndb-item"><span class="ndb-label">Secondary NDB</span><span class="ndb-value">WR · 230 kHz</span></div>
+    <div class="ndb-item"><span class="ndb-label">Inbound QDM</span><span class="ndb-value blue">060°M</span></div>
+    <div class="ndb-item"><span class="ndb-label">PAPI</span><span class="ndb-value green">2.7°</span></div>
+    <div class="ndb-item"><span class="ndb-label">Aerodrome Elev</span><span class="ndb-value">4095ft MSL</span></div>
+    <div class="ndb-item"><span class="ndb-label">THR 06 Elev</span><span class="ndb-value">4070ft MSL</span></div>
+  </div>
+
+  <div class="plate-body">
+
+    <!-- PLAN VIEW -->
+    <div class="plan-view">
+      <div class="section-label">Plan View</div>
+      <svg viewBox="0 0 340 360" width="100%" xmlns="http://www.w3.org/2000/svg">
+        <rect width="340" height="360" fill="#0a0c0f"/>
+        <defs>
+          <marker id="arr-a" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#e8a020"/></marker>
+          <marker id="arr-r" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#e84040"/></marker>
+          <marker id="arr-b" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#4a9eff"/></marker>
+        </defs>
+
+        <!-- MSA circle -->
+        <circle cx="170" cy="185" r="130" fill="none" stroke="#2a3040" stroke-width="1" stroke-dasharray="6,4"/>
+        <text x="170" y="62" fill="#6a7080" font-size="9" text-anchor="middle" font-family="Share Tech Mono">MSA 25nm · 6200ft</text>
+
+        <!-- North -->
+        <line x1="305" y1="55" x2="305" y2="35" stroke="#4a9eff" stroke-width="1.5" marker-end="url(#arr-b)"/>
+        <text x="305" y="30" fill="#4a9eff" font-size="10" text-anchor="middle" font-family="Share Tech Mono">N</text>
+
+        <!-- WB NDB on field -->
+        <circle cx="185" cy="200" r="8" fill="none" stroke="#e8a020" stroke-width="2"/>
+        <circle cx="185" cy="200" r="2" fill="#e8a020"/>
+        <text x="198" y="197" fill="#e8a020" font-size="9" font-family="Share Tech Mono" font-weight="bold">WB NDB</text>
+        <text x="198" y="207" fill="#6a7080" font-size="8" font-family="Share Tech Mono">258 kHz</text>
+
+        <!-- Runway 06/24 — oriented ~060° -->
+        <rect x="160" y="190" width="16" height="55" rx="1"
+              fill="#2a3040" stroke="#4ecb71" stroke-width="1.5"
+              transform="rotate(-30,168,217)"/>
+        <text x="185" y="265" fill="#4ecb71" font-size="9" text-anchor="middle" font-family="Share Tech Mono">RWY 06/24</text>
+        <text x="185" y="276" fill="#6a7080" font-size="7" text-anchor="middle" font-family="Share Tech Mono">1835m · 060°/240°</text>
+
+        <!-- Taxiway — parallel to runway, highlighted -->
+        <rect x="140" y="190" width="10" height="55" rx="1"
+              fill="#1a1400" stroke="#e8a020" stroke-width="1"
+              stroke-dasharray="3,2"
+              transform="rotate(-30,145,217)"/>
+        <text x="108" y="240" fill="#e8a020" font-size="8" font-family="Share Tech Mono">TWY</text>
+
+        <!-- IAF -->
+        <circle cx="90" cy="140" r="7" fill="none" stroke="#e8eaf0" stroke-width="1.5"/>
+        <text x="70" y="135" fill="#e8eaf0" font-size="9" font-family="Share Tech Mono">IAF</text>
+        <text x="70" y="145" fill="#6a7080" font-size="8" font-family="Share Tech Mono">WB 15DME</text>
+        <text x="70" y="155" fill="#6a7080" font-size="7" font-family="Share Tech Mono">6000ft</text>
+
+        <!-- FAF -->
+        <circle cx="130" cy="165" r="5" fill="none" stroke="#4a9eff" stroke-width="1.5"/>
+        <line x1="125" y1="165" x2="135" y2="165" stroke="#4a9eff" stroke-width="1"/>
+        <text x="138" y="161" fill="#4a9eff" font-size="9" font-family="Share Tech Mono">FAF</text>
+        <text x="138" y="171" fill="#6a7080" font-size="8" font-family="Share Tech Mono">WB 8DME</text>
+        <text x="138" y="181" fill="#6a7080" font-size="7" font-family="Share Tech Mono">5300ft</text>
+
+        <!-- Approach track 060° inbound -->
+        <line x1="97" y1="144" x2="125" y2="162" stroke="#e8a020" stroke-width="2" marker-end="url(#arr-a)"/>
+        <line x1="135" y1="167" x2="177" y2="196" stroke="#e8a020" stroke-width="2" marker-end="url(#arr-a)"/>
+        <text x="108" y="155" fill="#e8a020" font-size="8" font-family="Share Tech Mono">060°</text>
+
+        <!-- Holding -->
+        <ellipse cx="68" cy="128" rx="22" ry="11" fill="none" stroke="#e8eaf0" stroke-width="1" stroke-dasharray="3,3"/>
+        <text x="68" y="113" fill="#6a7080" font-size="7" text-anchor="middle" font-family="Share Tech Mono">HOLD</text>
+        <text x="68" y="122" fill="#6a7080" font-size="7" text-anchor="middle" font-family="Share Tech Mono">240° inbound</text>
+
+        <!-- Missed approach -->
+        <path d="M190,205 Q220,190 230,165 Q240,140 220,120" stroke="#e84040" stroke-width="1.5" fill="none" stroke-dasharray="4,3" marker-end="url(#arr-r)"/>
+        <text x="238" y="135" fill="#e84040" font-size="8" font-family="Share Tech Mono">MA</text>
+
+        <!-- Taxiway warning box -->
+        <rect x="15" y="295" width="150" height="52" fill="#100800" stroke="#e84040" stroke-width="1"/>
+        <text x="90" y="308" fill="#e84040" font-size="8" text-anchor="middle" font-family="Share Tech Mono" font-weight="bold">⚠ TAXIWAY WARNING</text>
+        <text x="90" y="320" fill="#e8eaf0" font-size="7" text-anchor="middle" font-family="Share Tech Mono">Taxiway runs parallel</text>
+        <text x="90" y="330" fill="#e8eaf0" font-size="7" text-anchor="middle" font-family="Share Tech Mono">to RWY 06/24. Confirm</text>
+        <text x="90" y="340" fill="#e8eaf0" font-size="7" text-anchor="middle" font-family="Share Tech Mono">runway markings before</text>
+        <text x="90" y="350" fill="#e8eaf0" font-size="7" text-anchor="middle" font-family="Share Tech Mono">landing. White = RWY.</text>
+      </svg>
+    </div>
+
+    <!-- DATA PANEL -->
+    <div class="data-panel">
+
+      <div class="data-block">
+        <div class="data-block-header">Primary Navaid</div>
+        <div class="data-row"><span class="label">Station</span><span class="value amber">WB NDB</span></div>
+        <div class="data-row"><span class="label">Frequency</span><span class="value amber">258 kHz</span></div>
+        <div class="data-row"><span class="label">Ident</span><span class="value">WB · ·▄▄▄ ▬</span></div>
+        <div class="data-row"><span class="label">Inbound QDM</span><span class="value">060°M</span></div>
+        <div class="data-row"><span class="label">Secondary NDB</span><span class="value">WR · 230 kHz</span></div>
+        <div class="data-row"><span class="label">PAPI Angle</span><span class="value green">2.7°</span></div>
+      </div>
+
+      <div class="data-block">
+        <div class="data-block-header">Altitudes</div>
+        <div class="data-row"><span class="label">MSA 25nm</span><span class="value">6200ft</span></div>
+        <div class="data-row"><span class="label">IAF (15 DME)</span><span class="value">6000ft</span></div>
+        <div class="data-row"><span class="label">FAF (8 DME)</span><span class="value blue">5300ft</span></div>
+        <div class="data-row"><span class="label">MDA Cat A/B</span><span class="value amber">4760ft (690ft AGL)</span></div>
+        <div class="data-row"><span class="label">MDA Cat C/D</span><span class="value amber">4820ft (750ft AGL)</span></div>
+        <div class="data-row"><span class="label">Aerodrome Elev</span><span class="value">4095ft MSL</span></div>
+        <div class="data-row"><span class="label">THR 06 Elev</span><span class="value">4070ft MSL</span></div>
+      </div>
+
+      <div class="data-block">
+        <div class="data-block-header">Descent Profile</div>
+        <div class="data-row"><span class="label">FAF → THR</span><span class="value">8nm</span></div>
+        <div class="data-row"><span class="label">Descent angle</span><span class="value">~3.1°</span></div>
+        <div class="data-row"><span class="label">Rate (70kt)</span><span class="value">~365ft/min</span></div>
+        <div class="data-row"><span class="label">Rate (90kt)</span><span class="value">~470ft/min</span></div>
+        <div class="data-row"><span class="label">Rate (100kt)</span><span class="value">~520ft/min</span></div>
+      </div>
+
+      <div class="data-block">
+        <div class="data-block-header">Minima</div>
+        <table class="minima-table">
+          <tr><th>Cat</th><th>MDA</th><th>HAA</th><th>Visibility</th></tr>
+          <tr><td class="cat">A</td><td>4760ft</td><td>690ft</td><td>1600m</td></tr>
+          <tr><td class="cat">B</td><td>4760ft</td><td>690ft</td><td>2400m</td></tr>
+          <tr><td class="cat">C</td><td>4820ft</td><td>750ft</td><td>3600m</td></tr>
+          <tr><td class="cat">D</td><td>4820ft</td><td>750ft</td><td>4800m</td></tr>
+        </table>
+      </div>
+
+    </div>
+
+    <!-- PROFILE -->
+    <div class="profile-view">
+      <div class="section-label">Profile View — NDB Approach RWY 06</div>
+      <svg viewBox="0 0 700 130" width="100%" xmlns="http://www.w3.org/2000/svg">
+        <rect width="700" height="130" fill="#0a0c0f"/>
+        <line x1="40" y1="110" x2="660" y2="110" stroke="#2a3040" stroke-width="1"/>
+        <text x="35" y="18" fill="#6a7080" font-size="8" text-anchor="end" font-family="Share Tech Mono">6000</text>
+        <text x="35" y="45" fill="#6a7080" font-size="8" text-anchor="end" font-family="Share Tech Mono">5300</text>
+        <text x="35" y="82" fill="#6a7080" font-size="8" text-anchor="end" font-family="Share Tech Mono">4760</text>
+        <text x="35" y="108" fill="#6a7080" font-size="8" text-anchor="end" font-family="Share Tech Mono">4070</text>
+        <line x1="40" y1="17" x2="660" y2="17" stroke="#1a1e28" stroke-width="1" stroke-dasharray="3,4"/>
+        <line x1="40" y1="44" x2="660" y2="44" stroke="#1a1e28" stroke-width="1" stroke-dasharray="3,4"/>
+        <line x1="40" y1="81" x2="660" y2="81" stroke="#1a1e28" stroke-width="1" stroke-dasharray="3,4"/>
+        <!-- IAF -->
+        <line x1="120" y1="10" x2="120" y2="110" stroke="#2a3040" stroke-width="1" stroke-dasharray="3,3"/>
+        <text x="120" y="8" fill="#e8eaf0" font-size="8" text-anchor="middle" font-family="Share Tech Mono">IAF</text>
+        <text x="120" y="120" fill="#6a7080" font-size="7" text-anchor="middle" font-family="Share Tech Mono">15 DME</text>
+        <circle cx="120" cy="17" r="4" fill="#e8eaf0"/>
+        <!-- FAF -->
+        <line x1="330" y1="37" x2="330" y2="110" stroke="#4a9eff" stroke-width="1" stroke-dasharray="3,3"/>
+        <text x="330" y="32" fill="#4a9eff" font-size="8" text-anchor="middle" font-family="Share Tech Mono">FAF</text>
+        <text x="330" y="120" fill="#6a7080" font-size="7" text-anchor="middle" font-family="Share Tech Mono">8 DME</text>
+        <circle cx="330" cy="44" r="5" fill="none" stroke="#4a9eff" stroke-width="1.5"/>
+        <line x1="325" y1="44" x2="335" y2="44" stroke="#4a9eff" stroke-width="1"/>
+        <!-- MAPt at WB NDB -->
+        <line x1="580" y1="74" x2="580" y2="110" stroke="#e84040" stroke-width="1" stroke-dasharray="3,3"/>
+        <text x="580" y="69" fill="#e84040" font-size="8" text-anchor="middle" font-family="Share Tech Mono">MAPt</text>
+        <text x="580" y="120" fill="#6a7080" font-size="7" text-anchor="middle" font-family="Share Tech Mono">WB NDB</text>
+        <!-- Level IAF to FAF -->
+        <line x1="120" y1="17" x2="330" y2="17" stroke="#e8a020" stroke-width="1.5" stroke-dasharray="4,3"/>
+        <!-- Descent FAF to MDA -->
+        <line x1="330" y1="44" x2="580" y2="81" stroke="#e8a020" stroke-width="2"/>
+        <!-- MDA line -->
+        <line x1="580" y1="81" x2="640" y2="81" stroke="#e8a020" stroke-width="1.5" stroke-dasharray="5,3"/>
+        <!-- Missed approach -->
+        <line x1="580" y1="81" x2="660" y2="40" stroke="#e84040" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arr-r2)"/>
+        <defs>
+          <marker id="arr-r2" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+            <path d="M0,0 L6,3 L0,6 Z" fill="#e84040"/>
+          </marker>
+        </defs>
+        <!-- Runway -->
+        <rect x="620" y="103" width="25" height="7" fill="#4ecb71"/>
+        <text x="632" y="128" fill="#4ecb71" font-size="7" text-anchor="middle" font-family="Share Tech Mono">THR 06</text>
+        <text x="130" y="13" fill="#e8a020" font-size="7" font-family="Share Tech Mono">6000ft</text>
+        <text x="338" y="40" fill="#4a9eff" font-size="7" font-family="Share Tech Mono">5300ft</text>
+        <text x="584" y="77" fill="#e8a020" font-size="7" font-family="Share Tech Mono">MDA 4760</text>
+      </svg>
+    </div>
+
+    <!-- MISSED -->
+    <div class="missed">
+      <div class="missed-label">MISSED APPROACH</div>
+      <div class="missed-text">
+        Climb straight ahead on runway track 060° to 5500ft, then climbing right turn tracking WB NDB outbound on 240° radial to 6000ft. Hold at WB NDB, 060° inbound, left turns. Await further clearance from Wonderboom Approach.
+      </div>
+    </div>
+
+    <!-- CAUTION BAR -->
+    <div class="caution-bar">
+      <div class="caution-title">⚠ PILOT CAUTIONS — WONDERBOOM</div>
+      <div class="caution-item"><span>TAXIWAY:</span>A taxiway runs parallel to RWY 06/24 and is similar in width and appearance. Pilots trained on single-strip aerodromes must positively identify runway markings (white numbers and centreline) before landing. Yellow markings = taxiway. Confirm with Tower if uncertain.</div>
+      <div class="caution-item"><span>FIRST VISIT:</span>Request progressive taxi instructions if unfamiliar with the aerodrome layout. Tower is approachable.</div>
+      <div class="caution-item"><span>CIRCUIT:</span>RWY 24 right-hand circuit. Confirm circuit direction in your clearance.</div>
+    </div>
+
+    <!-- HISTORY NOTE -->
+    <div class="history-bar">
+      <strong>Historical note:</strong> Wonderboom is where Dr Francois Coetzee obtained his PPL. Originally a single-strip GA field, now upgraded to national airport status with extended runway capable of handling heavier traffic. The parallel taxiway that resembles a second runway has caught out more than one pilot transitioning from smaller strips — including a newly-licensed pilot who made a perfect landing on the taxiway on his first visit from Groblersdal. Aircraft and pilot undamaged. Lesson learned.
+    </div>
+
+    <!-- COMMS -->
+    <div class="comms-bar">
+      <div class="comm-item"><span class="comm-label">TOWER</span><span class="comm-freq">118.35</span></div>
+      <div class="comm-item"><span class="comm-label">GROUND</span><span class="comm-freq">120.60</span></div>
+      <div class="comm-item"><span class="comm-label">WB NDB</span><span class="comm-freq">258 kHz</span></div>
+      <div class="comm-item"><span class="comm-label">WR NDB</span><span class="comm-freq">230 kHz</span></div>
+    </div>
+
+  </div>
+
+  <div class="plate-footer">
+    <span>CoetzeeMed Flight Operations · MSFS 2024 Reference</span>
+    <span>FAWB NDB RWY 06 · WB 258 kHz</span>
+    <span>⚠ NOT FOR OPERATIONAL USE</span>
+  </div>
+
+</div>
+</body>
+</html>
