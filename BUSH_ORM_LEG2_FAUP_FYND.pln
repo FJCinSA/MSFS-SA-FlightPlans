@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SimBase.Document Type="AceXML" version="1,0">
+    <Descr>AceXML Document</Descr>
+    <FlightPlan.FlightPlan>
+        <Title>ORM LEG2 FAUP to FYND - RAW NAV Orange River Run</Title>
+        <FPType>VFR</FPType>
+        <RouteType>LowAlt</RouteType>
+        <CruisingAlt>4500</CruisingAlt>
+        <DepartureID>FAUP</DepartureID>
+        <DepartureLLA>S28* 23' 57.00",E21* 15' 37.00",+2791.00</DepartureLLA>
+        <DestinationID>FYND</DestinationID>
+        <DestinationLLA>S28* 42' 6.00",E17* 37' 28.00",+560.00</DestinationLLA>
+        <Descr>Upington to Noordoewer via UN NDB / Augrabies Falls overfly / Orange River low level</Descr>
+        <DeparturePosition>1</DeparturePosition>
+        <DepartureName>Upington</DepartureName>
+        <DestinationName>Noordoewer</DestinationName>
+        <ATCWaypoint id="FAUP">
+            <ATCWaypointType>Airport</ATCWaypointType>
+            <WorldPosition>S28* 23' 57.00",E21* 15' 37.00",+2791.00</WorldPosition>
+            <ICAO><ICAOIdent>FAUP</ICAOIdent></ICAO>
+        </ATCWaypoint>
+        <ATCWaypoint id="UN">
+            <ATCWaypointType>NDB</ATCWaypointType>
+            <WorldPosition>S28* 23' 0.00",E21* 16' 0.00",+2800.00</WorldPosition>
+            <ICAO><ICAOIdent>UN</ICAOIdent></ICAO>
+        </ATCWaypoint>
+        <ATCWaypoint id="AUGRABIES">
+            <ATCWaypointType>User</ATCWaypointType>
+            <WorldPosition>S28* 35' 37.00",E20* 20' 30.00",+2800.00</WorldPosition>
+        </ATCWaypoint>
+        <ATCWaypoint id="ORANGE_RVR">
+            <ATCWaypointType>User</ATCWaypointType>
+            <WorldPosition>S28* 40' 0.00",E19* 0' 0.00",+1500.00</WorldPosition>
+        </ATCWaypoint>
+        <ATCWaypoint id="FYND">
+            <ATCWaypointType>Airport</ATCWaypointType>
+            <WorldPosition>S28* 42' 6.00",E17* 37' 28.00",+560.00</WorldPosition>
+            <ICAO><ICAOIdent>FYND</ICAOIdent></ICAO>
+        </ATCWaypoint>
+    </FlightPlan.FlightPlan>
+</SimBase.Document>

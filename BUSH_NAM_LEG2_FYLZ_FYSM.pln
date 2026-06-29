@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SimBase.Document Type="AceXML" version="1,0">
+    <Descr>AceXML Document</Descr>
+    <FlightPlan.FlightPlan>
+        <Title>NAM LEG2 FYLZ to FYSM - RAW NAV Namib Desert</Title>
+        <FPType>VFR</FPType>
+        <RouteType>LowAlt</RouteType>
+        <CruisingAlt>9500</CruisingAlt>
+        <DepartureID>FYLZ</DepartureID>
+        <DepartureLLA>S26* 41' 7.00",E15* 14' 44.00",+457.00</DepartureLLA>
+        <DestinationID>FYSM</DestinationID>
+        <DestinationLLA>S22* 39' 43.00",E14* 34' 7.00",+170.00</DestinationLLA>
+        <Descr>Luderitz to Swakopmund via LU NDB / Sossusvlei overfly / coastal track / SW NDB</Descr>
+        <DeparturePosition>1</DeparturePosition>
+        <DepartureName>Luderitz</DepartureName>
+        <DestinationName>Swakopmund</DestinationName>
+        <ATCWaypoint id="FYLZ">
+            <ATCWaypointType>Airport</ATCWaypointType>
+            <WorldPosition>S26* 41' 7.00",E15* 14' 44.00",+457.00</WorldPosition>
+            <ICAO><ICAOIdent>FYLZ</ICAOIdent></ICAO>
+        </ATCWaypoint>
+        <ATCWaypoint id="LU">
+            <ATCWaypointType>NDB</ATCWaypointType>
+            <WorldPosition>S26* 41' 0.00",E15* 14' 0.00",+460.00</WorldPosition>
+            <ICAO><ICAOIdent>LU</ICAOIdent></ICAO>
+        </ATCWaypoint>
+        <ATCWaypoint id="SOSSUSVLEI">
+            <ATCWaypointType>User</ATCWaypointType>
+            <WorldPosition>S24* 43' 39.00",E15* 20' 33.00",+9500.00</WorldPosition>
+        </ATCWaypoint>
+        <ATCWaypoint id="COAST_TRK">
+            <ATCWaypointType>User</ATCWaypointType>
+            <WorldPosition>S23* 30' 0.00",E14* 34' 0.00",+2000.00</WorldPosition>
+        </ATCWaypoint>
+        <ATCWaypoint id="SW">
+            <ATCWaypointType>NDB</ATCWaypointType>
+            <WorldPosition>S22* 40' 0.00",E14* 34' 0.00",+175.00</WorldPosition>
+            <ICAO><ICAOIdent>SW</ICAOIdent></ICAO>
+        </ATCWaypoint>
+        <ATCWaypoint id="FYSM">
+            <ATCWaypointType>Airport</ATCWaypointType>
+            <WorldPosition>S22* 39' 43.00",E14* 34' 7.00",+170.00</WorldPosition>
+            <ICAO><ICAOIdent>FYSM</ICAOIdent></ICAO>
+        </ATCWaypoint>
+    </FlightPlan.FlightPlan>
+</SimBase.Document>

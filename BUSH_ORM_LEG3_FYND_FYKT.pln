@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SimBase.Document Type="AceXML" version="1,0">
+    <Descr>AceXML Document</Descr>
+    <FlightPlan.FlightPlan>
+        <Title>ORM LEG3 FYND to FYKT - RAW NAV Orange River Run</Title>
+        <FPType>VFR</FPType>
+        <RouteType>LowAlt</RouteType>
+        <CruisingAlt>6500</CruisingAlt>
+        <DepartureID>FYND</DepartureID>
+        <DepartureLLA>S28* 42' 6.00",E17* 37' 28.00",+560.00</DepartureLLA>
+        <DestinationID>FYKT</DestinationID>
+        <DestinationLLA>S26* 32' 20.00",E18* 6' 42.00",+3506.00</DestinationLLA>
+        <Descr>Noordoewer to Keetmanshoop via KP NDB - climb out of the river valley, track north</Descr>
+        <DeparturePosition>1</DeparturePosition>
+        <DepartureName>Noordoewer</DepartureName>
+        <DestinationName>Keetmanshoop</DestinationName>
+        <ATCWaypoint id="FYND">
+            <ATCWaypointType>Airport</ATCWaypointType>
+            <WorldPosition>S28* 42' 6.00",E17* 37' 28.00",+560.00</WorldPosition>
+            <ICAO><ICAOIdent>FYND</ICAOIdent></ICAO>
+        </ATCWaypoint>
+        <ATCWaypoint id="KP">
+            <ATCWaypointType>NDB</ATCWaypointType>
+            <WorldPosition>S26* 32' 0.00",E18* 7' 0.00",+3500.00</WorldPosition>
+            <ICAO><ICAOIdent>KP</ICAOIdent></ICAO>
+        </ATCWaypoint>
+        <ATCWaypoint id="FYKT">
+            <ATCWaypointType>Airport</ATCWaypointType>
+            <WorldPosition>S26* 32' 20.00",E18* 6' 42.00",+3506.00</WorldPosition>
+            <ICAO><ICAOIdent>FYKT</ICAOIdent></ICAO>
+        </ATCWaypoint>
+    </FlightPlan.FlightPlan>
+</SimBase.Document>

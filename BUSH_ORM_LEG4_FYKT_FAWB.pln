@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SimBase.Document Type="AceXML" version="1,0">
+    <Descr>AceXML Document</Descr>
+    <FlightPlan.FlightPlan>
+        <Title>ORM LEG4 FYKT to FAWB - RAW NAV Orange River Run</Title>
+        <FPType>VFR</FPType>
+        <RouteType>LowAlt</RouteType>
+        <CruisingAlt>9500</CruisingAlt>
+        <DepartureID>FYKT</DepartureID>
+        <DepartureLLA>S26* 32' 20.00",E18* 6' 42.00",+3506.00</DepartureLLA>
+        <DestinationID>FAWB</DestinationID>
+        <DestinationLLA>S25* 39' 14.00",E28* 13' 27.00",+4095.00</DestinationLLA>
+        <Descr>Keetmanshoop to Wonderboom via KP NDB / VB NDB / KD NDB / WB NDB - long return across the Karoo</Descr>
+        <DeparturePosition>1</DeparturePosition>
+        <DepartureName>Keetmanshoop</DepartureName>
+        <DestinationName>Wonderboom</DestinationName>
+        <ATCWaypoint id="FYKT">
+            <ATCWaypointType>Airport</ATCWaypointType>
+            <WorldPosition>S26* 32' 20.00",E18* 6' 42.00",+3506.00</WorldPosition>
+            <ICAO><ICAOIdent>FYKT</ICAOIdent></ICAO>
+        </ATCWaypoint>
+        <ATCWaypoint id="KP">
+            <ATCWaypointType>NDB</ATCWaypointType>
+            <WorldPosition>S26* 32' 0.00",E18* 7' 0.00",+3500.00</WorldPosition>
+            <ICAO><ICAOIdent>KP</ICAOIdent></ICAO>
+        </ATCWaypoint>
+        <ATCWaypoint id="VB">
+            <ATCWaypointType>NDB</ATCWaypointType>
+            <WorldPosition>S26* 59' 0.00",E24* 44' 0.00",+3900.00</WorldPosition>
+            <ICAO><ICAOIdent>VB</ICAOIdent></ICAO>
+        </ATCWaypoint>
+        <ATCWaypoint id="KD">
+            <ATCWaypointType>NDB</ATCWaypointType>
+            <WorldPosition>S26* 52' 0.00",E26* 40' 0.00",+4200.00</WorldPosition>
+            <ICAO><ICAOIdent>KD</ICAOIdent></ICAO>
+        </ATCWaypoint>
+        <ATCWaypoint id="WB">
+            <ATCWaypointType>NDB</ATCWaypointType>
+            <WorldPosition>S25* 39' 0.00",E28* 13' 0.00",+4095.00</WorldPosition>
+            <ICAO><ICAOIdent>WB</ICAOIdent></ICAO>
+        </ATCWaypoint>
+        <ATCWaypoint id="FAWB">
+            <ATCWaypointType>Airport</ATCWaypointType>
+            <WorldPosition>S25* 39' 14.00",E28* 13' 27.00",+4095.00</WorldPosition>
+            <ICAO><ICAOIdent>FAWB</ICAOIdent></ICAO>
+        </ATCWaypoint>
+    </FlightPlan.FlightPlan>
+</SimBase.Document>

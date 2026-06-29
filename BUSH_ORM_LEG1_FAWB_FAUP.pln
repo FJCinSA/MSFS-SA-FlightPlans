@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SimBase.Document Type="AceXML" version="1,0">
+    <Descr>AceXML Document</Descr>
+    <FlightPlan.FlightPlan>
+        <Title>ORM LEG1 FAWB to FAUP - RAW NAV Orange River Run</Title>
+        <FPType>VFR</FPType>
+        <RouteType>LowAlt</RouteType>
+        <CruisingAlt>9500</CruisingAlt>
+        <DepartureID>FAWB</DepartureID>
+        <DepartureLLA>S25* 39' 14.00",E28* 13' 27.00",+4095.00</DepartureLLA>
+        <DestinationID>FAUP</DestinationID>
+        <DestinationLLA>S28* 23' 57.00",E21* 15' 37.00",+2791.00</DestinationLLA>
+        <Descr>Wonderboom to Upington via WB NDB / KD NDB / VB NDB / UN NDB / UPV VOR-DME</Descr>
+        <DeparturePosition>1</DeparturePosition>
+        <DepartureName>Wonderboom</DepartureName>
+        <DestinationName>Upington</DestinationName>
+        <ATCWaypoint id="FAWB">
+            <ATCWaypointType>Airport</ATCWaypointType>
+            <WorldPosition>S25* 39' 14.00",E28* 13' 27.00",+4095.00</WorldPosition>
+            <ICAO><ICAOIdent>FAWB</ICAOIdent></ICAO>
+        </ATCWaypoint>
+        <ATCWaypoint id="WB">
+            <ATCWaypointType>NDB</ATCWaypointType>
+            <WorldPosition>S25* 39' 0.00",E28* 13' 0.00",+4095.00</WorldPosition>
+            <ICAO><ICAOIdent>WB</ICAOIdent></ICAO>
+        </ATCWaypoint>
+        <ATCWaypoint id="KD">
+            <ATCWaypointType>NDB</ATCWaypointType>
+            <WorldPosition>S26* 52' 0.00",E26* 40' 0.00",+4200.00</WorldPosition>
+            <ICAO><ICAOIdent>KD</ICAOIdent></ICAO>
+        </ATCWaypoint>
+        <ATCWaypoint id="VB">
+            <ATCWaypointType>NDB</ATCWaypointType>
+            <WorldPosition>S26* 59' 0.00",E24* 44' 0.00",+3900.00</WorldPosition>
+            <ICAO><ICAOIdent>VB</ICAOIdent></ICAO>
+        </ATCWaypoint>
+        <ATCWaypoint id="UN">
+            <ATCWaypointType>NDB</ATCWaypointType>
+            <WorldPosition>S28* 23' 0.00",E21* 16' 0.00",+2800.00</WorldPosition>
+            <ICAO><ICAOIdent>UN</ICAOIdent></ICAO>
+        </ATCWaypoint>
+        <ATCWaypoint id="UPV">
+            <ATCWaypointType>VOR</ATCWaypointType>
+            <WorldPosition>S28* 24' 0.00",E21* 15' 0.00",+2800.00</WorldPosition>
+            <ICAO><ICAOIdent>UPV</ICAOIdent></ICAO>
+        </ATCWaypoint>
+        <ATCWaypoint id="FAUP">
+            <ATCWaypointType>Airport</ATCWaypointType>
+            <WorldPosition>S28* 23' 57.00",E21* 15' 37.00",+2791.00</WorldPosition>
+            <ICAO><ICAOIdent>FAUP</ICAOIdent></ICAO>
+        </ATCWaypoint>
+    </FlightPlan.FlightPlan>
+</SimBase.Document>
