@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FABL VOR RWY 20 Approach — Bram Fischer International</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Barlow+Condensed:wght@400;600;700&display=swap');
+
+  :root {
+    --black:    #0a0c0f;
+    --panel:    #111418;
+    --border:   #2a3040;
+    --amber:    #e8a020;
+    --amber-dim:#7a5010;
+    --green:    #4ecb71;
+    --red:      #e84040;
+    --blue:     #4a9eff;
+    --white:    #e8eaf0;
+    --grey:     #6a7080;
+    --mono:     'Share Tech Mono', monospace;
+    --cond:     'Barlow Condensed', sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: var(--mono);
+    padding: 24px;
+    min-height: 100vh;
+  }
+
+  /* PLATE WRAPPER */
+  .plate {
+    max-width: 780px;
+    margin: 0 auto;
+    border: 2px solid var(--amber);
+    background: var(--panel);
+    position: relative;
+  }
+
+  /* HEADER BAND */
+  .plate-header {
+    background: var(--amber);
+    color: var(--black);
+    padding: 10px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .plate-header .airport {
+    font-family: var(--cond);
+    font-size: 1.4rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+  }
+  .plate-header .approach-type {
+    font-family: var(--cond);
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-align: right;
+  }
+  .plate-header .icao {
+    font-family: var(--mono);
+    font-size: 0.85rem;
+    opacity: 0.7;
+  }
+
+  /* WARNING BAND */
+  .sim-warning {
+    background: #1a1000;
+    border-bottom: 1px solid var(--amber-dim);
+    padding: 5px 16px;
+    font-size: 0.7rem;
+    color: var(--amber-dim);
+    text-align: center;
+    letter-spacing: 0.08em;
+  }
+
+  /* MAIN BODY */
+  .plate-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+  }
+
+  /* PLAN VIEW — left panel */
+  .plan-view {
+    border-right: 1px solid var(--border);
+    padding: 16px;
+  }
+
+  .section-label {
+    font-family: var(--cond);
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    color: var(--grey);
+    margin-bottom: 10px;
+    text-transform: uppercase;
+  }
+
+  /* SVG approach diagram */
+  .approach-svg {
+    width: 100%;
+  }
+
+  /* RIGHT PANEL */
+  .data-panel {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  /* DATA TABLES */
+  .data-block {
+    border: 1px solid var(--border);
+  }
+  .data-block-header {
+    background: var(--border);
+    padding: 4px 10px;
+    font-family: var(--cond);
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    color: var(--amber);
+    text-transform: uppercase;
+  }
+  .data-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 10px;
+    border-bottom: 1px solid #1a1e28;
+    font-size: 0.78rem;
+  }
+  .data-row:last-child { border-bottom: none; }
+  .data-row .label { color: var(--grey); }
+  .data-row .value { color: var(--white); font-weight: bold; }
+  .data-row .value.amber { color: var(--amber); }
+  .data-row .value.green { color: var(--green); }
+  .data-row .value.blue  { color: var(--blue); }
+  .data-row .value.red   { color: var(--red); }
+
+  /* MINIMA TABLE */
+  .minima-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.75rem;
+  }
+  .minima-table th {
+    background: var(--border);
+    color: var(--amber);
+    padding: 5px 8px;
+    text-align: center;
+    font-family: var(--cond);
+    letter-spacing: 0.1em;
+    font-size: 0.72rem;
+  }
+  .minima-table td {
+    padding: 6px 8px;
+    text-align: center;
+    border-bottom: 1px solid #1a1e28;
+    color: var(--white);
+  }
+  .minima-table tr:last-child td { border-bottom: none; }
+  .minima-table .cat { color: var(--amber); font-weight: bold; }
+
+  /* PROFILE VIEW */
+  .profile-view {
+    border-top: 1px solid var(--border);
+    padding: 16px;
+    grid-column: 1 / -1;
+  }
+
+  /* MISSED APPROACH */
+  .missed {
+    border-top: 1px solid var(--border);
+    padding: 12px 16px;
+    grid-column: 1 / -1;
+    background: #0f0a00;
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+    font-size: 0.78rem;
+  }
+  .missed-label {
+    color: var(--red);
+    font-family: var(--cond);
+    font-weight: 700;
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+    padding-top: 1px;
+  }
+  .missed-text { color: var(--white); line-height: 1.5; }
+
+  /* COMMS FOOTER */
+  .comms-bar {
+    border-top: 1px solid var(--border);
+    padding: 10px 16px;
+    grid-column: 1 / -1;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    font-size: 0.72rem;
+  }
+  .comm-item { display: flex; gap: 8px; }
+  .comm-label { color: var(--grey); }
+  .comm-freq { color: var(--blue); font-weight: bold; }
+
+  /* FOOTER */
+  .plate-footer {
+    border-top: 2px solid var(--amber);
+    background: #0d0f14;
+    padding: 8px 16px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.65rem;
+    color: var(--grey);
+  }
+</style>
+</head>
+<body>
+
+<div class="plate">
+
+  <!-- HEADER -->
+  <div class="plate-header">
+    <div>
+      <div class="airport">BRAM FISCHER INTERNATIONAL</div>
+      <div class="icao">FABL · Bloemfontein · South Africa</div>
+    </div>
+    <div class="approach-type">
+      VOR RWY 20<br>
+      <span style="font-size:0.8rem;font-weight:400;">BLV 114.10 MHz</span>
+    </div>
+  </div>
+
+  <!-- SIM WARNING -->
+  <div class="sim-warning">
+    ⚠ SIMULATION REFERENCE ONLY — NOT FOR OPERATIONAL USE — VERIFY AGAINST CURRENT AIP / NOTAM / JEPPESEN
+  </div>
+
+  <!-- MAIN BODY -->
+  <div class="plate-body">
+
+    <!-- LEFT: PLAN VIEW DIAGRAM -->
+    <div class="plan-view">
+      <div class="section-label">Plan View</div>
+      <svg class="approach-svg" viewBox="0 0 340 340" xmlns="http://www.w3.org/2000/svg">
+        <!-- Background -->
+        <rect width="340" height="340" fill="#0a0c0f"/>
+
+        <!-- MSA circle -->
+        <circle cx="170" cy="170" r="130" fill="none" stroke="#2a3040" stroke-width="1" stroke-dasharray="6,4"/>
+        <text x="170" y="52" fill="#6a7080" font-size="9" text-anchor="middle" font-family="Share Tech Mono">MSA 25nm</text>
+        <text x="170" y="63" fill="#6a7080" font-size="9" text-anchor="middle" font-family="Share Tech Mono">6200ft</text>
+
+        <!-- North arrow -->
+        <line x1="300" y1="50" x2="300" y2="30" stroke="#4a9eff" stroke-width="1.5" marker-end="url(#arrow)"/>
+        <text x="300" y="25" fill="#4a9eff" font-size="10" text-anchor="middle" font-family="Share Tech Mono">N</text>
+        <defs>
+          <marker id="arrow" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+            <path d="M0,0 L6,3 L0,6 Z" fill="#4a9eff"/>
+          </marker>
+          <marker id="arrow-white" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+            <path d="M0,0 L6,3 L0,6 Z" fill="#e8eaf0"/>
+          </marker>
+          <marker id="arrow-amber" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+            <path d="M0,0 L8,4 L0,8 Z" fill="#e8a020"/>
+          </marker>
+        </defs>
+
+        <!-- BLV VOR/DME on field -->
+        <polygon points="170,155 178,175 162,175" fill="none" stroke="#e8a020" stroke-width="1.5"/>
+        <circle cx="170" cy="170" r="5" fill="#e8a020"/>
+        <text x="183" y="168" fill="#e8a020" font-size="9" font-family="Share Tech Mono" font-weight="bold">BLV</text>
+        <text x="183" y="178" fill="#6a7080" font-size="8" font-family="Share Tech Mono">114.10</text>
+
+        <!-- Runway 20 -->
+        <rect x="164" y="175" width="12" height="60" fill="#2a3040" stroke="#4ecb71" stroke-width="1"/>
+        <text x="170" y="250" fill="#4ecb71" font-size="9" text-anchor="middle" font-family="Share Tech Mono">RWY 20</text>
+        <text x="170" y="261" fill="#6a7080" font-size="8" text-anchor="middle" font-family="Share Tech Mono">200° / 4413ft</text>
+
+        <!-- FAF point — 8nm from threshold -->
+        <circle cx="170" cy="120" r="6" fill="none" stroke="#4a9eff" stroke-width="1.5"/>
+        <line x1="164" y1="120" x2="176" y2="120" stroke="#4a9eff" stroke-width="1"/>
+        <text x="182" y="116" fill="#4a9eff" font-size="9" font-family="Share Tech Mono">FAF</text>
+        <text x="182" y="126" fill="#6a7080" font-size="8" font-family="Share Tech Mono">BLV 8DME</text>
+        <text x="182" y="136" fill="#6a7080" font-size="8" font-family="Share Tech Mono">5700ft</text>
+
+        <!-- IAF -->
+        <polygon points="170,60 176,72 164,72" fill="none" stroke="#e8eaf0" stroke-width="1.5"/>
+        <text x="182" y="62" fill="#e8eaf0" font-size="9" font-family="Share Tech Mono">IAF</text>
+        <text x="182" y="72" fill="#6a7080" font-size="8" font-family="Share Tech Mono">BLV 20DME</text>
+        <text x="182" y="82" fill="#6a7080" font-size="8" font-family="Share Tech Mono">7000ft</text>
+
+        <!-- Approach track inbound 200° -->
+        <line x1="170" y1="72" x2="170" y2="119" stroke="#e8a020" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arrow-amber)"/>
+
+        <!-- Final approach track -->
+        <line x1="170" y1="126" x2="170" y2="175" stroke="#e8a020" stroke-width="2" marker-end="url(#arrow-amber)"/>
+
+        <!-- Radial label -->
+        <text x="148" y="100" fill="#e8a020" font-size="8" font-family="Share Tech Mono" text-anchor="middle">200°</text>
+        <text x="148" y="110" fill="#6a7080" font-size="7" font-family="Share Tech Mono" text-anchor="middle">inbound</text>
+
+        <!-- Holding pattern at IAF -->
+        <ellipse cx="205" cy="66" rx="28" ry="14" fill="none" stroke="#e8eaf0" stroke-width="1" stroke-dasharray="3,3"/>
+        <text x="205" y="50" fill="#6a7080" font-size="7" font-family="Share Tech Mono" text-anchor="middle">HOLD</text>
+        <text x="205" y="59" fill="#6a7080" font-size="7" font-family="Share Tech Mono" text-anchor="middle">020° inbound</text>
+
+        <!-- Missed approach arrow -->
+        <path d="M170,235 Q140,220 130,190 Q120,160 145,140" stroke="#e84040" stroke-width="1.5" fill="none" stroke-dasharray="4,3" marker-end="url(#arrow)"/>
+        <text x="112" y="178" fill="#e84040" font-size="8" font-family="Share Tech Mono">MA</text>
+      </svg>
+    </div>
+
+    <!-- RIGHT: DATA -->
+    <div class="data-panel">
+
+      <div class="data-block">
+        <div class="data-block-header">Primary Navaid</div>
+        <div class="data-row"><span class="label">Station</span><span class="value amber">BLV VORTAC</span></div>
+        <div class="data-row"><span class="label">Frequency</span><span class="value amber">114.10 MHz</span></div>
+        <div class="data-row"><span class="label">Ident</span><span class="value">BLV · ▬ ·▄▄▄· ·▄▄▄</span></div>
+        <div class="data-row"><span class="label">Inbound Course</span><span class="value">200°M</span></div>
+        <div class="data-row"><span class="label">On Field</span><span class="value green">Yes — 0.4nm</span></div>
+      </div>
+
+      <div class="data-block">
+        <div class="data-block-header">Altitudes</div>
+        <div class="data-row"><span class="label">MSA 25nm</span><span class="value">6200ft</span></div>
+        <div class="data-row"><span class="label">IAF (20 DME)</span><span class="value">7000ft</span></div>
+        <div class="data-row"><span class="label">FAF (8 DME)</span><span class="value blue">5700ft</span></div>
+        <div class="data-row"><span class="label">MDA (Circling)</span><span class="value amber">5160ft MSL</span></div>
+        <div class="data-row"><span class="label">HAA</span><span class="value amber">703ft AGL</span></div>
+        <div class="data-row"><span class="label">Threshold Elev</span><span class="value">4413ft MSL</span></div>
+      </div>
+
+      <div class="data-block">
+        <div class="data-block-header">Descent Profile</div>
+        <div class="data-row"><span class="label">FAF → THR</span><span class="value">8nm</span></div>
+        <div class="data-row"><span class="label">Descent angle</span><span class="value">~3.2°</span></div>
+        <div class="data-row"><span class="label">Rate (90kt)</span><span class="value">~490ft/min</span></div>
+        <div class="data-row"><span class="label">Rate (100kt)</span><span class="value">~545ft/min</span></div>
+        <div class="data-row"><span class="label">Rate (120kt)</span><span class="value">~655ft/min</span></div>
+      </div>
+
+      <div class="data-block">
+        <div class="data-block-header">Minima</div>
+        <table class="minima-table">
+          <tr><th>Category</th><th>MDA</th><th>Visibility</th></tr>
+          <tr><td class="cat">A</td><td>5160ft</td><td>1600m</td></tr>
+          <tr><td class="cat">B</td><td>5160ft</td><td>2400m</td></tr>
+          <tr><td class="cat">C</td><td>5240ft</td><td>3600m</td></tr>
+          <tr><td class="cat">D</td><td>5240ft</td><td>3600m</td></tr>
+        </table>
+      </div>
+
+    </div>
+
+    <!-- PROFILE VIEW -->
+    <div class="profile-view" style="grid-column: 1 / -1;">
+      <div class="section-label">Profile View</div>
+      <svg viewBox="0 0 700 130" width="100%" xmlns="http://www.w3.org/2000/svg">
+        <rect width="700" height="130" fill="#0a0c0f"/>
+
+        <!-- Ground line -->
+        <line x1="40" y1="110" x2="660" y2="110" stroke="#2a3040" stroke-width="1"/>
+
+        <!-- Altitude labels left -->
+        <text x="35" y="28" fill="#6a7080" font-size="8" text-anchor="end" font-family="Share Tech Mono">7000</text>
+        <text x="35" y="58" fill="#6a7080" font-size="8" text-anchor="end" font-family="Share Tech Mono">5700</text>
+        <text x="35" y="85" fill="#6a7080" font-size="8" text-anchor="end" font-family="Share Tech Mono">5160</text>
+        <text x="35" y="108" fill="#6a7080" font-size="8" text-anchor="end" font-family="Share Tech Mono">4413</text>
+
+        <!-- Horizontal guide lines -->
+        <line x1="40" y1="27" x2="660" y2="27" stroke="#1a1e28" stroke-width="1" stroke-dasharray="3,4"/>
+        <line x1="40" y1="57" x2="660" y2="57" stroke="#1a1e28" stroke-width="1" stroke-dasharray="3,4"/>
+        <line x1="40" y1="84" x2="660" y2="84" stroke="#1a1e28" stroke-width="1" stroke-dasharray="3,4"/>
+
+        <!-- IAF vertical -->
+        <line x1="160" y1="20" x2="160" y2="110" stroke="#2a3040" stroke-width="1" stroke-dasharray="3,3"/>
+        <text x="160" y="15" fill="#e8eaf0" font-size="8" text-anchor="middle" font-family="Share Tech Mono">IAF</text>
+        <text x="160" y="120" fill="#6a7080" font-size="7" text-anchor="middle" font-family="Share Tech Mono">20 DME</text>
+
+        <!-- FAF vertical -->
+        <line x1="400" y1="50" x2="400" y2="110" stroke="#4a9eff" stroke-width="1" stroke-dasharray="3,3"/>
+        <text x="400" y="45" fill="#4a9eff" font-size="8" text-anchor="middle" font-family="Share Tech Mono">FAF</text>
+        <text x="400" y="120" fill="#6a7080" font-size="7" text-anchor="middle" font-family="Share Tech Mono">8 DME</text>
+
+        <!-- MAPt -->
+        <line x1="600" y1="78" x2="600" y2="110" stroke="#e84040" stroke-width="1" stroke-dasharray="3,3"/>
+        <text x="600" y="73" fill="#e84040" font-size="8" text-anchor="middle" font-family="Share Tech Mono">MAPt</text>
+        <text x="600" y="120" fill="#6a7080" font-size="7" text-anchor="middle" font-family="Share Tech Mono">BLV VOR</text>
+
+        <!-- Descent path IAF to FAF -->
+        <line x1="160" y1="27" x2="400" y2="57" stroke="#e8a020" stroke-width="2"/>
+        <circle cx="160" cy="27" r="4" fill="#e8a020"/>
+
+        <!-- FAF dot -->
+        <circle cx="400" cy="57" r="5" fill="none" stroke="#4a9eff" stroke-width="1.5"/>
+        <line x1="395" y1="57" x2="405" y2="57" stroke="#4a9eff" stroke-width="1"/>
+
+        <!-- Final descent to MDA -->
+        <line x1="400" y1="57" x2="600" y2="84" stroke="#e8a020" stroke-width="2"/>
+
+        <!-- MDA line -->
+        <line x1="600" y1="84" x2="660" y2="84" stroke="#e8a020" stroke-width="1.5" stroke-dasharray="5,3"/>
+
+        <!-- Missed approach climb -->
+        <line x1="600" y1="84" x2="660" y2="50" stroke="#e84040" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arrow-red)"/>
+        <defs>
+          <marker id="arrow-red" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+            <path d="M0,0 L6,3 L0,6 Z" fill="#e84040"/>
+          </marker>
+        </defs>
+
+        <!-- Altitude values on path -->
+        <text x="170" y="22" fill="#e8a020" font-size="8" font-family="Share Tech Mono">7000ft</text>
+        <text x="408" y="53" fill="#4a9eff" font-size="8" font-family="Share Tech Mono">5700ft</text>
+        <text x="608" y="80" fill="#e8a020" font-size="8" font-family="Share Tech Mono">5160ft MDA</text>
+
+        <!-- Runway symbol -->
+        <rect x="590" y="104" width="20" height="6" fill="#4ecb71"/>
+        <text x="600" y="128" fill="#4ecb71" font-size="7" text-anchor="middle" font-family="Share Tech Mono">THR 4413</text>
+      </svg>
+    </div>
+
+    <!-- MISSED APPROACH -->
+    <div class="missed">
+      <div class="missed-label">MISSED APPROACH</div>
+      <div class="missed-text">
+        Climb straight ahead on runway track 200° to 5500ft, then climbing left turn to 6000ft tracking BLV VOR radial 020° outbound. Hold at BLV VOR, 020° inbound, right turns. Await further clearance.
+      </div>
+    </div>
+
+    <!-- COMMS -->
+    <div class="comms-bar">
+      <div class="comm-item"><span class="comm-label">ATIS</span><span class="comm-freq">126.45</span></div>
+      <div class="comm-item"><span class="comm-label">APPROACH WEST</span><span class="comm-freq">119.40</span></div>
+      <div class="comm-item"><span class="comm-label">APPROACH EAST</span><span class="comm-freq">124.30</span></div>
+      <div class="comm-item"><span class="comm-label">TOWER</span><span class="comm-freq">120.80</span></div>
+      <div class="comm-item"><span class="comm-label">BLV VORTAC</span><span class="comm-freq">114.10</span></div>
+    </div>
+
+  </div><!-- /plate-body -->
+
+  <!-- FOOTER -->
+  <div class="plate-footer">
+    <span>CoetzeeMed Flight Operations · MSFS 2024 Reference</span>
+    <span>FABL VOR RWY 20 · BLV 114.10</span>
+    <span>⚠ NOT FOR OPERATIONAL USE</span>
+  </div>
+
+</div><!-- /plate -->
+
+</body>
+</html>
