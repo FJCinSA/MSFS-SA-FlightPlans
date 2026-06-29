@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SimBase.Document Type="AceXML" version="1,0">
+    <Descr>AceXML Document</Descr>
+    <FlightPlan.FlightPlan>
+        <Title>STELL LEG4 FAWC to FASH - RAW NAV Du Toitskloof (ZS-NTP Recreation)</Title>
+        <FPType>VFR</FPType>
+        <RouteType>LowAlt</RouteType>
+        <CruisingAlt>2000</CruisingAlt>
+        <DepartureID>FAWC</DepartureID>
+        <DepartureLLA>S33* 39' 47.00",E19* 24' 55.00",+673.00</DepartureLLA>
+        <DestinationID>FASH</DestinationID>
+        <DestinationLLA>S33* 58' 47.00",E18* 49' 11.00",+295.00</DestinationLLA>
+        <Descr>Worcester to Stellenbosch via Du Toitskloof Pass - Afternoon, low cloud base. Mountains visible on both wings. Follow the N1 through the valley. Do not climb into cloud. This is where it gets real.</Descr>
+        <DeparturePosition>1</DeparturePosition>
+        <DepartureName>Worcester</DepartureName>
+        <DestinationName>Stellenbosch</DestinationName>
+        <ATCWaypoint id="FAWC">
+            <ATCWaypointType>Airport</ATCWaypointType>
+            <WorldPosition>S33* 39' 47.00",E19* 24' 55.00",+673.00</WorldPosition>
+            <ICAO><ICAOIdent>FAWC</ICAOIdent></ICAO>
+        </ATCWaypoint>
+        <ATCWaypoint id="DUTOIT_EAST">
+            <ATCWaypointType>User</ATCWaypointType>
+            <WorldPosition>S33* 43' 0.00",E19* 11' 0.00",+1200.00</WorldPosition>
+        </ATCWaypoint>
+        <ATCWaypoint id="DUTOIT_PASS">
+            <ATCWaypointType>User</ATCWaypointType>
+            <WorldPosition>S33* 46' 0.00",E19* 4' 0.00",+1400.00</WorldPosition>
+        </ATCWaypoint>
+        <ATCWaypoint id="DUTOIT_WEST">
+            <ATCWaypointType>User</ATCWaypointType>
+            <WorldPosition>S33* 50' 0.00",E18* 58' 0.00",+800.00</WorldPosition>
+        </ATCWaypoint>
+        <ATCWaypoint id="PAARL">
+            <ATCWaypointType>User</ATCWaypointType>
+            <WorldPosition>S33* 44' 0.00",E18* 58' 0.00",+500.00</WorldPosition>
+        </ATCWaypoint>
+        <ATCWaypoint id="FASH">
+            <ATCWaypointType>Airport</ATCWaypointType>
+            <WorldPosition>S33* 58' 47.00",E18* 49' 11.00",+295.00</WorldPosition>
+            <ICAO><ICAOIdent>FASH</ICAOIdent></ICAO>
+        </ATCWaypoint>
+    </FlightPlan.FlightPlan>
+</SimBase.Document>

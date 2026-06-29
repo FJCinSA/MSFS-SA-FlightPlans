@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SimBase.Document Type="AceXML" version="1,0">
+    <Descr>AceXML Document</Descr>
+    <FlightPlan.FlightPlan>
+        <Title>STELL LEG3 FABW to FAWC - RAW NAV (ZS-NTP Recreation)</Title>
+        <FPType>VFR</FPType>
+        <RouteType>LowAlt</RouteType>
+        <CruisingAlt>7500</CruisingAlt>
+        <DepartureID>FABW</DepartureID>
+        <DepartureLLA>S32* 20' 39.00",E22* 53' 34.00",+2887.00</DepartureLLA>
+        <DestinationID>FAWC</DestinationID>
+        <DestinationLLA>S33* 39' 47.00",E19* 24' 55.00",+673.00</DestinationLLA>
+        <Descr>Beaufort West to Worcester via SWV VOR / GGV VOR-DME / Hex River Valley</Descr>
+        <DeparturePosition>1</DeparturePosition>
+        <DepartureName>Beaufort West</DepartureName>
+        <DestinationName>Worcester</DestinationName>
+        <ATCWaypoint id="FABW">
+            <ATCWaypointType>Airport</ATCWaypointType>
+            <WorldPosition>S32* 20' 39.00",E22* 53' 34.00",+2887.00</WorldPosition>
+            <ICAO><ICAOIdent>FABW</ICAOIdent></ICAO>
+        </ATCWaypoint>
+        <ATCWaypoint id="SWV">
+            <ATCWaypointType>VOR</ATCWaypointType>
+            <WorldPosition>S33* 55' 0.00",E20* 26' 0.00",+1000.00</WorldPosition>
+            <ICAO><ICAOIdent>SWV</ICAOIdent></ICAO>
+        </ATCWaypoint>
+        <ATCWaypoint id="HEXRIVER">
+            <ATCWaypointType>User</ATCWaypointType>
+            <WorldPosition>S33* 30' 0.00",E19* 37' 0.00",+1500.00</WorldPosition>
+        </ATCWaypoint>
+        <ATCWaypoint id="FAWC">
+            <ATCWaypointType>Airport</ATCWaypointType>
+            <WorldPosition>S33* 39' 47.00",E19* 24' 55.00",+673.00</WorldPosition>
+            <ICAO><ICAOIdent>FAWC</ICAOIdent></ICAO>
+        </ATCWaypoint>
+    </FlightPlan.FlightPlan>
+</SimBase.Document>

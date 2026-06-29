@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SimBase.Document Type="AceXML" version="1,0">
+    <Descr>AceXML Document</Descr>
+    <FlightPlan.FlightPlan>
+        <Title>STELL LEG2 FATM to FABW - NIGHT RAW NAV Karoo (ZS-NTP Recreation)</Title>
+        <FPType>VFR</FPType>
+        <RouteType>LowAlt</RouteType>
+        <CruisingAlt>8000</CruisingAlt>
+        <DepartureID>FATM</DepartureID>
+        <DepartureLLA>S29* 1' 39.00",E26* 9' 0.00",+4547.00</DepartureLLA>
+        <DestinationID>FABW</DestinationID>
+        <DestinationLLA>S32* 20' 39.00",E22* 53' 34.00",+2887.00</DestinationLLA>
+        <Descr>New Tempe to Beaufort West - Night flight, dark moon. No flight plan. 8000ft. Karoo black below. Scattered farmhouse lights only. Trust the instruments. Trust yourself.</Descr>
+        <DeparturePosition>1</DeparturePosition>
+        <DepartureName>New Tempe Bloemfontein</DepartureName>
+        <DestinationName>Beaufort West</DestinationName>
+        <ATCWaypoint id="FATM">
+            <ATCWaypointType>Airport</ATCWaypointType>
+            <WorldPosition>S29* 1' 39.00",E26* 9' 0.00",+4547.00</WorldPosition>
+            <ICAO><ICAOIdent>FATM</ICAOIdent></ICAO>
+        </ATCWaypoint>
+        <ATCWaypoint id="BLV">
+            <ATCWaypointType>VOR</ATCWaypointType>
+            <WorldPosition>S29* 6' 1.80",E26* 18' 2.52",+4416.00</WorldPosition>
+            <ICAO><ICAOIdent>BLV</ICAOIdent></ICAO>
+        </ATCWaypoint>
+        <ATCWaypoint id="VWV">
+            <ATCWaypointType>VOR</ATCWaypointType>
+            <WorldPosition>S31* 37' 0.00",E23* 9' 0.00",+4000.00</WorldPosition>
+            <ICAO><ICAOIdent>VWV</ICAOIdent></ICAO>
+        </ATCWaypoint>
+        <ATCWaypoint id="FABW">
+            <ATCWaypointType>Airport</ATCWaypointType>
+            <WorldPosition>S32* 20' 39.00",E22* 53' 34.00",+2887.00</WorldPosition>
+            <ICAO><ICAOIdent>FABW</ICAOIdent></ICAO>
+        </ATCWaypoint>
+    </FlightPlan.FlightPlan>
+</SimBase.Document>

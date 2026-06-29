@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SimBase.Document Type="AceXML" version="1,0">
+    <Descr>AceXML Document</Descr>
+    <FlightPlan.FlightPlan>
+        <Title>STELL LEG1 FAWB to FATM - RAW NAV (ZS-NTP Recreation)</Title>
+        <FPType>VFR</FPType>
+        <RouteType>LowAlt</RouteType>
+        <CruisingAlt>7500</CruisingAlt>
+        <DepartureID>FAWB</DepartureID>
+        <DepartureLLA>S25* 39' 6.00",E28* 13' 26.00",+4268.00</DepartureLLA>
+        <DestinationID>FATM</DestinationID>
+        <DestinationLLA>S29* 1' 39.00",E26* 9' 0.00",+4547.00</DestinationLLA>
+        <Descr>Wonderboom to New Tempe via WB NDB / PSV VOR-DME / BLV VORTAC</Descr>
+        <DeparturePosition>1</DeparturePosition>
+        <DepartureName>Wonderboom</DepartureName>
+        <DestinationName>New Tempe Bloemfontein</DestinationName>
+        <ATCWaypoint id="FAWB">
+            <ATCWaypointType>Airport</ATCWaypointType>
+            <WorldPosition>S25* 39' 6.00",E28* 13' 26.00",+4268.00</WorldPosition>
+            <ICAO><ICAOIdent>FAWB</ICAOIdent></ICAO>
+        </ATCWaypoint>
+        <ATCWaypoint id="WB">
+            <ATCWaypointType>NDB</ATCWaypointType>
+            <WorldPosition>S25* 39' 0.00",E28* 13' 0.00",+4268.00</WorldPosition>
+            <ICAO><ICAOIdent>WB</ICAOIdent></ICAO>
+        </ATCWaypoint>
+        <ATCWaypoint id="PSV">
+            <ATCWaypointType>VOR</ATCWaypointType>
+            <WorldPosition>S26* 43' 0.00",E27* 6' 0.00",+4593.00</WorldPosition>
+            <ICAO><ICAOIdent>PSV</ICAOIdent></ICAO>
+        </ATCWaypoint>
+        <ATCWaypoint id="BLV">
+            <ATCWaypointType>VOR</ATCWaypointType>
+            <WorldPosition>S29* 6' 1.80",E26* 18' 2.52",+4416.00</WorldPosition>
+            <ICAO><ICAOIdent>BLV</ICAOIdent></ICAO>
+        </ATCWaypoint>
+        <ATCWaypoint id="FATM">
+            <ATCWaypointType>Airport</ATCWaypointType>
+            <WorldPosition>S29* 1' 39.00",E26* 9' 0.00",+4547.00</WorldPosition>
+            <ICAO><ICAOIdent>FATM</ICAOIdent></ICAO>
+        </ATCWaypoint>
+    </FlightPlan.FlightPlan>
+</SimBase.Document>
