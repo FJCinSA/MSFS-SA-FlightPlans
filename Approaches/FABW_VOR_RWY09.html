@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FABW VOR RWY 09 — Beaufort West</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Barlow+Condensed:wght@400;600;700&display=swap');
+  :root {
+    --black:#0a0c0f;--panel:#111418;--border:#2a3040;
+    --amber:#e8a020;--amber-dim:#7a5010;--green:#4ecb71;
+    --red:#e84040;--blue:#4a9eff;--white:#e8eaf0;--grey:#6a7080;
+    --mono:'Share Tech Mono',monospace;--cond:'Barlow Condensed',sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--black);color:var(--white);font-family:var(--mono);padding:24px;min-height:100vh;}
+  .plate{max-width:780px;margin:0 auto;border:2px solid var(--amber);background:var(--panel);}
+  .plate-header{background:var(--amber);color:var(--black);padding:10px 16px;display:flex;justify-content:space-between;align-items:center;}
+  .plate-header .airport{font-family:var(--cond);font-size:1.4rem;font-weight:700;letter-spacing:0.05em;}
+  .plate-header .approach-type{font-family:var(--cond);font-size:1.1rem;font-weight:600;text-align:right;}
+  .plate-header .icao{font-family:var(--mono);font-size:0.85rem;opacity:0.7;}
+  .sim-warning{background:#1a1000;border-bottom:1px solid var(--amber-dim);padding:5px 16px;font-size:0.7rem;color:var(--amber-dim);text-align:center;letter-spacing:0.08em;}
+  .vor-band{background:#0a1020;border-bottom:1px solid var(--border);padding:8px 16px;display:flex;gap:24px;align-items:center;flex-wrap:wrap;}
+  .vor-item{display:flex;flex-direction:column;gap:2px;}
+  .vor-item .vor-label{font-size:0.65rem;color:var(--grey);letter-spacing:0.1em;text-transform:uppercase;}
+  .vor-item .vor-value{font-size:0.9rem;color:var(--amber);font-weight:bold;}
+  .vor-item .vor-value.blue{color:var(--blue);}
+  .vor-item .vor-value.green{color:var(--green);}
+  .plate-body{display:grid;grid-template-columns:1fr 1fr;gap:0;}
+  .plan-view{border-right:1px solid var(--border);padding:16px;}
+  .section-label{font-family:var(--cond);font-size:0.7rem;letter-spacing:0.15em;color:var(--grey);margin-bottom:10px;text-transform:uppercase;}
+  .data-panel{padding:16px;display:flex;flex-direction:column;gap:14px;}
+  .data-block{border:1px solid var(--border);}
+  .data-block-header{background:var(--border);padding:4px 10px;font-family:var(--cond);font-size:0.75rem;letter-spacing:0.12em;color:var(--amber);text-transform:uppercase;}
+  .data-row{display:flex;justify-content:space-between;padding:5px 10px;border-bottom:1px solid #1a1e28;font-size:0.78rem;}
+  .data-row:last-child{border-bottom:none;}
+  .data-row .label{color:var(--grey);}
+  .data-row .value{color:var(--white);font-weight:bold;}
+  .data-row .value.amber{color:var(--amber);}
+  .data-row .value.green{color:var(--green);}
+  .data-row .value.blue{color:var(--blue);}
+  .data-row .value.red{color:var(--red);}
+  .minima-table{width:100%;border-collapse:collapse;font-size:0.75rem;}
+  .minima-table th{background:var(--border);color:var(--amber);padding:5px 8px;text-align:center;font-family:var(--cond);letter-spacing:0.1em;font-size:0.72rem;}
+  .minima-table td{padding:6px 8px;text-align:center;border-bottom:1px solid #1a1e28;color:var(--white);}
+  .minima-table tr:last-child td{border-bottom:none;}
+  .minima-table .cat{color:var(--amber);font-weight:bold;}
+  .profile-view{border-top:1px solid var(--border);padding:16px;grid-column:1/-1;}
+  .missed{border-top:1px solid var(--border);padding:12px 16px;grid-column:1/-1;background:#0f0a00;display:flex;gap:8px;align-items:flex-start;font-size:0.78rem;}
+  .missed-label{color:var(--red);font-family:var(--cond);font-weight:700;font-size:0.8rem;letter-spacing:0.08em;white-space:nowrap;padding-top:1px;}
+  .missed-text{color:var(--white);line-height:1.5;}
+  .caution-bar{border-top:1px solid var(--border);padding:10px 16px;grid-column:1/-1;background:#100800;font-size:0.75rem;line-height:1.7;}
+  .caution-bar .caution-title{color:var(--red);font-family:var(--cond);font-weight:700;letter-spacing:0.1em;font-size:0.8rem;margin-bottom:6px;}
+  .caution-bar .caution-item{color:var(--white);margin-bottom:3px;}
+  .caution-bar .caution-item span{color:var(--amber);margin-right:6px;}
+  .history-bar{border-top:1px solid var(--border);padding:10px 16px;grid-column:1/-1;background:#080d08;font-size:0.72rem;color:var(--grey);line-height:1.6;font-style:italic;}
+  .history-bar strong{color:var(--green);font-style:normal;}
+  .comms-bar{border-top:1px solid var(--border);padding:10px 16px;grid-column:1/-1;display:flex;flex-wrap:wrap;gap:16px;font-size:0.72rem;}
+  .comm-item{display:flex;gap:8px;}
+  .comm-label{color:var(--grey);}
+  .comm-freq{color:var(--blue);font-weight:bold;}
+  .plate-footer{border-top:2px solid var(--amber);background:#0d0f14;padding:8px 16px;display:flex;justify-content:space-between;font-size:0.65rem;color:var(--grey);}
+</style>
+</head>
+<body>
+<div class="plate">
+
+  <div class="plate-header">
+    <div>
+      <div class="airport">BEAUFORT WEST</div>
+      <div class="icao">FABW · Beaufort West · South Africa</div>
+    </div>
+    <div class="approach-type">VOR RWY 09<br><span style="font-size:0.8rem;font-weight:400;">SLV 113.30 MHz</span></div>
+  </div>
+
+  <div class="sim-warning">⚠ SIMULATION REFERENCE ONLY — NOT FOR OPERATIONAL USE — VERIFY AGAINST CURRENT AIP / NOTAM / JEPPESEN</div>
+
+  <div class="vor-band">
+    <div class="vor-item"><span class="vor-label">VOR/DME</span><span class="vor-value">SLV · 113.30 MHz</span></div>
+    <div class="vor-item"><span class="vor-label">Station</span><span class="vor-value">Sutherland (~102nm W)</span></div>
+    <div class="vor-item"><span class="vor-label">Inbound Track</span><span class="vor-value blue">090°M</span></div>
+    <div class="vor-item"><span class="vor-label">FAF DME</span><span class="vor-value blue">SLV 96 DME</span></div>
+    <div class="vor-item"><span class="vor-label">Aerodrome Elev</span><span class="vor-value">2929ft MSL</span></div>
+    <div class="vor-item"><span class="vor-label">THR 09 Elev</span><span class="vor-value">2910ft MSL</span></div>
+  </div>
+
+  <div class="plate-body">
+
+    <!-- PLAN VIEW -->
+    <div class="plan-view">
+      <div class="section-label">Plan View — Final Approach Segment</div>
+      <svg viewBox="0 0 340 360" width="100%" xmlns="http://www.w3.org/2000/svg">
+        <rect width="340" height="360" fill="#0a0c0f"/>
+        <defs>
+          <marker id="arr-a2" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#e8a020"/></marker>
+          <marker id="arr-r2" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#e84040"/></marker>
+          <marker id="arr-b2" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#4a9eff"/></marker>
+          <marker id="arr-w2" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#e8eaf0"/></marker>
+        </defs>
+
+        <!-- MSA partial circle (25nm sectors) -->
+        <circle cx="205" cy="185" r="120" fill="none" stroke="#2a3040" stroke-width="1" stroke-dasharray="6,4"/>
+        <text x="205" y="72" fill="#6a7080" font-size="8" text-anchor="middle" font-family="Share Tech Mono">MSA N/W/E 25nm · 5000ft</text>
+        <text x="205" y="310" fill="#e84040" font-size="8" text-anchor="middle" font-family="Share Tech Mono">MSA S sector · 7000ft</text>
+
+        <!-- North -->
+        <line x1="305" y1="55" x2="305" y2="35" stroke="#4a9eff" stroke-width="1.5" marker-end="url(#arr-b2)"/>
+        <text x="305" y="30" fill="#4a9eff" font-size="10" text-anchor="middle" font-family="Share Tech Mono">N</text>
+
+        <!-- Runway 09/27 — east-west, horizontal -->
+        <rect x="185" y="178" width="80" height="14" rx="1"
+              fill="#2a3040" stroke="#4ecb71" stroke-width="1.5"/>
+        <text x="225" y="208" fill="#4ecb71" font-size="9" text-anchor="middle" font-family="Share Tech Mono">RWY 09/27</text>
+        <text x="225" y="219" fill="#6a7080" font-size="7" text-anchor="middle" font-family="Share Tech Mono">090°/270° · 2929ft elev</text>
+
+        <!-- RWY 09 threshold label (left/west end) -->
+        <text x="185" y="172" fill="#6a7080" font-size="7" text-anchor="middle" font-family="Share Tech Mono">09</text>
+        <!-- RWY 27 end label -->
+        <text x="265" y="172" fill="#6a7080" font-size="7" text-anchor="middle" font-family="Share Tech Mono">27</text>
+
+        <!-- SLV VOR — far to the west, shown as off-diagram reference -->
+        <line x1="15" y1="185" x2="45" y2="185" stroke="#e8a020" stroke-width="1" stroke-dasharray="3,3" marker-end="url(#arr-a2)"/>
+        <text x="8" y="178" fill="#e8a020" font-size="8" font-family="Share Tech Mono" text-anchor="middle">SLV</text>
+        <text x="8" y="188" fill="#6a7080" font-size="7" font-family="Share Tech Mono" text-anchor="middle">102nm</text>
+        <text x="8" y="198" fill="#6a7080" font-size="7" font-family="Share Tech Mono" text-anchor="middle">W</text>
+
+        <!-- IAF — shown at far left representing SLV VOR -->
+        <circle cx="55" cy="185" r="7" fill="none" stroke="#e8eaf0" stroke-width="1.5"/>
+        <text x="55" y="162" fill="#e8eaf0" font-size="9" text-anchor="middle" font-family="Share Tech Mono">IAF</text>
+        <text x="55" y="172" fill="#6a7080" font-size="8" text-anchor="middle" font-family="Share Tech Mono">SLV VOR</text>
+        <text x="55" y="153" fill="#6a7080" font-size="7" text-anchor="middle" font-family="Share Tech Mono">6000ft</text>
+
+        <!-- FAF — ~6nm west of threshold -->
+        <circle cx="130" cy="185" r="5" fill="none" stroke="#4a9eff" stroke-width="1.5"/>
+        <line x1="125" y1="185" x2="135" y2="185" stroke="#4a9eff" stroke-width="1"/>
+        <text x="130" y="162" fill="#4a9eff" font-size="9" text-anchor="middle" font-family="Share Tech Mono">FAF</text>
+        <text x="130" y="172" fill="#6a7080" font-size="8" text-anchor="middle" font-family="Share Tech Mono">SLV 96DME</text>
+        <text x="130" y="153" fill="#6a7080" font-size="7" text-anchor="middle" font-family="Share Tech Mono">4800ft</text>
+
+        <!-- Approach track 090° (left to right) -->
+        <line x1="62" y1="185" x2="125" y2="185" stroke="#e8a020" stroke-width="1.5" stroke-dasharray="4,3"/>
+        <line x1="135" y1="185" x2="183" y2="185" stroke="#e8a020" stroke-width="2" marker-end="url(#arr-a2)"/>
+        <text x="158" y="178" fill="#e8a020" font-size="8" text-anchor="middle" font-family="Share Tech Mono">090°</text>
+
+        <!-- Holding at IAF/SLV -->
+        <ellipse cx="55" cy="163" rx="22" ry="10" fill="none" stroke="#e8eaf0" stroke-width="1" stroke-dasharray="3,3"/>
+        <text x="55" y="148" fill="#6a7080" font-size="7" text-anchor="middle" font-family="Share Tech Mono">HOLD</text>
+        <text x="55" y="157" fill="#6a7080" font-size="7" text-anchor="middle" font-family="Share Tech Mono">090° inbd</text>
+
+        <!-- Missed approach — straight ahead (east) then left turn (north) -->
+        <path d="M265,185 Q285,185 295,175 Q310,155 295,135 Q280,115 255,110" stroke="#e84040" stroke-width="1.5" fill="none" stroke-dasharray="4,3" marker-end="url(#arr-r2)"/>
+        <text x="255" y="100" fill="#e84040" font-size="8" font-family="Share Tech Mono">MA</text>
+        <text x="255" y="110" fill="#6a7080" font-size="7" font-family="Share Tech Mono">left turn</text>
+        <text x="255" y="120" fill="#6a7080" font-size="7" font-family="Share Tech Mono">5000ft</text>
+
+        <!-- Swartberg terrain warning (south) -->
+        <rect x="120" y="265" width="170" height="52" fill="#100800" stroke="#e84040" stroke-width="1"/>
+        <text x="205" y="278" fill="#e84040" font-size="8" text-anchor="middle" font-family="Share Tech Mono" font-weight="bold">⚠ SWARTBERGE</text>
+        <text x="205" y="290" fill="#e8eaf0" font-size="7" text-anchor="middle" font-family="Share Tech Mono">Peaks to 6900ft MSL</text>
+        <text x="205" y="301" fill="#e8eaf0" font-size="7" text-anchor="middle" font-family="Share Tech Mono">20–30nm south of aerodrome</text>
+        <text x="205" y="312" fill="#e8a020" font-size="7" text-anchor="middle" font-family="Share Tech Mono">DO NOT TURN SOUTH below 7000ft</text>
+
+        <!-- Karoo open terrain (north — safe) -->
+        <text x="205" y="100" fill="#4a9eff" font-size="8" text-anchor="middle" font-family="Share Tech Mono">GREAT KAROO (open)</text>
+      </svg>
+    </div>
+
+    <!-- DATA PANEL -->
+    <div class="data-panel">
+
+      <div class="data-block">
+        <div class="data-block-header">Primary Navaid</div>
+        <div class="data-row"><span class="label">Station</span><span class="value amber">SLV VOR-DME</span></div>
+        <div class="data-row"><span class="label">Frequency</span><span class="value amber">113.30 MHz</span></div>
+        <div class="data-row"><span class="label">Ident</span><span class="value">SLV · ···· ·▄▄▄ ·▄▄▄</span></div>
+        <div class="data-row"><span class="label">Inbound Track</span><span class="value">090°M</span></div>
+        <div class="data-row"><span class="label">Location</span><span class="value">Sutherland · ~102nm W</span></div>
+        <div class="data-row"><span class="label">Secondary VOR</span><span class="value blue">SWV 114.40 (Swellendam)</span></div>
+      </div>
+
+      <div class="data-block">
+        <div class="data-block-header">Altitudes</div>
+        <div class="data-row"><span class="label">MSA N/W/E (25nm)</span><span class="value">5000ft</span></div>
+        <div class="data-row"><span class="label">MSA S sector (25nm)</span><span class="value red">7000ft (Swartberge)</span></div>
+        <div class="data-row"><span class="label">IAF (SLV VOR)</span><span class="value">6000ft</span></div>
+        <div class="data-row"><span class="label">FAF (SLV 96 DME)</span><span class="value blue">4800ft</span></div>
+        <div class="data-row"><span class="label">MDA Cat A/B</span><span class="value amber">3600ft (671ft AGL)</span></div>
+        <div class="data-row"><span class="label">MDA Cat C/D</span><span class="value amber">3700ft (771ft AGL)</span></div>
+        <div class="data-row"><span class="label">Aerodrome Elev</span><span class="value">2929ft MSL</span></div>
+        <div class="data-row"><span class="label">THR 09 Elev</span><span class="value">2910ft MSL</span></div>
+      </div>
+
+      <div class="data-block">
+        <div class="data-block-header">Descent Profile</div>
+        <div class="data-row"><span class="label">FAF → MAPt</span><span class="value">~6nm</span></div>
+        <div class="data-row"><span class="label">Descent angle</span><span class="value">~3.2°</span></div>
+        <div class="data-row"><span class="label">Rate (90kt)</span><span class="value">300ft/min</span></div>
+        <div class="data-row"><span class="label">Rate (100kt)</span><span class="value">333ft/min</span></div>
+        <div class="data-row"><span class="label">Rate (110kt)</span><span class="value">367ft/min</span></div>
+        <div class="data-row"><span class="label">Rate (120kt)</span><span class="value">400ft/min</span></div>
+      </div>
+
+      <div class="data-block">
+        <div class="data-block-header">Minima</div>
+        <table class="minima-table">
+          <tr><th>Category</th><th>MDA</th><th>HAA</th><th>Visibility</th></tr>
+          <tr><td class="cat">A</td><td>3600ft</td><td>671ft</td><td>1600m</td></tr>
+          <tr><td class="cat">B</td><td>3600ft</td><td>671ft</td><td>2400m</td></tr>
+          <tr><td class="cat">C</td><td>3700ft</td><td>771ft</td><td>3600m</td></tr>
+          <tr><td class="cat">D</td><td>3700ft</td><td>771ft</td><td>4800m</td></tr>
+        </table>
+      </div>
+
+    </div>
+
+    <!-- PROFILE VIEW -->
+    <div class="profile-view">
+      <div class="section-label">Profile View — VOR RWY 09 (SLV inbound, east)</div>
+      <svg viewBox="0 0 700 130" width="100%" xmlns="http://www.w3.org/2000/svg">
+        <rect width="700" height="130" fill="#0a0c0f"/>
+        <line x1="40" y1="110" x2="660" y2="110" stroke="#2a3040" stroke-width="1"/>
+
+        <!-- Altitude guides -->
+        <text x="35" y="18" fill="#6a7080" font-size="8" text-anchor="end" font-family="Share Tech Mono">6000</text>
+        <text x="35" y="42" fill="#6a7080" font-size="8" text-anchor="end" font-family="Share Tech Mono">4800</text>
+        <text x="35" y="82" fill="#6a7080" font-size="8" text-anchor="end" font-family="Share Tech Mono">3600</text>
+        <text x="35" y="108" fill="#6a7080" font-size="8" text-anchor="end" font-family="Share Tech Mono">2910</text>
+        <line x1="40" y1="17" x2="660" y2="17" stroke="#1a1e28" stroke-width="1" stroke-dasharray="3,4"/>
+        <line x1="40" y1="41" x2="660" y2="41" stroke="#1a1e28" stroke-width="1" stroke-dasharray="3,4"/>
+        <line x1="40" y1="81" x2="660" y2="81" stroke="#1a1e28" stroke-width="1" stroke-dasharray="3,4"/>
+
+        <!-- IAF (SLV VOR) -->
+        <line x1="100" y1="10" x2="100" y2="110" stroke="#2a3040" stroke-width="1" stroke-dasharray="3,3"/>
+        <text x="100" y="8" fill="#e8eaf0" font-size="8" text-anchor="middle" font-family="Share Tech Mono">IAF/SLV</text>
+        <text x="100" y="120" fill="#6a7080" font-size="7" text-anchor="middle" font-family="Share Tech Mono">6000ft</text>
+        <circle cx="100" cy="17" r="4" fill="#e8eaf0"/>
+
+        <!-- FAF -->
+        <line x1="350" y1="35" x2="350" y2="110" stroke="#4a9eff" stroke-width="1" stroke-dasharray="3,3"/>
+        <text x="350" y="30" fill="#4a9eff" font-size="8" text-anchor="middle" font-family="Share Tech Mono">FAF</text>
+        <text x="350" y="120" fill="#6a7080" font-size="7" text-anchor="middle" font-family="Share Tech Mono">96 DME · 4800ft</text>
+        <circle cx="350" cy="41" r="5" fill="none" stroke="#4a9eff" stroke-width="1.5"/>
+        <line x1="345" y1="41" x2="355" y2="41" stroke="#4a9eff" stroke-width="1"/>
+
+        <!-- MAPt at 102DME / FABW -->
+        <line x1="580" y1="75" x2="580" y2="110" stroke="#e84040" stroke-width="1" stroke-dasharray="3,3"/>
+        <text x="580" y="70" fill="#e84040" font-size="8" text-anchor="middle" font-family="Share Tech Mono">MAPt</text>
+        <text x="580" y="120" fill="#6a7080" font-size="7" text-anchor="middle" font-family="Share Tech Mono">102 DME / FABW</text>
+
+        <!-- Level IAF to FAF -->
+        <line x1="100" y1="17" x2="350" y2="17" stroke="#e8a020" stroke-width="1.5" stroke-dasharray="4,3"/>
+
+        <!-- Descent FAF to MDA -->
+        <line x1="350" y1="41" x2="580" y2="81" stroke="#e8a020" stroke-width="2"/>
+
+        <!-- MDA line -->
+        <line x1="580" y1="81" x2="640" y2="81" stroke="#e8a020" stroke-width="1.5" stroke-dasharray="5,3"/>
+
+        <!-- Missed approach -->
+        <line x1="580" y1="81" x2="660" y2="40" stroke="#e84040" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arr-red-bw)"/>
+        <defs>
+          <marker id="arr-red-bw" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+            <path d="M0,0 L6,3 L0,6 Z" fill="#e84040"/>
+          </marker>
+        </defs>
+
+        <!-- Runway symbol -->
+        <rect x="620" y="103" width="25" height="7" fill="#4ecb71"/>
+        <text x="632" y="128" fill="#4ecb71" font-size="7" text-anchor="middle" font-family="Share Tech Mono">THR 09</text>
+        <text x="100" y="13" fill="#e8a020" font-size="7" font-family="Share Tech Mono">6000ft</text>
+        <text x="358" y="37" fill="#4a9eff" font-size="7" font-family="Share Tech Mono">4800ft</text>
+        <text x="584" y="77" fill="#e8a020" font-size="7" font-family="Share Tech Mono">MDA 3600</text>
+      </svg>
+    </div>
+
+    <!-- MISSED APPROACH -->
+    <div class="missed">
+      <div class="missed-label">MISSED APPROACH</div>
+      <div class="missed-text">
+        Climb straight ahead on runway track 090° to 4500ft, then climbing LEFT turn to 5000ft tracking SLV VOR. Hold at SLV VOR, 090° inbound, right turns. DO NOT TURN RIGHT (south) — Swartberge terrain. Advise Beaufort West Radio of intention.
+      </div>
+    </div>
+
+    <!-- CAUTION -->
+    <div class="caution-bar">
+      <div class="caution-title">⚠ PILOT CAUTIONS — BEAUFORT WEST</div>
+      <div class="caution-item"><span>TERRAIN SOUTH:</span>Swartberge mountains (peaks to 6900ft MSL) lie 20–30nm south. Minimum safe altitude in S sector 7000ft. Do not turn south below 7000ft.</div>
+      <div class="caution-item"><span>DENSITY ALT:</span>Aerodrome elevation 2929ft in a hot Karoo climate. On summer days ISA+20°C to +25°C, density altitude can exceed 5000ft. Performance calculations critical.</div>
+      <div class="caution-item"><span>DME RANGE:</span>SLV VOR at ~102nm. DME reception reliable above 6000ft on the approach. Cross-check with SWV (114.40) for position awareness.</div>
+    </div>
+
+    <!-- HISTORY NOTE -->
+    <div class="history-bar">
+      <strong>Karoo fuel stop:</strong> Beaufort West is the natural overnight / fuel stop on the FACT–FALA cross-country, sitting approximately mid-way up the N1 at the gateway to the Great Karoo. Beaufort West is also the birthplace of Christiaan Barnard, who performed the world's first heart transplant in 1967 — fitting context for a CoetzeeMed flight.
+    </div>
+
+    <!-- COMMS -->
+    <div class="comms-bar">
+      <div class="comm-item"><span class="comm-label">BEAUFORT WEST AFIS</span><span class="comm-freq">122.80</span></div>
+      <div class="comm-item"><span class="comm-label">SLV VOR-DME</span><span class="comm-freq">113.30</span></div>
+      <div class="comm-item"><span class="comm-label">SWV VOR</span><span class="comm-freq">114.40</span></div>
+    </div>
+
+  </div><!-- /plate-body -->
+
+  <div class="plate-footer">
+    <span>CoetzeeMed Flight Operations · MSFS 2024 Reference</span>
+    <span>FABW VOR RWY 09 · SLV 113.30</span>
+    <span>⚠ NOT FOR OPERATIONAL USE</span>
+  </div>
+
+</div>
+</body>
+</html>
