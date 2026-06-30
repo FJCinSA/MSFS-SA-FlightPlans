@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>FABW - VFR Joining Procedure</title>
+<style>
+:root{
+  --bg:#0a1018; --panel:#101926; --line:#2a3a4d; --text:#dce6ef;
+  --amber:#e8b84b; --cyan:#5fd0d8; --red:#d65a5a; --dim:#7d8a99;
+}
+*{box-sizing:border-box;}
+body{
+  background:var(--bg); color:var(--text);
+  font-family:'Consolas','Courier New',monospace;
+  margin:0; padding:20px;
+}
+.plate{
+  max-width:980px; margin:0 auto; background:var(--panel);
+  border:1px solid var(--line); border-radius:4px; padding:18px 24px;
+}
+.header{
+  display:flex; justify-content:space-between; align-items:baseline;
+  border-bottom:2px solid var(--amber); padding-bottom:8px; margin-bottom:14px;
+}
+.header h1{font-size:20px; color:var(--amber); margin:0; letter-spacing:1px;}
+.header .sub{font-size:13px; color:var(--cyan);}
+.header .meta{text-align:right; font-size:11px; color:var(--dim); line-height:1.4;}
+.row{display:flex; gap:16px; flex-wrap:wrap; margin-bottom:14px;}
+.box{
+  flex:1; min-width:220px; border:1px solid var(--line); border-radius:3px;
+  padding:10px 12px; background:#0d141f;
+}
+.box h2{font-size:12px; color:var(--cyan); margin:0 0 6px 0; text-transform:uppercase; letter-spacing:1px;}
+.box p, .box li{font-size:13px; margin:2px 0; line-height:1.5;}
+.freqline{display:flex; justify-content:space-between; border-bottom:1px dotted var(--line); padding:3px 0;}
+.freqline span:first-child{color:var(--dim);}
+.freqline span:last-child{color:var(--amber); font-weight:bold;}
+.profile{
+  border:1px solid var(--line); border-radius:3px; padding:14px;
+  background:#0d141f; margin-bottom:14px;
+}
+.profile svg{width:100%; height:auto; display:block;}
+.minima{
+  border:2px solid var(--amber); border-radius:3px; padding:10px 14px;
+  background:#1a1408; margin-bottom:14px;
+}
+.minima h2{color:var(--amber); font-size:13px; margin:0 0 8px 0; letter-spacing:1px;}
+table{width:100%; border-collapse:collapse; font-size:13px;}
+table th, table td{border:1px solid var(--line); padding:5px 8px; text-align:center;}
+table th{color:var(--cyan); background:#0d141f;}
+.warning{
+  border:1px solid var(--red); border-radius:3px; padding:10px 14px;
+  background:#1a0d0d; color:#f0b8b8; font-size:13px; margin-bottom:14px;
+}
+.warning b{color:var(--red);}
+.missed{font-size:13px; line-height:1.6;}
+.footer{
+  border-top:1px solid var(--line); margin-top:10px; padding-top:8px;
+  font-size:11px; color:var(--dim); display:flex; justify-content:space-between;
+}
+.disclaimer{
+  font-size:11px; color:var(--dim); font-style:italic; margin-top:10px;
+  border-top:1px dashed var(--line); padding-top:8px;
+}
+</style>
+</head>
+<body>
+<div class="plate">
+
+<div class="header">
+  <div>
+    <h1>FABW — BEAUFORT WEST (KAROO GATEWAY)</h1>
+    <div class="sub">VFR JOINING PROCEDURE — NO PUBLISHED IAP</div>
+  </div>
+  <div class="meta">
+    ELEV 2929 FT &nbsp;|&nbsp; UNCONTROLLED<br>
+    CoetzeeMed Flight Ops — FJCinSA
+  </div>
+</div>
+
+<div class="row">
+  <div class="box">
+    <h2>Communications</h2>
+    <div class="freqline"><span>CTAF / Flight Info</span><span>125.60</span></div>
+    <p style="color:#7d8a99;font-size:11px;">No control tower. Make blind broadcasts on CTAF — position, intentions, runway in use.</p>
+  </div>
+  <div class="box">
+    <h2>Runway</h2>
+    <p>RWY 08/26, unpaved/gravel surface typical for Karoo strips — confirm in-sim scenery surface.</p>
+    <p>Field elevation 2929 FT — high veld, density altitude matters on hot Karoo afternoons.</p>
+  </div>
+  <div class="box">
+    <h2>Field notes</h2>
+    <p>Fuel stop on the FACT→FALA cross-country (Leg 1, GPS &amp; RAW NAV editions).</p>
+    <p>No NDB, VOR, or ILS. Field is below controlled airspace — VFR-only operation.</p>
+  </div>
+</div>
+
+<div class="profile">
+  <svg viewBox="0 0 900 160" xmlns="http://www.w3.org/2000/svg">
+    <line x1="40" y1="120" x2="860" y2="120" stroke="#2a3a4d" stroke-width="2"/>
+    <text x="350" y="140" fill="#7d8a99" font-size="12">JOIN OVERHEAD 1000FT AGL ABOVE CIRCUIT TO DETERMINE ACTIVE RWY</text>
+    <line x1="700" y1="120" x2="780" y2="60" stroke="#5fd0d8" stroke-dasharray="4,4"/>
+    <text x="700" y="50" fill="#dce6ef" font-size="11">OVERHEAD JOIN — CIRCUIT ALT 4929FT (2000FT AGL)</text>
+    <polygon points="700,120 692,108 708,108" fill="#dce6ef"/>
+    <text x="40" y="115" fill="#dce6ef" font-size="11">RWY 08/26, ELEV 2929FT</text>
+  </svg>
+</div>
+
+<div class="minima">
+  <h2>JOINING PROCEDURE</h2>
+  <p>1. Make blind broadcast 10 NM out — callsign, position, intentions.</p>
+  <p>2. Join overhead aerodrome at 1000 FT above circuit altitude to identify active runway / windsock.</p>
+  <p>3. Descend on the dead side, join downwind for active runway.</p>
+  <p>4. Continue broadcasts through circuit — base, final, clear of runway.</p>
+</div>
+
+<div class="warning">
+  <b>NOTE:</b> Mountainous high-veld terrain surrounds the field. Watch for thermal turbulence and
+  density altitude on warm-weather ops — this matches the Karoo conditions flown on the personal-history
+  ZS-NTP legs (FATM→FABW night sector).
+</div>
+
+<div class="disclaimer">
+  Simplified plate for MSFS 2024 simulator use — built from public airport data, June 2026.
+  FABW has no published instrument approach; this is a VFR joining reference, not an IAP.
+</div>
+
+<div class="footer"><span>CoetzeeMed Flight Operations · FJCinSA</span><span>MSFS 2024 Southern Africa Flight Pack</span></div>
+</div>
+</body>
+</html>

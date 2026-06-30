@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>FACT - ILS RWY 01</title>
+<style>
+:root{
+  --bg:#0a1018; --panel:#101926; --line:#2a3a4d; --text:#dce6ef;
+  --amber:#e8b84b; --cyan:#5fd0d8; --red:#d65a5a; --dim:#7d8a99;
+}
+*{box-sizing:border-box;}
+body{
+  background:var(--bg); color:var(--text);
+  font-family:'Consolas','Courier New',monospace;
+  margin:0; padding:20px;
+}
+.plate{
+  max-width:980px; margin:0 auto; background:var(--panel);
+  border:1px solid var(--line); border-radius:4px; padding:18px 24px;
+}
+.header{
+  display:flex; justify-content:space-between; align-items:baseline;
+  border-bottom:2px solid var(--amber); padding-bottom:8px; margin-bottom:14px;
+}
+.header h1{font-size:20px; color:var(--amber); margin:0; letter-spacing:1px;}
+.header .sub{font-size:13px; color:var(--cyan);}
+.header .meta{text-align:right; font-size:11px; color:var(--dim); line-height:1.4;}
+.row{display:flex; gap:16px; flex-wrap:wrap; margin-bottom:14px;}
+.box{
+  flex:1; min-width:220px; border:1px solid var(--line); border-radius:3px;
+  padding:10px 12px; background:#0d141f;
+}
+.box h2{font-size:12px; color:var(--cyan); margin:0 0 6px 0; text-transform:uppercase; letter-spacing:1px;}
+.box p, .box li{font-size:13px; margin:2px 0; line-height:1.5;}
+.freqline{display:flex; justify-content:space-between; border-bottom:1px dotted var(--line); padding:3px 0;}
+.freqline span:first-child{color:var(--dim);}
+.freqline span:last-child{color:var(--amber); font-weight:bold;}
+.profile{
+  border:1px solid var(--line); border-radius:3px; padding:14px;
+  background:#0d141f; margin-bottom:14px;
+}
+.profile svg{width:100%; height:auto; display:block;}
+.minima{
+  border:2px solid var(--amber); border-radius:3px; padding:10px 14px;
+  background:#1a1408; margin-bottom:14px;
+}
+.minima h2{color:var(--amber); font-size:13px; margin:0 0 8px 0; letter-spacing:1px;}
+table{width:100%; border-collapse:collapse; font-size:13px;}
+table th, table td{border:1px solid var(--line); padding:5px 8px; text-align:center;}
+table th{color:var(--cyan); background:#0d141f;}
+.warning{
+  border:1px solid var(--red); border-radius:3px; padding:10px 14px;
+  background:#1a0d0d; color:#f0b8b8; font-size:13px; margin-bottom:14px;
+}
+.warning b{color:var(--red);}
+.missed{font-size:13px; line-height:1.6;}
+.footer{
+  border-top:1px solid var(--line); margin-top:10px; padding-top:8px;
+  font-size:11px; color:var(--dim); display:flex; justify-content:space-between;
+}
+.disclaimer{
+  font-size:11px; color:var(--dim); font-style:italic; margin-top:10px;
+  border-top:1px dashed var(--line); padding-top:8px;
+}
+</style>
+</head>
+<body>
+<div class="plate">
+
+<div class="header">
+  <div>
+    <h1>FACT — CAPE TOWN INTL</h1>
+    <div class="sub">ILS RWY 01</div>
+  </div>
+  <div class="meta">
+    ELEV 151 FT &nbsp;|&nbsp; CTR<br>
+    CoetzeeMed Flight Ops — FJCinSA
+  </div>
+</div>
+
+<div class="row">
+  <div class="box">
+    <h2>Communications</h2>
+    <div class="freqline"><span>ATIS</span><span>127.00</span></div>
+    <div class="freqline"><span>Approach</span><span>119.70</span></div>
+    <div class="freqline"><span>Director</span><span>124.35</span></div>
+    <div class="freqline"><span>Tower</span><span>118.10</span></div>
+    <div class="freqline"><span>Ground</span><span>121.90</span></div>
+  </div>
+  <div class="box">
+    <h2>Navaids</h2>
+    <div class="freqline"><span>ILS CTI (RWY 01)</span><span>110.30</span></div>
+    <div class="freqline"><span>CTV VOR/DME</span><span>115.70</span></div>
+    <div class="freqline"><span>RWY 01 Heading</span><span>010° MAG</span></div>
+    <div class="freqline"><span>RWY 01 THR ELEV</span><span>144 FT</span></div>
+  </div>
+  <div class="box">
+    <h2>Runway</h2>
+    <p>RWY 01/19 — 10,502 x 200 FT, hard surface.</p>
+    <p>Secondary RWY 16/34 — 5,581 x 151 FT.</p>
+    <p>Prevailing wind NW in winter favours RWY 01; strong SE "Cape Doctor" in summer favours RWY 19.</p>
+  </div>
+</div>
+
+<div class="profile">
+  <svg viewBox="0 0 900 200" xmlns="http://www.w3.org/2000/svg">
+    <line x1="40" y1="160" x2="860" y2="160" stroke="#2a3a4d" stroke-width="2"/>
+    <line x1="700" y1="160" x2="860" y2="40" stroke="#5fd0d8" stroke-width="2"/>
+    <text x="430" y="180" fill="#7d8a99" font-size="12">FINAL APPROACH TRACK 010°(M) — GLIDE PATH 3.0°</text>
+    <text x="700" y="35" fill="#e8b84b" font-size="12">IF / GS INTERCEPT 3000FT</text>
+    <circle cx="860" cy="40" r="4" fill="#e8b84b"/>
+    <line x1="780" y1="160" x2="780" y2="60" stroke="#5fd0d8" stroke-dasharray="4,4"/>
+    <text x="760" y="55" fill="#dce6ef" font-size="11">OM / 4 DME CTI</text>
+    <polygon points="700,160 692,148 708,148" fill="#dce6ef"/>
+    <text x="40" y="155" fill="#dce6ef" font-size="11">RWY 01 THR 144FT</text>
+  </svg>
+</div>
+
+<div class="minima">
+  <h2>MINIMA — ILS RWY 01</h2>
+  <table>
+    <tr><th>CAT</th><th>DA(H)</th><th>RVR/VIS</th></tr>
+    <tr><td>A/B/C</td><td>~544 FT (400 FT AGL)</td><td>800 M</td></tr>
+    <tr><td>D</td><td>~544 FT (400 FT AGL)</td><td>1000 M</td></tr>
+  </table>
+</div>
+
+<div class="missed">
+  <b>MISSED APPROACH:</b> Climb straight ahead on RWY heading to 1500 FT, then as directed by ATC /
+  comply with published lost-comms routing (KODES 1A north / TETAN 1C east / OKTED 1A south-east).
+</div>
+
+<div class="warning">
+  <b>NOTE:</b> Cape Town sits in a TMA with multiple parallel-style traffic flows and the "Cape Doctor"
+  SE wind regularly forces a runway change to 19. Confirm active runway and ATIS before planning approach.
+</div>
+
+<div class="disclaimer">
+  Simplified plate for MSFS 2024 simulator use — built from public AIP/SkyVector data, June 2026.
+  Minima are representative, not for real-world navigation. Verify against current AIP/Jeppesen before any real-world use.
+</div>
+
+<div class="footer"><span>CoetzeeMed Flight Operations · FJCinSA</span><span>MSFS 2024 Southern Africa Flight Pack</span></div>
+</div>
+</body>
+</html>
