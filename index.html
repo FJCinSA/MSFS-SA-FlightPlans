@@ -41,6 +41,9 @@
   .t-web{background:rgba(212,175,55,.16); color:var(--gold2); border:1px solid rgba(212,175,55,.4)}
   .t-pln{background:rgba(95,211,196,.13); color:var(--teal); border:1px solid rgba(95,211,196,.35)}
   .card .go{display:inline-block; margin-top:14px; color:var(--gold); font-size:13px; font-weight:700; letter-spacing:.03em}
+  .card-links{display:flex;gap:14px;margin-top:14px;flex-wrap:wrap;align-items:center}
+  .card-link{font-size:13px;font-weight:700;letter-spacing:.03em;color:var(--gold)}
+  .card-link.kb{color:var(--teal)}
   .route{margin-top:10px; font-family:"Consolas",monospace; font-size:12.5px; color:var(--ink); line-height:1.8}
   .route b{color:var(--gold2)}
   .note{background:rgba(230,182,95,.07); border:1px solid rgba(230,182,95,.25); border-radius:12px;
@@ -292,23 +295,29 @@
   <section class="sect">
     <h2>Personal History Flights</h2>
     <div class="grid">
-      <a class="card" href="SOLO_FAWB_FAPN.pln">
+      <div class="card">
         <span class="tag t-pln">.PLN</span>
         <span class="ic">&#9992;&#65039;</span>
         <h3>FAWB &rarr; FAPN &mdash; ZS-NTP Recreation</h3>
         <p>Wonderboom to Pilanesberg. RAW NAV, VFR, 6&#8239;500&#8239;ft. Comms failure into Pilanesberg &mdash; relayed via Joburg Information. James&rsquo;s first flight.</p>
         <p style="margin-top:8px; font-size:12px; color:var(--gold); font-style:italic">Sim setup: midsummer, 09:00 SAST departure, scattered cumulus, thermal turbulence &mdash; fly it rough, that&rsquo;s how it was.</p>
         <div class="route"><b>FAWB</b> &rarr; WB NDB &rarr; Hartbeespoort &rarr; PLB NDB &rarr; PNV &rarr; <b>FAPN</b></div>
-        <span class="go">Load in sim &rarr;</span>
-      </a>
-      <a class="card" href="SOLO_FAPN_FAMM.pln">
+        <div class="card-links">
+          <a class="card-link" href="SOLO_FAWB_FAPN.pln">Load in sim &rarr;</a>
+          <a class="card-link kb" href="Approaches/Kneeboard_FAWB_FAPN_FAMM.html">Kneeboard &rarr;</a>
+        </div>
+      </div>
+      <div class="card">
         <span class="tag t-pln">.PLN</span>
         <span class="ic">&#9992;&#65039;</span>
         <h3>FAPN &rarr; FAMM &mdash; ZS-NTP Recreation</h3>
         <p>Pilanesberg to Mafikeng. RAW NAV, VFR, 6&#8239;500&#8239;ft. C172N ZS-NTP &mdash; Dr Francois Coetzee &amp; James Caroto-Coetzee.</p>
         <div class="route"><b>FAPN</b> &rarr; PNV &rarr; Zeerust &rarr; MMV &rarr; MH NDB &rarr; <b>FAMM</b></div>
-        <span class="go">Load in sim &rarr;</span>
-      </a>
+        <div class="card-links">
+          <a class="card-link" href="SOLO_FAPN_FAMM.pln">Load in sim &rarr;</a>
+          <a class="card-link kb" href="Approaches/Kneeboard_FAWB_FAPN_FAMM.html">Kneeboard &rarr;</a>
+        </div>
+      </div>
       <a class="card" href="STELL_LEG1_FAWB_FATM.pln">
         <span class="tag t-pln">.PLN</span>
         <span class="ic">&#9992;&#65039;</span>
@@ -340,6 +349,13 @@
         <p>Worcester to Stellenbosch via Du Toitskloof. Low level through the pass, mountains visible on both wings. Followed the N1 under the cloud. Afternoon light.</p>
         <div class="route"><b>FAWC</b> &rarr; Du Toitskloof East &rarr; Pass &rarr; Du Toitskloof West &rarr; Paarl &rarr; <b>FASH</b></div>
         <span class="go">Load in sim &rarr;</span>
+      </a>
+      <a class="card" href="Approaches/Kneeboard_Stellenbosch.html">
+        <span class="tag t-web">HTML</span>
+        <span class="ic">&#128196;</span>
+        <h3>FAWB &rarr; FATM &rarr; FABW &rarr; FAWC &rarr; FASH &mdash; ZS-NTP Stellenbosch</h3>
+        <p>Full kneeboard for all 4 legs: Wonderboom to Stellenbosch via Bloemfontein, Beaufort West &amp; Du Toitskloof Pass. Includes night sector FATM&ndash;FABW and mountain-valley arrival FABW&ndash;FAWC.</p>
+        <span class="go">Open kneeboard &rarr;</span>
       </a>
     </div>
   </section>
