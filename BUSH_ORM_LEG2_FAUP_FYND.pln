@@ -22,7 +22,7 @@
         <ATCWaypoint id="UN">
             <ATCWaypointType>NDB</ATCWaypointType>
             <WorldPosition>S28* 23' 0.00",E21* 16' 0.00",+2800.00</WorldPosition>
-            <ICAO><ICAOIdent>UN</ICAOIdent></ICAO>
+            <ICAO><ICAORegion>FA</ICAORegion><ICAOIdent>UN</ICAOIdent></ICAO>
         </ATCWaypoint>
         <ATCWaypoint id="AUGRABIES">
             <ATCWaypointType>User</ATCWaypointType>

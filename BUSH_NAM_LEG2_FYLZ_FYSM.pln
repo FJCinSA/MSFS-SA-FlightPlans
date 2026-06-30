@@ -22,7 +22,7 @@
         <ATCWaypoint id="LU">
             <ATCWaypointType>NDB</ATCWaypointType>
             <WorldPosition>S26* 41' 0.00",E15* 14' 0.00",+460.00</WorldPosition>
-            <ICAO><ICAOIdent>LU</ICAOIdent></ICAO>
+            <ICAO><ICAORegion>FY</ICAORegion><ICAOIdent>LU</ICAOIdent></ICAO>
         </ATCWaypoint>
         <ATCWaypoint id="SOSSUSVLEI">
             <ATCWaypointType>User</ATCWaypointType>
@@ -35,7 +35,7 @@
         <ATCWaypoint id="SW">
             <ATCWaypointType>NDB</ATCWaypointType>
             <WorldPosition>S22* 40' 0.00",E14* 34' 0.00",+175.00</WorldPosition>
-            <ICAO><ICAOIdent>SW</ICAOIdent></ICAO>
+            <ICAO><ICAORegion>FY</ICAORegion><ICAOIdent>SW</ICAOIdent></ICAO>
         </ATCWaypoint>
         <ATCWaypoint id="FYSM">
             <ATCWaypointType>Airport</ATCWaypointType>

@@ -22,7 +22,7 @@
         <ATCWaypoint id="BDV">
             <ATCWaypointType>VOR</ATCWaypointType>
             <WorldPosition>S30* 57' 54.00",E26* 19' 21.72",+4715.00</WorldPosition>
-            <ICAO><ICAOIdent>BDV</ICAOIdent></ICAO>
+            <ICAO><ICAORegion>FA</ICAORegion><ICAOIdent>BDV</ICAOIdent></ICAO>
         </ATCWaypoint>
         <ATCWaypoint id="TROMPSBURG">
             <ATCWaypointType>User</ATCWaypointType>
@@ -31,17 +31,17 @@
         <ATCWaypoint id="JF">
             <ATCWaypointType>NDB</ATCWaypointType>
             <WorldPosition>S29* 44' 0.00",E25* 27' 0.00",+4600.00</WorldPosition>
-            <ICAO><ICAOIdent>JF</ICAOIdent></ICAO>
+            <ICAO><ICAORegion>FA</ICAORegion><ICAOIdent>JF</ICAOIdent></ICAO>
         </ATCWaypoint>
         <ATCWaypoint id="BL">
             <ATCWaypointType>NDB</ATCWaypointType>
             <WorldPosition>S29* 6' 1.80",E26* 18' 2.52",+4416.00</WorldPosition>
-            <ICAO><ICAOIdent>BL</ICAOIdent></ICAO>
+            <ICAO><ICAORegion>FA</ICAORegion><ICAOIdent>BL</ICAOIdent></ICAO>
         </ATCWaypoint>
         <ATCWaypoint id="BLV">
             <ATCWaypointType>VOR</ATCWaypointType>
             <WorldPosition>S29* 6' 1.80",E26* 18' 2.52",+4416.00</WorldPosition>
-            <ICAO><ICAOIdent>BLV</ICAOIdent></ICAO>
+            <ICAO><ICAORegion>FA</ICAORegion><ICAOIdent>BLV</ICAOIdent></ICAO>
         </ATCWaypoint>
         <ATCWaypoint id="FABL">
             <ATCWaypointType>Airport</ATCWaypointType>

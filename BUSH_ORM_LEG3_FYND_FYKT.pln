@@ -22,7 +22,7 @@
         <ATCWaypoint id="KP">
             <ATCWaypointType>NDB</ATCWaypointType>
             <WorldPosition>S26* 32' 0.00",E18* 7' 0.00",+3500.00</WorldPosition>
-            <ICAO><ICAOIdent>KP</ICAOIdent></ICAO>
+            <ICAO><ICAORegion>FY</ICAORegion><ICAOIdent>KP</ICAOIdent></ICAO>
         </ATCWaypoint>
         <ATCWaypoint id="FYKT">
             <ATCWaypointType>Airport</ATCWaypointType>

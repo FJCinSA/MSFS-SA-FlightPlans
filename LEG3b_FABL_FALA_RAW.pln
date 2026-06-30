@@ -22,7 +22,7 @@
         <ATCWaypoint id="BLV">
             <ATCWaypointType>VOR</ATCWaypointType>
             <WorldPosition>S29* 6' 1.80",E26* 18' 2.52",+4416.00</WorldPosition>
-            <ICAO><ICAOIdent>BLV</ICAOIdent></ICAO>
+            <ICAO><ICAORegion>FA</ICAORegion><ICAOIdent>BLV</ICAOIdent></ICAO>
         </ATCWaypoint>
         <ATCWaypoint id="BRANDFORT">
             <ATCWaypointType>User</ATCWaypointType>
@@ -31,17 +31,17 @@
         <ATCWaypoint id="KS">
             <ATCWaypointType>NDB</ATCWaypointType>
             <WorldPosition>S27* 40' 44.04",E27* 17' 13.96",+4500.00</WorldPosition>
-            <ICAO><ICAOIdent>KS</ICAOIdent></ICAO>
+            <ICAO><ICAORegion>FA</ICAORegion><ICAOIdent>KS</ICAOIdent></ICAO>
         </ATCWaypoint>
         <ATCWaypoint id="PSV">
             <ATCWaypointType>VOR</ATCWaypointType>
             <WorldPosition>S26* 43' 0.00",E27* 6' 0.00",+4593.00</WorldPosition>
-            <ICAO><ICAOIdent>PSV</ICAOIdent></ICAO>
+            <ICAO><ICAORegion>FA</ICAORegion><ICAOIdent>PSV</ICAOIdent></ICAO>
         </ATCWaypoint>
         <ATCWaypoint id="LIV">
             <ATCWaypointType>VOR</ATCWaypointType>
             <WorldPosition>S25* 56' 56.04",E27* 54' 49.16",+4570.00</WorldPosition>
-            <ICAO><ICAOIdent>LIV</ICAOIdent></ICAO>
+            <ICAO><ICAORegion>FA</ICAORegion><ICAOIdent>LIV</ICAOIdent></ICAO>
         </ATCWaypoint>
         <ATCWaypoint id="FALA">
             <ATCWaypointType>Airport</ATCWaypointType>

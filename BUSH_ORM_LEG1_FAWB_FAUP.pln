@@ -22,27 +22,27 @@
         <ATCWaypoint id="WB">
             <ATCWaypointType>NDB</ATCWaypointType>
             <WorldPosition>S25* 39' 0.00",E28* 13' 0.00",+4095.00</WorldPosition>
-            <ICAO><ICAOIdent>WB</ICAOIdent></ICAO>
+            <ICAO><ICAORegion>FA</ICAORegion><ICAOIdent>WB</ICAOIdent></ICAO>
         </ATCWaypoint>
         <ATCWaypoint id="KD">
             <ATCWaypointType>NDB</ATCWaypointType>
             <WorldPosition>S26* 52' 0.00",E26* 40' 0.00",+4200.00</WorldPosition>
-            <ICAO><ICAOIdent>KD</ICAOIdent></ICAO>
+            <ICAO><ICAORegion>FA</ICAORegion><ICAOIdent>KD</ICAOIdent></ICAO>
         </ATCWaypoint>
         <ATCWaypoint id="VB">
             <ATCWaypointType>NDB</ATCWaypointType>
             <WorldPosition>S26* 59' 0.00",E24* 44' 0.00",+3900.00</WorldPosition>
-            <ICAO><ICAOIdent>VB</ICAOIdent></ICAO>
+            <ICAO><ICAORegion>FA</ICAORegion><ICAOIdent>VB</ICAOIdent></ICAO>
         </ATCWaypoint>
         <ATCWaypoint id="UN">
             <ATCWaypointType>NDB</ATCWaypointType>
             <WorldPosition>S28* 23' 0.00",E21* 16' 0.00",+2800.00</WorldPosition>
-            <ICAO><ICAOIdent>UN</ICAOIdent></ICAO>
+            <ICAO><ICAORegion>FA</ICAORegion><ICAOIdent>UN</ICAOIdent></ICAO>
         </ATCWaypoint>
         <ATCWaypoint id="UPV">
             <ATCWaypointType>VOR</ATCWaypointType>
             <WorldPosition>S28* 24' 0.00",E21* 15' 0.00",+2800.00</WorldPosition>
-            <ICAO><ICAOIdent>UPV</ICAOIdent></ICAO>
+            <ICAO><ICAORegion>FA</ICAORegion><ICAOIdent>UPV</ICAOIdent></ICAO>
         </ATCWaypoint>
         <ATCWaypoint id="FAUP">
             <ATCWaypointType>Airport</ATCWaypointType>
