@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>LEG3a - Colesberg to Bloemfontein</title>
+<style>
+:root{
+  --bg:#0a1018; --panel:#101926; --line:#2a3a4d; --text:#dce6ef;
+  --amber:#e8b84b; --cyan:#5fd0d8; --red:#d65a5a; --dim:#7d8a99;
+}
+*{box-sizing:border-box;}
+body{
+  background:var(--bg); color:var(--text);
+  font-family:'Consolas','Courier New',monospace;
+  margin:0; padding:20px;
+}
+.plate{
+  max-width:980px; margin:0 auto; background:var(--panel);
+  border:1px solid var(--line); border-radius:4px; padding:18px 24px;
+}
+.header{
+  display:flex; justify-content:space-between; align-items:baseline;
+  border-bottom:2px solid var(--amber); padding-bottom:8px; margin-bottom:14px;
+}
+.header h1{font-size:20px; color:var(--amber); margin:0; letter-spacing:1px;}
+.header .sub{font-size:13px; color:var(--cyan);}
+.header .meta{text-align:right; font-size:11px; color:var(--dim); line-height:1.4;}
+.narrative{
+  border-left:3px solid var(--cyan); padding:8px 14px; margin-bottom:16px;
+  background:#0d141f; font-size:13px; line-height:1.6; color:var(--text);
+}
+.narrative b{color:var(--cyan);}
+.leg{
+  border:1px solid var(--line); border-radius:3px; margin-bottom:14px;
+  background:#0d141f; overflow:hidden;
+}
+.leg-head{
+  background:#152133; padding:8px 14px; display:flex; justify-content:space-between;
+  align-items:baseline; border-bottom:1px solid var(--line);
+}
+.leg-head h2{font-size:14px; color:var(--amber); margin:0; letter-spacing:1px;}
+.leg-head span{font-size:12px; color:var(--cyan);}
+.leg-body{padding:10px 14px;}
+table{width:100%; border-collapse:collapse; font-size:13px; margin-bottom:8px;}
+table th, table td{border:1px solid var(--line); padding:5px 8px; text-align:center;}
+table th{color:var(--cyan); background:#0d141f; font-size:11px; text-transform:uppercase;}
+.notes{font-size:12px; color:var(--text); line-height:1.5; padding-top:4px;}
+.notes b{color:var(--amber);}
+.warning{
+  border:1px solid var(--red); border-radius:3px; padding:8px 14px;
+  background:#1a0d0d; color:#f0b8b8; font-size:12px; margin-top:8px;
+}
+.warning b{color:var(--red);}
+.aircraft-box{
+  border:1px solid var(--line); border-radius:3px; padding:10px 14px;
+  background:#0d141f; margin-bottom:16px; font-size:13px;
+}
+.aircraft-box h2{font-size:12px; color:var(--cyan); margin:0 0 6px 0; text-transform:uppercase; letter-spacing:1px;}
+.footer{
+  border-top:1px solid var(--line); margin-top:10px; padding-top:8px;
+  font-size:11px; color:var(--dim); display:flex; justify-content:space-between;
+}
+.disclaimer{
+  font-size:11px; color:var(--dim); font-style:italic; margin-top:10px;
+  border-top:1px dashed var(--line); padding-top:8px;
+}
+.navstatus-partial {
+  display: inline-block;
+  font-size: 0.7em;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  padding: 2px 8px;
+  border: 1px solid #b8860b;
+  border-radius: 3px;
+  color: #d4af37;
+  background: rgba(184,134,11,0.08);
+  vertical-align: middle;
+  margin-left: 8px;
+}
+</style>
+</head>
+<body>
+<div class="plate">
+
+<div class="header">
+  <div>
+    <h1>LEG3a &mdash; COLESBERG TO BLOEMFONTEIN</h1>
+    <div class="sub">RAW NAV &middot; FACB &rarr; BDV &rarr; TROMPSBURG &rarr; JF &rarr; BL &rarr; BLV &rarr; FABL</div>
+  </div>
+  <div class="meta">
+    IFR &middot; RAW NAV &middot; 7,500 FT<br>
+    CoetzeeMed Flight Operations &middot; FJCinSA
+  </div>
+</div>
+
+<div class="narrative">
+  Colesberg to Bloemfontein, RAW NAV routing via the historical Free State navaid chain &mdash;
+  Burgersdorp VOR, Jagersfontein NDB, and Bloemfontein NDB &mdash; before joining the Bloemfontein
+  VORTAC for the arrival.
+</div>
+
+<div class="leg">
+  <div class="leg-head">
+    <h2>LEG 3a &mdash; FACB &rarr; FABL</h2>
+    <span>Colesberg &rarr; Bloemfontein</span>
+  </div>
+  <div class="leg-body">
+    <table>
+      <tr><th>#</th><th>Waypoint</th><th>Type</th><th>Freq</th><th>Altitude</th></tr>
+      <tr><td>1</td><td>FACB</td><td>Airport</td><td>&mdash;</td><td>4,639 ft</td></tr>
+      <tr><td>2</td><td>BDV <span class="navstatus-partial">RAW NAV (PARTIAL)</span></td><td>VOR</td><td>113.10 MHz</td><td>4,715 ft</td></tr>
+      <tr><td>3</td><td>TROMPSBURG</td><td>User Wpt</td><td>&mdash;</td><td>4,800 ft</td></tr>
+      <tr><td>4</td><td>JF <span class="navstatus-partial">RAW NAV (PARTIAL)</span></td><td>NDB</td><td>243 kHz</td><td>4,600 ft</td></tr>
+      <tr><td>5</td><td>BL <span class="navstatus-partial">RAW NAV (PARTIAL)</span></td><td>NDB</td><td>380 kHz</td><td>4,416 ft</td></tr>
+      <tr><td>6</td><td>BLV</td><td>VOR</td><td>114.10 MHz</td><td>4,416 ft</td></tr>
+      <tr><td>7</td><td>FABL</td><td>Airport</td><td>&mdash;</td><td>4,458 ft</td></tr>
+    </table>
+    <div class="notes">
+      Position for BDV, JF, and BL is defined by hardcoded coordinates (RAW NAV route data), not a live
+      cockpit needle. These historical South African navaids are not present in MSFS&rsquo;s bundled navdata
+      or Navigraph&rsquo;s database, and do not resolve in Little Navmap despite correct ICAORegion (FA) tagging.
+      The route flies correctly; there is no ADF/VOR indication for these three waypoints in the cockpit.
+    </div>
+  </div>
+</div>
+
+<div class="disclaimer">
+  Kneeboard reference for MSFS 2024 Southern Africa Flight Pack. PLN file: LEG3a_FACB_FABL_RAW.pln.
+  RAW NAV &mdash; BDV/JF/BL positions are hardcoded route data, not live navaid receptions.
+</div>
+
+<div class="footer"><span>CoetzeeMed Flight Operations &middot; FJCinSA</span><span>MSFS 2024 Southern Africa Flight Pack</span></div>
+</div>
+</body>
+</html>
